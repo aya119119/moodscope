@@ -1,0 +1,1530 @@
+{
+  "pca_explained": [
+    0.6952,
+    0.1289
+  ],
+  "elbow": [
+    {
+      "k": 1,
+      "inertia": 1400.0
+    },
+    {
+      "k": 2,
+      "inertia": 470.76
+    },
+    {
+      "k": 3,
+      "inertia": 373.37
+    },
+    {
+      "k": 4,
+      "inertia": 327.84
+    },
+    {
+      "k": 5,
+      "inertia": 286.58
+    },
+    {
+      "k": 6,
+      "inertia": 274.01
+    },
+    {
+      "k": 7,
+      "inertia": 228.34
+    },
+    {
+      "k": 8,
+      "inertia": 228.05
+    },
+    {
+      "k": 9,
+      "inertia": 212.6
+    },
+    {
+      "k": 10,
+      "inertia": 156.92
+    }
+  ],
+  "feature_names": [
+    "energy",
+    "valence",
+    "danceability",
+    "acousticness",
+    "tempo_norm",
+    "loudness",
+    "speechiness",
+    "instrumentalness"
+  ],
+  "mood_averages": {
+    "Hype": {
+      "energy": 0.827,
+      "valence": 0.646,
+      "danceability": 0.783,
+      "acousticness": 0.128,
+      "tempo_norm": 0.749,
+      "loudness": -5.013,
+      "speechiness": 0.153,
+      "instrumentalness": 0.065
+    },
+    "Happy": {
+      "energy": 0.735,
+      "valence": 0.868,
+      "danceability": 0.74,
+      "acousticness": 0.198,
+      "tempo_norm": 0.655,
+      "loudness": -5.983,
+      "speechiness": 0.06,
+      "instrumentalness": 0.031
+    },
+    "Chill": {
+      "energy": 0.347,
+      "valence": 0.54,
+      "danceability": 0.44,
+      "acousticness": 0.604,
+      "tempo_norm": 0.302,
+      "loudness": -10.058,
+      "speechiness": -0.007,
+      "instrumentalness": 0.093
+    },
+    "Sad": {
+      "energy": 0.345,
+      "valence": 0.537,
+      "danceability": 0.444,
+      "acousticness": 0.607,
+      "tempo_norm": 0.301,
+      "loudness": -10.048,
+      "speechiness": 0.082,
+      "instrumentalness": 0.107
+    }
+  },
+  "songs": [
+    {
+      "name": "Fade Into Darkness - Vocal Radio Mix",
+      "artist": "Avicii",
+      "mood": "Chill",
+      "pca_x": -1.3325,
+      "pca_y": -0.1954,
+      "tags": NaN
+    },
+    {
+      "name": "Love Me Like You Do - From \"Fifty Shades Of Grey\"",
+      "artist": "Ellie Goulding",
+      "mood": "Hype",
+      "pca_x": 5.5751,
+      "pca_y": -0.6796,
+      "tags": "love,2015,soundtrack,pop,party"
+    },
+    {
+      "name": "Timber",
+      "artist": "Pitbull",
+      "mood": "Hype",
+      "pca_x": 5.7142,
+      "pca_y": 0.0369,
+      "tags": "dance,pop,party,kesha,2013"
+    },
+    {
+      "name": "Levels - Radio Edit",
+      "artist": "Avicii",
+      "mood": "Sad",
+      "pca_x": -0.6887,
+      "pca_y": -0.8284,
+      "tags": NaN
+    },
+    {
+      "name": "Danza Kuduro",
+      "artist": "Don Omar",
+      "mood": "Hype",
+      "pca_x": 5.9534,
+      "pca_y": 0.6311,
+      "tags": "reggaeton,latin,dance,kuduro don omar,spanish"
+    },
+    {
+      "name": "Waiting For Love",
+      "artist": "Avicii",
+      "mood": "Hype",
+      "pca_x": 5.0004,
+      "pca_y": 0.3578,
+      "tags": "dance,avicii,house,swedish,2015 single"
+    },
+    {
+      "name": "Bad Habits",
+      "artist": "Ed Sheeran",
+      "mood": "Hype",
+      "pca_x": 5.7708,
+      "pca_y": 2.0739,
+      "tags": "pop,2021,ed sheeran,dance,2020s"
+    },
+    {
+      "name": "Hey Brother",
+      "artist": "Avicii",
+      "mood": "Hype",
+      "pca_x": 5.5369,
+      "pca_y": 1.0011,
+      "tags": "dance,pop,electronic,country house,country"
+    },
+    {
+      "name": "Douha alia",
+      "artist": "Cheb Mami",
+      "mood": "Sad",
+      "pca_x": -1.0862,
+      "pca_y": -0.4238,
+      "tags": NaN
+    },
+    {
+      "name": "Aïcha",
+      "artist": "Khaled",
+      "mood": "Chill",
+      "pca_x": -0.7239,
+      "pca_y": -1.35,
+      "tags": NaN
+    },
+    {
+      "name": "Abdel Kader - Live à Bercy, Paris / 1998",
+      "artist": "Rachid Taha",
+      "mood": "Sad",
+      "pca_x": -0.6686,
+      "pca_y": 0.5589,
+      "tags": NaN
+    },
+    {
+      "name": "Trigue Lycee",
+      "artist": "Khaled",
+      "mood": "Sad",
+      "pca_x": -0.7758,
+      "pca_y": 0.3745,
+      "tags": NaN
+    },
+    {
+      "name": "Omri",
+      "artist": "Cheba Maria",
+      "mood": "Chill",
+      "pca_x": -1.3355,
+      "pca_y": -0.3838,
+      "tags": NaN
+    },
+    {
+      "name": "Au pays des merveilles - Azwaw Master Mix",
+      "artist": "Cheb Mami",
+      "mood": "Chill",
+      "pca_x": -1.0746,
+      "pca_y": -1.0802,
+      "tags": NaN
+    },
+    {
+      "name": "Ma vie 2 fois",
+      "artist": "Cheb Mami",
+      "mood": "Sad",
+      "pca_x": -0.3651,
+      "pca_y": 0.5516,
+      "tags": NaN
+    },
+    {
+      "name": "M.",
+      "artist": "Anıl Emre Daldal",
+      "mood": "Sad",
+      "pca_x": -0.6998,
+      "pca_y": 1.0676,
+      "tags": NaN
+    },
+    {
+      "name": "Kül",
+      "artist": "Cem Adrian",
+      "mood": "Sad",
+      "pca_x": -0.8202,
+      "pca_y": 0.1831,
+      "tags": NaN
+    },
+    {
+      "name": "Dinle Beni Bi'",
+      "artist": "Yüzyüzeyken Konuşuruz",
+      "mood": "Chill",
+      "pca_x": -0.7788,
+      "pca_y": -0.6296,
+      "tags": NaN
+    },
+    {
+      "name": "Evergreen",
+      "artist": "Richy Mitch & The Coal Miners",
+      "mood": "Sad",
+      "pca_x": -0.9341,
+      "pca_y": 0.1998,
+      "tags": "wsum 91.7 fm madison,wavelength with dj izzy,folk,indie folk,indie"
+    },
+    {
+      "name": "Stressed Out",
+      "artist": "Twenty One Pilots",
+      "mood": "Happy",
+      "pca_x": 4.8676,
+      "pca_y": -0.9525,
+      "tags": "alternative,indie,alt-pop,rock,hip hop"
+    },
+    {
+      "name": "Not Allowed",
+      "artist": "TV Girl",
+      "mood": "Happy",
+      "pca_x": 4.8627,
+      "pca_y": -2.2092,
+      "tags": "indie pop,neo-psychedelia,hypnagogic pop,indie,melodic"
+    },
+    {
+      "name": "Diamond Veins",
+      "artist": "French 79",
+      "mood": "Sad",
+      "pca_x": -0.5089,
+      "pca_y": -0.6332,
+      "tags": NaN
+    },
+    {
+      "name": "Creep",
+      "artist": "Radiohead",
+      "mood": "Sad",
+      "pca_x": -0.5774,
+      "pca_y": 1.5994,
+      "tags": "alternative,alternative rock,rock,indie,radiohead"
+    },
+    {
+      "name": "Picture You",
+      "artist": "Chappell Roan",
+      "mood": "Happy",
+      "pca_x": 4.5168,
+      "pca_y": -0.913,
+      "tags": "pop,singer-songwriter,alt-pop,rock,rnb"
+    },
+    {
+      "name": "Weak In Your Light",
+      "artist": "Nation of Language",
+      "mood": "Sad",
+      "pca_x": -0.5496,
+      "pca_y": 1.1686,
+      "tags": NaN
+    },
+    {
+      "name": "On the Run",
+      "artist": "Glass Animals",
+      "mood": "Chill",
+      "pca_x": -1.6847,
+      "pca_y": -0.1541,
+      "tags": NaN
+    },
+    {
+      "name": "Lost Highway",
+      "artist": "Hank Williams",
+      "mood": "Sad",
+      "pca_x": -0.9677,
+      "pca_y": -0.1726,
+      "tags": NaN
+    },
+    {
+      "name": "Too Sweet",
+      "artist": "Hozier",
+      "mood": "Happy",
+      "pca_x": 4.7585,
+      "pca_y": -2.1885,
+      "tags": "pop soul,2024,pop,love,pop rock"
+    },
+    {
+      "name": "Cigarette Daydreams",
+      "artist": "Cage The Elephant",
+      "mood": "Sad",
+      "pca_x": -0.4992,
+      "pca_y": 0.6092,
+      "tags": "alternative rock,rock,indie rock,indie,hook"
+    },
+    {
+      "name": "Need 2",
+      "artist": "Pinegrove",
+      "mood": "Sad",
+      "pca_x": -3.1704,
+      "pca_y": 1.2314,
+      "tags": "indie folk,slowcore,slacker rock,midwest emo,wsum 91.7 fm madison"
+    },
+    {
+      "name": "Comptine d'un autre été: l'Après-midi (from \"Amélie\")",
+      "artist": "Jacob's Piano",
+      "mood": "Sad",
+      "pca_x": -0.7951,
+      "pca_y": 0.6848,
+      "tags": NaN
+    },
+    {
+      "name": "L.F.O.L.F (feat. Leto)",
+      "artist": "ElGrandeToto",
+      "mood": "Chill",
+      "pca_x": -0.7527,
+      "pca_y": -0.6295,
+      "tags": NaN
+    },
+    {
+      "name": "5E ARRONDISSEMENT",
+      "artist": "ElGrandeToto",
+      "mood": "Chill",
+      "pca_x": -0.6507,
+      "pca_y": -0.6721,
+      "tags": NaN
+    },
+    {
+      "name": "SALGOAT (with Roi Heenok)",
+      "artist": "ElGrandeToto",
+      "mood": "Sad",
+      "pca_x": -0.7036,
+      "pca_y": 1.0511,
+      "tags": NaN
+    },
+    {
+      "name": "Thunes",
+      "artist": "GP Explorer",
+      "mood": "Sad",
+      "pca_x": -0.5163,
+      "pca_y": 0.7721,
+      "tags": NaN
+    },
+    {
+      "name": "Ojos Sin Ver",
+      "artist": "Morad",
+      "mood": "Chill",
+      "pca_x": -0.7835,
+      "pca_y": 0.0782,
+      "tags": NaN
+    },
+    {
+      "name": "Qui sait ? (feat. ElGrandeToto)",
+      "artist": "Niro",
+      "mood": "Chill",
+      "pca_x": -1.1398,
+      "pca_y": -0.6985,
+      "tags": NaN
+    },
+    {
+      "name": "Leave A Message (feat. Poppy Wright & Trick Shady)",
+      "artist": "Josh Baker",
+      "mood": "Sad",
+      "pca_x": -0.9581,
+      "pca_y": 0.4623,
+      "tags": NaN
+    },
+    {
+      "name": "Ma Tnsani (Yalla Habibi)",
+      "artist": "Vanco",
+      "mood": "Chill",
+      "pca_x": -0.2336,
+      "pca_y": -1.3544,
+      "tags": NaN
+    },
+    {
+      "name": "Forever",
+      "artist": "ZULAN",
+      "mood": "Chill",
+      "pca_x": -0.9218,
+      "pca_y": -1.4588,
+      "tags": NaN
+    },
+    {
+      "name": "Still Into You",
+      "artist": "CYRIL",
+      "mood": "Sad",
+      "pca_x": -0.483,
+      "pca_y": 0.2192,
+      "tags": NaN
+    },
+    {
+      "name": "Losing Control",
+      "artist": "KI/KI",
+      "mood": "Chill",
+      "pca_x": -1.4545,
+      "pca_y": -1.8041,
+      "tags": NaN
+    },
+    {
+      "name": "The Less I Know The Better",
+      "artist": "Mau P",
+      "mood": "Chill",
+      "pca_x": -0.7259,
+      "pca_y": -0.84,
+      "tags": NaN
+    },
+    {
+      "name": "WACUKA",
+      "artist": "AVAION",
+      "mood": "Sad",
+      "pca_x": -0.9203,
+      "pca_y": 0.705,
+      "tags": NaN
+    },
+    {
+      "name": "A New Day (feat. Celine Dion)",
+      "artist": "Sebastian Ingrosso",
+      "mood": "Sad",
+      "pca_x": -1.2332,
+      "pca_y": 0.9327,
+      "tags": NaN
+    },
+    {
+      "name": "You",
+      "artist": "Dom Dolla",
+      "mood": "Sad",
+      "pca_x": -0.7138,
+      "pca_y": 1.5674,
+      "tags": NaN
+    },
+    {
+      "name": "Rest Easy",
+      "artist": "nimino",
+      "mood": "Chill",
+      "pca_x": -1.5572,
+      "pca_y": -1.0398,
+      "tags": NaN
+    },
+    {
+      "name": "I Only Smoke When I Drink",
+      "artist": "nimino",
+      "mood": "Hype",
+      "pca_x": 5.628,
+      "pca_y": 2.0595,
+      "tags": "electronic,house,future house,dance,stutter house"
+    },
+    {
+      "name": "Drifting",
+      "artist": "Tiësto",
+      "mood": "Sad",
+      "pca_x": -0.217,
+      "pca_y": 0.3914,
+      "tags": NaN
+    },
+    {
+      "name": "Knock Me Off My Feet",
+      "artist": "oskar med k",
+      "mood": "Sad",
+      "pca_x": -0.9405,
+      "pca_y": 0.7804,
+      "tags": NaN
+    },
+    {
+      "name": "Desire",
+      "artist": "Ian Asher",
+      "mood": "Chill",
+      "pca_x": -0.8569,
+      "pca_y": -1.6325,
+      "tags": NaN
+    },
+    {
+      "name": "Victory Lap",
+      "artist": "Fred again..",
+      "mood": "Hype",
+      "pca_x": 5.7647,
+      "pca_y": 1.0422,
+      "tags": "grime,rap,hip-hop,electronic,dubstep"
+    },
+    {
+      "name": "Think About Us",
+      "artist": "Sonny Fodera",
+      "mood": "Chill",
+      "pca_x": -1.2036,
+      "pca_y": -0.6448,
+      "tags": NaN
+    },
+    {
+      "name": "Delilah (pull me out of this)",
+      "artist": "Fred again..",
+      "mood": "Hype",
+      "pca_x": 4.9818,
+      "pca_y": 0.6499,
+      "tags": "garage house,speed garage,house,electronic,uk garage"
+    },
+    {
+      "name": "Dernière danse - Techno Mix",
+      "artist": "Indila",
+      "mood": "Sad",
+      "pca_x": -1.1204,
+      "pca_y": -0.5594,
+      "tags": NaN
+    },
+    {
+      "name": "Play With Me",
+      "artist": "Sara Landry",
+      "mood": "Sad",
+      "pca_x": -0.5815,
+      "pca_y": 1.0502,
+      "tags": NaN
+    },
+    {
+      "name": "Be The One",
+      "artist": "Eli Brown",
+      "mood": "Chill",
+      "pca_x": -1.2839,
+      "pca_y": -0.4975,
+      "tags": NaN
+    },
+    {
+      "name": "Till I Collapse",
+      "artist": "Braaheim",
+      "mood": "Sad",
+      "pca_x": -1.2406,
+      "pca_y": 0.4552,
+      "tags": NaN
+    },
+    {
+      "name": "In The End",
+      "artist": "ILYAA",
+      "mood": "Chill",
+      "pca_x": -1.7156,
+      "pca_y": 0.2614,
+      "tags": NaN
+    },
+    {
+      "name": "Rockafeller Skank",
+      "artist": "ILYAA",
+      "mood": "Sad",
+      "pca_x": -0.9875,
+      "pca_y": 0.4846,
+      "tags": NaN
+    },
+    {
+      "name": "Bla Bla Bla",
+      "artist": "ILYAA",
+      "mood": "Chill",
+      "pca_x": -0.9613,
+      "pca_y": -1.4161,
+      "tags": NaN
+    },
+    {
+      "name": "Birch Tree",
+      "artist": "Strawberry Guy",
+      "mood": "Chill",
+      "pca_x": -0.6856,
+      "pca_y": -0.6702,
+      "tags": "wsum 91.7 fm madison,wavelength with dj izzy"
+    },
+    {
+      "name": "Cuddle",
+      "artist": "Sleeping After Pills",
+      "mood": "Chill",
+      "pca_x": -1.2387,
+      "pca_y": 0.6117,
+      "tags": NaN
+    },
+    {
+      "name": "B.",
+      "artist": "Anıl Emre Daldal",
+      "mood": "Sad",
+      "pca_x": -0.6052,
+      "pca_y": 0.1724,
+      "tags": NaN
+    },
+    {
+      "name": "Love Me Not",
+      "artist": "Ravyn Lenae",
+      "mood": "Happy",
+      "pca_x": 5.6271,
+      "pca_y": -1.3124,
+      "tags": "pop soul,soul,rnb,rock,pop rock"
+    },
+    {
+      "name": "we fell in love in october",
+      "artist": "girl in red",
+      "mood": "Happy",
+      "pca_x": 5.187,
+      "pca_y": -1.6356,
+      "tags": "dream pop,singer-songwriter,bedroom pop,indie pop,female vocalists"
+    },
+    {
+      "name": "Out of My League",
+      "artist": "Fitz and The Tantrums",
+      "mood": "Happy",
+      "pca_x": 4.9519,
+      "pca_y": 0.211,
+      "tags": "indie pop,indie,alternative,music choice: alternative,10s"
+    },
+    {
+      "name": "From The Land Of The Sky Blue Water",
+      "artist": "Mildred Bailey",
+      "mood": "Chill",
+      "pca_x": -0.8627,
+      "pca_y": 0.0673,
+      "tags": NaN
+    },
+    {
+      "name": "Lonesome Town",
+      "artist": "Ricky Nelson",
+      "mood": "Sad",
+      "pca_x": -1.3683,
+      "pca_y": 0.8203,
+      "tags": NaN
+    },
+    {
+      "name": "Zu Zu",
+      "artist": "The Bonnevilles",
+      "mood": "Sad",
+      "pca_x": -0.7271,
+      "pca_y": 0.6039,
+      "tags": NaN
+    },
+    {
+      "name": "I'm Sorry - Single Version",
+      "artist": "Brenda Lee",
+      "mood": "Chill",
+      "pca_x": -1.0527,
+      "pca_y": -0.2652,
+      "tags": NaN
+    },
+    {
+      "name": "Laughing on the Outside",
+      "artist": "Bernadette Carroll",
+      "mood": "Sad",
+      "pca_x": -1.007,
+      "pca_y": 1.6505,
+      "tags": NaN
+    },
+    {
+      "name": "Good Looking",
+      "artist": "Suki Waterhouse",
+      "mood": "Happy",
+      "pca_x": 5.1199,
+      "pca_y": -1.7436,
+      "tags": "wsum 91.7 fm madison,cloud nine,indie pop,dream pop,sad"
+    },
+    {
+      "name": "Lovers Rock",
+      "artist": "TV Girl",
+      "mood": "Happy",
+      "pca_x": 4.2797,
+      "pca_y": -1.2784,
+      "tags": "alternative,pop,2014,indie pop,hypnagogic pop"
+    },
+    {
+      "name": "Kiss of Life",
+      "artist": "Sade",
+      "mood": "Chill",
+      "pca_x": -0.7682,
+      "pca_y": -1.5277,
+      "tags": "soul,sade,female vocalists,jazz,chillout"
+    },
+    {
+      "name": "Fi Ktab Zhar",
+      "artist": "Cheikh Mamidou",
+      "mood": "Chill",
+      "pca_x": -1.4053,
+      "pca_y": -0.817,
+      "tags": NaN
+    },
+    {
+      "name": "Crazy Love",
+      "artist": "Tion Wayne",
+      "mood": "Sad",
+      "pca_x": -1.1561,
+      "pca_y": 1.3765,
+      "tags": NaN
+    },
+    {
+      "name": "We9tna",
+      "artist": "L'morphine",
+      "mood": "Chill",
+      "pca_x": -1.3345,
+      "pca_y": -0.2292,
+      "tags": NaN
+    },
+    {
+      "name": "Emmenez-moi",
+      "artist": "Charles Aznavour",
+      "mood": "Sad",
+      "pca_x": -1.3388,
+      "pca_y": 1.2241,
+      "tags": NaN
+    },
+    {
+      "name": "cobain",
+      "artist": "Valerieblud",
+      "mood": "Chill",
+      "pca_x": -1.1457,
+      "pca_y": -0.7808,
+      "tags": NaN
+    },
+    {
+      "name": "The Let Out",
+      "artist": "J. Cole",
+      "mood": "Sad",
+      "pca_x": -1.4429,
+      "pca_y": 0.5134,
+      "tags": "psychedelic soul,hip hop,contemporary rnb,conscious hip hop"
+    },
+    {
+      "name": "Chenoui Kheloui",
+      "artist": "Cheb Faycal",
+      "mood": "Chill",
+      "pca_x": -0.8117,
+      "pca_y": -1.0582,
+      "tags": NaN
+    },
+    {
+      "name": "2 lungs",
+      "artist": "Saiming",
+      "mood": "Sad",
+      "pca_x": -0.8361,
+      "pca_y": -0.4447,
+      "tags": NaN
+    },
+    {
+      "name": "BOOMX3",
+      "artist": "ElGrandeToto",
+      "mood": "Chill",
+      "pca_x": -1.7892,
+      "pca_y": 0.4308,
+      "tags": NaN
+    },
+    {
+      "name": "AFRAID OF LOVIN' U",
+      "artist": "Najm",
+      "mood": "Sad",
+      "pca_x": -1.3775,
+      "pca_y": 1.4609,
+      "tags": NaN
+    },
+    {
+      "name": "'BOUT U",
+      "artist": "Najm",
+      "mood": "Sad",
+      "pca_x": -0.7845,
+      "pca_y": -0.3218,
+      "tags": NaN
+    },
+    {
+      "name": "Phantom",
+      "artist": "EsDeeKid",
+      "mood": "Hype",
+      "pca_x": 5.3483,
+      "pca_y": 0.4924,
+      "tags": "gangsta rap,uk hip hop,hardcore hip hop,uk rap,dark plugg"
+    },
+    {
+      "name": "4 Raws",
+      "artist": "EsDeeKid",
+      "mood": "Hype",
+      "pca_x": 5.65,
+      "pca_y": -0.491,
+      "tags": "trap,gangsta rap,hardcore hip hop,uk hip hop,cloud rap"
+    },
+    {
+      "name": "LV Sandals",
+      "artist": "EsDeeKid",
+      "mood": "Hype",
+      "pca_x": 5.6081,
+      "pca_y": 1.0346,
+      "tags": "jerk,uk hip hop,nervous music,cloud rap,rap"
+    },
+    {
+      "name": "carrelage italien",
+      "artist": "Alpha Wann",
+      "mood": "Chill",
+      "pca_x": -1.4228,
+      "pca_y": -0.1061,
+      "tags": NaN
+    },
+    {
+      "name": "sasori",
+      "artist": "Rounhaa",
+      "mood": "Chill",
+      "pca_x": -1.552,
+      "pca_y": 0.1736,
+      "tags": NaN
+    },
+    {
+      "name": "البوصلة ضاعت",
+      "artist": "Marwan Moussa",
+      "mood": "Chill",
+      "pca_x": -1.7053,
+      "pca_y": 0.7032,
+      "tags": NaN
+    },
+    {
+      "name": "Detni Essekra",
+      "artist": "Khaled",
+      "mood": "Sad",
+      "pca_x": -0.6772,
+      "pca_y": 0.1645,
+      "tags": NaN
+    },
+    {
+      "name": "Amoriste",
+      "artist": "Furelise",
+      "mood": "Chill",
+      "pca_x": -1.2466,
+      "pca_y": 0.1149,
+      "tags": NaN
+    },
+    {
+      "name": "Air Maxes - KETTAMA MIX",
+      "artist": "KETTAMA",
+      "mood": "Sad",
+      "pca_x": -1.1081,
+      "pca_y": 1.3042,
+      "tags": NaN
+    },
+    {
+      "name": "Redemption",
+      "artist": "Drake",
+      "mood": "Hype",
+      "pca_x": 5.0783,
+      "pca_y": 2.0232,
+      "tags": "drake,hip-hop,alternative rnb,rnb,2016"
+    },
+    {
+      "name": "Timeless",
+      "artist": "V1V1D",
+      "mood": "Sad",
+      "pca_x": -0.9308,
+      "pca_y": -0.6375,
+      "tags": NaN
+    },
+    {
+      "name": "Tous les mêmes",
+      "artist": "Stromae",
+      "mood": "Hype",
+      "pca_x": 5.8188,
+      "pca_y": -0.1584,
+      "tags": "french,electropop,belgian,sexy,dance"
+    },
+    {
+      "name": "Won't Be Late (feat. Drake)",
+      "artist": "Swae Lee",
+      "mood": "Chill",
+      "pca_x": -1.0471,
+      "pca_y": -0.661,
+      "tags": NaN
+    },
+    {
+      "name": "She's A 10 But...",
+      "artist": "ARTAN",
+      "mood": "Sad",
+      "pca_x": -1.1969,
+      "pca_y": 1.1511,
+      "tags": NaN
+    },
+    {
+      "name": "Hate It Or Love It",
+      "artist": "The Game",
+      "mood": "Hype",
+      "pca_x": 5.6773,
+      "pca_y": 2.5905,
+      "tags": "hip-hop,rap,the game,gangsta rap,hip hop"
+    },
+    {
+      "name": "Rais M'Bolhi",
+      "artist": "L'morphine",
+      "mood": "Sad",
+      "pca_x": -0.9101,
+      "pca_y": 0.7852,
+      "tags": NaN
+    },
+    {
+      "name": "ماما",
+      "artist": "Said Mosker",
+      "mood": "Chill",
+      "pca_x": -1.0295,
+      "pca_y": -0.5375,
+      "tags": NaN
+    },
+    {
+      "name": "Sur ma route",
+      "artist": "Black M",
+      "mood": "Chill",
+      "pca_x": -0.7906,
+      "pca_y": -0.8412,
+      "tags": NaN
+    },
+    {
+      "name": "Sbaart Ou Tal Adabi",
+      "artist": "Cheb Hasni",
+      "mood": "Sad",
+      "pca_x": -1.0317,
+      "pca_y": 0.545,
+      "tags": NaN
+    },
+    {
+      "name": "Sabrina (i am a party)",
+      "artist": "Fred again..",
+      "mood": "Chill",
+      "pca_x": -2.0599,
+      "pca_y": 0.224,
+      "tags": NaN
+    },
+    {
+      "name": "I feel alive",
+      "artist": "Duskus",
+      "mood": "Chill",
+      "pca_x": -1.2924,
+      "pca_y": -1.3819,
+      "tags": NaN
+    },
+    {
+      "name": "Entombed",
+      "artist": "Deftones",
+      "mood": "Happy",
+      "pca_x": 5.0512,
+      "pca_y": -1.1714,
+      "tags": "alternative metal,alternative rock,dream pop,shoegaze,metal"
+    },
+    {
+      "name": "moulay taher / مولاي الطاهر",
+      "artist": "Lahcen Laaroussi",
+      "mood": "Chill",
+      "pca_x": -0.7649,
+      "pca_y": -0.8424,
+      "tags": NaN
+    },
+    {
+      "name": "Skrt",
+      "artist": "Swimming Paul",
+      "mood": "Chill",
+      "pca_x": -1.0497,
+      "pca_y": -1.4524,
+      "tags": NaN
+    },
+    {
+      "name": "Vhs",
+      "artist": "Swimming Paul",
+      "mood": "Sad",
+      "pca_x": -0.6806,
+      "pca_y": -0.544,
+      "tags": NaN
+    },
+    {
+      "name": "Sparadra",
+      "artist": "L'morphine",
+      "mood": "Sad",
+      "pca_x": -0.8013,
+      "pca_y": -0.3318,
+      "tags": NaN
+    },
+    {
+      "name": "Adams",
+      "artist": "L'morphine",
+      "mood": "Chill",
+      "pca_x": -1.2941,
+      "pca_y": -0.6739,
+      "tags": NaN
+    },
+    {
+      "name": "Bad Influence",
+      "artist": "Omah Lay",
+      "mood": "Sad",
+      "pca_x": -0.4712,
+      "pca_y": -0.6538,
+      "tags": NaN
+    },
+    {
+      "name": "Ohio",
+      "artist": "L'morphine",
+      "mood": "Sad",
+      "pca_x": -0.5547,
+      "pca_y": -0.4261,
+      "tags": NaN
+    },
+    {
+      "name": "Me and the Birds",
+      "artist": "Duster",
+      "mood": "Chill",
+      "pca_x": -3.1305,
+      "pca_y": 1.5465,
+      "tags": "slowcore,indie rock,sadcore,beautiful,numero group"
+    },
+    {
+      "name": "And I Love Her - Remastered 2009",
+      "artist": "The Beatles",
+      "mood": "Chill",
+      "pca_x": -3.3673,
+      "pca_y": 0.8445,
+      "tags": "romantic,folk,old school,my top songs,acoustic"
+    },
+    {
+      "name": "Cinderella (feat. Ty Dolla $ign)",
+      "artist": "Mac Miller",
+      "mood": "Hype",
+      "pca_x": 5.3433,
+      "pca_y": 1.4223,
+      "tags": "rap,love,hip-hop,sad,perfect"
+    },
+    {
+      "name": "Dumb",
+      "artist": "Nirvana",
+      "mood": "Sad",
+      "pca_x": -1.4551,
+      "pca_y": 0.6985,
+      "tags": "grunge,rock,alternative,alternative rock,nirvana"
+    },
+    {
+      "name": "#skeptacore pt.3",
+      "artist": "Ryder",
+      "mood": "Chill",
+      "pca_x": -1.2142,
+      "pca_y": -0.3042,
+      "tags": NaN
+    },
+    {
+      "name": "Time And Trust",
+      "artist": "Naomi Sharon",
+      "mood": "Sad",
+      "pca_x": -0.955,
+      "pca_y": -0.2939,
+      "tags": NaN
+    },
+    {
+      "name": "Owner - A COLORS ENCORE",
+      "artist": "Carla Prata",
+      "mood": "Chill",
+      "pca_x": -1.0578,
+      "pca_y": -1.3512,
+      "tags": NaN
+    },
+    {
+      "name": "That's Not Me",
+      "artist": "Skepta",
+      "mood": "Chill",
+      "pca_x": -1.1706,
+      "pca_y": -1.4741,
+      "tags": NaN
+    },
+    {
+      "name": "Thiago Silva",
+      "artist": "Dave",
+      "mood": "Sad",
+      "pca_x": -0.7346,
+      "pca_y": 0.8844,
+      "tags": NaN
+    },
+    {
+      "name": "Soweto (with Don Toliver, Rema and Tempoe)",
+      "artist": "Victony",
+      "mood": "Sad",
+      "pca_x": -0.4163,
+      "pca_y": 0.5068,
+      "tags": NaN
+    },
+    {
+      "name": "All-in",
+      "artist": "Damost",
+      "mood": "Sad",
+      "pca_x": -0.8768,
+      "pca_y": 1.0622,
+      "tags": NaN
+    },
+    {
+      "name": "Flashing Lights",
+      "artist": "Kanye West",
+      "mood": "Hype",
+      "pca_x": 5.3712,
+      "pca_y": 2.0121,
+      "tags": "hip-hop,rap,hip hop,kanye west,rnb"
+    },
+    {
+      "name": "Butterflies",
+      "artist": "Skrillex",
+      "mood": "Sad",
+      "pca_x": -0.5671,
+      "pca_y": 1.7198,
+      "tags": NaN
+    },
+    {
+      "name": "Dance To This (feat. Ariana Grande)",
+      "artist": "Troye Sivan",
+      "mood": "Happy",
+      "pca_x": 4.6871,
+      "pca_y": -1.5825,
+      "tags": "pop,synthpop,spectrum sounds,wsum 91.7 fm madison,ariana grande"
+    },
+    {
+      "name": "21 Years",
+      "artist": "Skepta",
+      "mood": "Chill",
+      "pca_x": -1.6906,
+      "pca_y": -1.0809,
+      "tags": NaN
+    },
+    {
+      "name": "Marvellous",
+      "artist": "Dave",
+      "mood": "Chill",
+      "pca_x": -0.6443,
+      "pca_y": -1.7475,
+      "tags": NaN
+    },
+    {
+      "name": "Fake Plastic Trees",
+      "artist": "Radiohead",
+      "mood": "Sad",
+      "pca_x": -0.2272,
+      "pca_y": 0.7314,
+      "tags": "alternative,alternative rock,rock,90s,radiohead"
+    },
+    {
+      "name": "Right Now",
+      "artist": "LNRT",
+      "mood": "Sad",
+      "pca_x": -0.5354,
+      "pca_y": 0.2665,
+      "tags": NaN
+    },
+    {
+      "name": "The Boy Who Played the Harp",
+      "artist": "Dave",
+      "mood": "Chill",
+      "pca_x": -0.8673,
+      "pca_y": -1.1742,
+      "tags": NaN
+    },
+    {
+      "name": "Laho II",
+      "artist": "Shallipopi",
+      "mood": "Chill",
+      "pca_x": -1.5097,
+      "pca_y": 0.7688,
+      "tags": NaN
+    },
+    {
+      "name": "Sirens (From Ireland)",
+      "artist": "Skepta",
+      "mood": "Sad",
+      "pca_x": -0.7315,
+      "pca_y": -0.4106,
+      "tags": NaN
+    },
+    {
+      "name": "Moss",
+      "artist": "Duskus",
+      "mood": "Chill",
+      "pca_x": -0.6208,
+      "pca_y": -1.0507,
+      "tags": NaN
+    },
+    {
+      "name": "Looking For Love - Duskus Remix",
+      "artist": "Disclosure",
+      "mood": "Sad",
+      "pca_x": -1.1381,
+      "pca_y": 1.6901,
+      "tags": NaN
+    },
+    {
+      "name": "Sidi Bouzekri",
+      "artist": "Hoba Hoba Spirit",
+      "mood": "Sad",
+      "pca_x": -0.601,
+      "pca_y": 0.0035,
+      "tags": NaN
+    },
+    {
+      "name": "Push (feat. Omah Lay)",
+      "artist": "Naomi Sharon",
+      "mood": "Chill",
+      "pca_x": -1.0725,
+      "pca_y": -1.3681,
+      "tags": NaN
+    },
+    {
+      "name": "Building Castles",
+      "artist": "Bawo",
+      "mood": "Chill",
+      "pca_x": -0.6486,
+      "pca_y": -1.1371,
+      "tags": NaN
+    },
+    {
+      "name": "Better Hurry Up",
+      "artist": "Monkeyneck",
+      "mood": "Sad",
+      "pca_x": -0.7791,
+      "pca_y": -0.6449,
+      "tags": NaN
+    },
+    {
+      "name": "LIKE ME",
+      "artist": "MGEE",
+      "mood": "Sad",
+      "pca_x": -0.6358,
+      "pca_y": 0.4132,
+      "tags": NaN
+    },
+    {
+      "name": "NOUAR",
+      "artist": "Cheikha Rimitti",
+      "mood": "Sad",
+      "pca_x": -0.6661,
+      "pca_y": 0.889,
+      "tags": NaN
+    },
+    {
+      "name": "Ricky Hatton",
+      "artist": "Casnova",
+      "mood": "Sad",
+      "pca_x": -0.4211,
+      "pca_y": -0.6519,
+      "tags": NaN
+    },
+    {
+      "name": "No Dey Form",
+      "artist": "Babyboy AV",
+      "mood": "Sad",
+      "pca_x": -1.0553,
+      "pca_y": 0.6567,
+      "tags": NaN
+    },
+    {
+      "name": "theres this girl",
+      "artist": "sign crushes motorist",
+      "mood": "Sad",
+      "pca_x": -1.2192,
+      "pca_y": 0.3329,
+      "tags": NaN
+    },
+    {
+      "name": "Sid El Houari",
+      "artist": "Cheb Kader",
+      "mood": "Sad",
+      "pca_x": -0.8586,
+      "pca_y": 1.4186,
+      "tags": NaN
+    },
+    {
+      "name": "WOTOWOTO SEASONING (feat. Black Sherif)",
+      "artist": "ODUMODUBLVCK",
+      "mood": "Chill",
+      "pca_x": -1.0119,
+      "pca_y": -0.8265,
+      "tags": NaN
+    },
+    {
+      "name": "Hippodrome",
+      "artist": "Jamie T",
+      "mood": "Sad",
+      "pca_x": -0.7126,
+      "pca_y": -0.602,
+      "tags": NaN
+    },
+    {
+      "name": "Douwi Douwi",
+      "artist": "7liwa",
+      "mood": "Sad",
+      "pca_x": -1.0495,
+      "pca_y": 0.3252,
+      "tags": NaN
+    },
+    {
+      "name": "Angie (i’ve been lost) [feat. Angie McMahon]",
+      "artist": "Fred again..",
+      "mood": "Sad",
+      "pca_x": -0.6493,
+      "pca_y": -0.6988,
+      "tags": NaN
+    },
+    {
+      "name": "Big Hen (steal my joy)",
+      "artist": "Fred again..",
+      "mood": "Sad",
+      "pca_x": -0.9684,
+      "pca_y": 0.7769,
+      "tags": NaN
+    },
+    {
+      "name": "Carlos (make it thru)",
+      "artist": "Fred again..",
+      "mood": "Sad",
+      "pca_x": -0.2616,
+      "pca_y": -0.0967,
+      "tags": NaN
+    },
+    {
+      "name": "Hope",
+      "artist": "Duskus",
+      "mood": "Sad",
+      "pca_x": -0.4874,
+      "pca_y": 0.237,
+      "tags": NaN
+    },
+    {
+      "name": "Sierra",
+      "artist": "Argy",
+      "mood": "Chill",
+      "pca_x": -0.5009,
+      "pca_y": -1.8433,
+      "tags": NaN
+    },
+    {
+      "name": "peace u need",
+      "artist": "Fred again..",
+      "mood": "Sad",
+      "pca_x": -0.5679,
+      "pca_y": 0.0324,
+      "tags": NaN
+    },
+    {
+      "name": "Charades",
+      "artist": "Headie One",
+      "mood": "Chill",
+      "pca_x": -1.4588,
+      "pca_y": -0.5536,
+      "tags": NaN
+    },
+    {
+      "name": "Need 2",
+      "artist": "Pinegrove",
+      "mood": "Sad",
+      "pca_x": -3.6056,
+      "pca_y": 3.124,
+      "tags": "indie folk,slowcore,slacker rock,midwest emo,wsum 91.7 fm madison"
+    },
+    {
+      "name": "These Things Will Come To Be",
+      "artist": "DJ Seinfeld",
+      "mood": "Chill",
+      "pca_x": -1.1814,
+      "pca_y": -0.4166,
+      "tags": NaN
+    },
+    {
+      "name": "17th December 2020 (Waterloo Station)",
+      "artist": "Fred again..",
+      "mood": "Chill",
+      "pca_x": -0.81,
+      "pca_y": -1.187,
+      "tags": NaN
+    },
+    {
+      "name": "lemme land?",
+      "artist": "Canking",
+      "mood": "Sad",
+      "pca_x": -0.7971,
+      "pca_y": -0.0765,
+      "tags": NaN
+    },
+    {
+      "name": "Ghost",
+      "artist": "Gabry Ponte",
+      "mood": "Chill",
+      "pca_x": -1.7027,
+      "pca_y": -0.5478,
+      "tags": NaN
+    },
+    {
+      "name": "Games",
+      "artist": "NM",
+      "mood": "Chill",
+      "pca_x": -1.2296,
+      "pca_y": -0.0246,
+      "tags": NaN
+    },
+    {
+      "name": "Levels",
+      "artist": "BigXthaPlug",
+      "mood": "Chill",
+      "pca_x": -0.8255,
+      "pca_y": -1.9395,
+      "tags": NaN
+    },
+    {
+      "name": "Merci Beaucoup",
+      "artist": "Pop Smoke",
+      "mood": "Chill",
+      "pca_x": -1.0524,
+      "pca_y": 0.3126,
+      "tags": NaN
+    },
+    {
+      "name": "Wish I Never Met You - Prison Tapes",
+      "artist": "Tory Lanez",
+      "mood": "Sad",
+      "pca_x": -0.7993,
+      "pca_y": 1.0453,
+      "tags": NaN
+    },
+    {
+      "name": "let it breathe (feat. Roddy Ricch)",
+      "artist": "Gunna",
+      "mood": "Sad",
+      "pca_x": -0.9944,
+      "pca_y": 0.9015,
+      "tags": NaN
+    },
+    {
+      "name": "NOSEBLEED",
+      "artist": "FRVRFRIDAY",
+      "mood": "Sad",
+      "pca_x": -0.5269,
+      "pca_y": 0.7864,
+      "tags": NaN
+    },
+    {
+      "name": "Gaslight 101",
+      "artist": "Odeal",
+      "mood": "Chill",
+      "pca_x": -1.026,
+      "pca_y": -0.3236,
+      "tags": NaN
+    },
+    {
+      "name": "Black Sand",
+      "artist": "Glass Beams",
+      "mood": "Sad",
+      "pca_x": -0.9022,
+      "pca_y": 1.4244,
+      "tags": NaN
+    },
+    {
+      "name": "BerwynGesaffNeighbours",
+      "artist": "Fred again..",
+      "mood": "Chill",
+      "pca_x": -1.0299,
+      "pca_y": 0.5637,
+      "tags": NaN
+    },
+    {
+      "name": "يا خو",
+      "artist": "Ayoub Anbaoui",
+      "mood": "Sad",
+      "pca_x": -0.7473,
+      "pca_y": 0.0886,
+      "tags": NaN
+    },
+    {
+      "name": "Lewjah Tani X Houwa ( Coke Studio Africa 2023)",
+      "artist": "Zouhair Bahaoui",
+      "mood": "Chill",
+      "pca_x": -0.3878,
+      "pca_y": -1.3255,
+      "tags": NaN
+    },
+    {
+      "name": "LaLaLa",
+      "artist": "RICCI",
+      "mood": "Sad",
+      "pca_x": -1.3272,
+      "pca_y": 0.5435,
+      "tags": NaN
+    }
+  ],
+  "centroids": [
+    {
+      "mood": "Happy",
+      "pca_x": 4.9008,
+      "pca_y": -1.3433
+    },
+    {
+      "mood": "Chill",
+      "pca_x": -1.1626,
+      "pca_y": -0.6258
+    },
+    {
+      "mood": "Sad",
+      "pca_x": -0.8765,
+      "pca_y": 0.4936
+    },
+    {
+      "mood": "Hype",
+      "pca_x": 5.5189,
+      "pca_y": 0.947
+    }
+  ],
+  "mood_counts": {
+    "Sad": 81,
+    "Chill": 66,
+    "Hype": 17,
+    "Happy": 11
+  }
+}
