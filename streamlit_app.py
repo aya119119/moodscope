@@ -1,4 +1,3 @@
- 
 import streamlit as st
 import pandas as pd
 import json
@@ -99,9 +98,8 @@ code, .mono { font-family: 'Space Mono', monospace !important; }
 .marquee-track {
     display: flex;
     width: max-content;
-    animation: marquee 18s linear infinite;
+    animation: marquee 60s linear infinite;
 }
-.marquee-track:hover { animation-play-state: paused; }
 .marquee-item {
     font-family: 'Bebas Neue', sans-serif;
     font-size: clamp(4rem, 10vw, 9rem);
@@ -533,9 +531,10 @@ with tab2:
 with tab3:
     st.markdown('<div class="section-head"><span class="section-title">MOOD PLAYLISTS</span><span class="section-count">— AUTO-GENERATED</span></div>', unsafe_allow_html=True)
 
-    cards = ""
+    col_p1, col_p2 = st.columns(2)
     moods = ["Hype", "Happy", "Chill", "Sad"]
-    for mood in moods:
+    cols = [col_p1, col_p2, col_p1, col_p2]
+    for mood, col in zip(moods, cols):
         count = mood_counts.get(mood, 0)
         color = MOOD_COLORS[mood]
         emoji = MOOD_EMOJIS[mood]
@@ -543,16 +542,16 @@ with tab3:
         spotify_url = f"https://open.spotify.com/playlist/{pid}"
         top_songs = df[df["cluster_name"] == mood]["name"].head(5).tolist()
         songs_preview = " · ".join(top_songs)
-        cards += f"""
-        <div class="playlist-card">
-            <span class="playlist-emoji">{emoji}</span>
-            <div class="playlist-mood" style="color:{color}">{mood.upper()}</div>
-            <div class="playlist-count">{count} TRACKS</div>
-            <div style="font-family:'DM Sans',sans-serif;font-size:0.8rem;color:#555;margin-bottom:1.5rem;line-height:1.6">{songs_preview}</div>
-            <a href="{spotify_url}" target="_blank" class="playlist-link">OPEN IN SPOTIFY →</a>
-        </div>"""
-
-    st.markdown(f'<div class="playlist-grid">{cards}</div>', unsafe_allow_html=True)
+        with col:
+            st.markdown(f"""
+            <div style="border:1px solid #1a1a1a;padding:2.5rem 2rem;margin-bottom:1px;background:#000">
+                <span style="font-size:2rem;display:block;margin-bottom:1rem">{emoji}</span>
+                <div style="font-family:Bebas Neue,sans-serif;font-size:3.5rem;line-height:1;color:{color};margin-bottom:0.5rem">{mood.upper()}</div>
+                <div style="font-family:Space Mono,monospace;font-size:0.7rem;color:#555;letter-spacing:0.15em;margin-bottom:1rem">{count} TRACKS</div>
+                <div style="font-family:DM Sans,sans-serif;font-size:0.8rem;color:#444;margin-bottom:1.5rem;line-height:1.8">{songs_preview}</div>
+            </div>
+            """, unsafe_allow_html=True)
+            st.link_button(f"OPEN IN SPOTIFY →", spotify_url, use_container_width=True)
 
     st.markdown("""
     <div style="font-family:Space Mono,monospace;font-size:0.65rem;color:#333;padding:2rem 0;border-top:1px solid #111;margin-top:2rem">
@@ -700,11 +699,17 @@ with tab4:
             if mood in mood_avgs:
                 vals = [mood_avgs[mood].get(f, 0) for f in features]
                 vals_norm = [max(0, min(1, v)) for v in vals]
+                MOOD_FILL = {
+                    "Hype":  "rgba(255,45,45,0.12)",
+                    "Happy": "rgba(255,140,0,0.12)",
+                    "Chill": "rgba(192,192,192,0.12)",
+                    "Sad":   "rgba(107,107,107,0.12)",
+                }
                 fig_radar.add_trace(go.Scatterpolar(
                     r=vals_norm + [vals_norm[0]],
                     theta=features + [features[0]],
                     fill='toself',
-                    fillcolor=MOOD_COLORS[mood] + '22',
+                    fillcolor=MOOD_FILL[mood],
                     line=dict(color=MOOD_COLORS[mood], width=2),
                     name=mood,
                 ))
