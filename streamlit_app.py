@@ -750,8 +750,9 @@ def render_dashboard(df, research, user_name):
                 fig_sig.add_trace(go.Scatter(x=t_axis, y=wave, mode='lines',
                     line=dict(color=color, width=1.5),
                     fill='tozeroy', fillcolor=MOOD_DIM[mood], name="Amplitude"), row=1, col=1)
+                r,g,b = int(color[1:3],16), int(color[3:5],16), int(color[5:7],16)
                 fig_sig.add_trace(go.Heatmap(z=spec,
-                    colorscale=[[0,'#000'],[0.3,f'{color}33'],[0.7,f'{color}88'],[1.0,color]],
+                    colorscale=[[0,'#000'],[0.3,f'rgba({r},{g},{b},0.2)'],[0.7,f'rgba({r},{g},{b},0.6)'],[1.0,color]],
                     showscale=False, name="Spectrogram"), row=2, col=1)
                 fig_sig.update_layout(
                     paper_bgcolor='#000', plot_bgcolor='#000',
