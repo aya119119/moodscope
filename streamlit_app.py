@@ -40,405 +40,396 @@ PERSONALITY = {
 def inject_css():
     st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Share+Tech+Mono&family=Rajdhani:wght@400;600;700&family=Orbitron:wght@700;900&display=swap');
 
 :root {
     --bg:      #000000;
-    --surface: #050505;
-    --border:  #1a1a1a;
-    --border2: #222222;
+    --surface: #040404;
+    --border:  #161616;
+    --border2: #1f1f1f;
     --red:     #FF2D2D;
     --green:   #4DFFB4;
     --blue:    #2D8BFF;
     --orange:  #FF6B2D;
-    --muted:   #444444;
-    --dim:     #2a2a2a;
-    --text:    #E0E0E0;
-    --text2:   #888888;
+    --muted:   #3a3a3a;
+    --text:    #FFFFFF;
+    --text2:   #666666;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
 
-[data-testid="stAppViewContainer"], .main {
-    background: var(--bg) !important;
-    color: var(--text) !important;
-    font-family: 'Rajdhani', sans-serif !important;
+/* HIDE ALL STREAMLIT CHROME */
+header, footer, [data-testid="stHeader"], [data-testid="stToolbar"],
+#MainMenu, .stDeployButton, [data-testid="stDecoration"] {
+    display: none !important; visibility: hidden !important; height: 0 !important;
 }
-
-/* GRID OVERLAY */
-[data-testid="stAppViewContainer"]::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image:
-        linear-gradient(rgba(255,45,45,0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,45,45,0.02) 1px, transparent 1px);
-    background-size: 40px 40px;
-    pointer-events: none;
-    z-index: 0;
-}
-
-[data-testid="stHeader"] { background: var(--bg) !important; border-bottom: 1px solid var(--border) !important; }
 section[data-testid="stSidebar"] { display: none !important; }
+.stApp > div:first-child { padding-top: 0 !important; }
+
+[data-testid="stAppViewContainer"], .main, .stApp {
+    background: #000000 !important;
+    color: var(--text) !important;
+}
+
+/* GRID BACKGROUND */
+body::before, [data-testid="stAppViewContainer"]::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+        linear-gradient(rgba(255,45,45,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,45,45,0.025) 1px, transparent 1px);
+    background-size: 50px 50px;
+    pointer-events: none; z-index: 0;
+}
+
 .block-container { padding: 0 !important; max-width: 100% !important; position: relative; z-index: 1; }
-#MainMenu, footer, [data-testid="stToolbar"], .stDeployButton { display: none !important; }
 
 /* SCROLLBAR */
-::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar { width: 3px; }
 ::-webkit-scrollbar-track { background: #000; }
 ::-webkit-scrollbar-thumb { background: var(--red); }
 
-/* TOP BAR */
+/* ── TOP BAR ── */
 .topbar {
     display: flex; justify-content: space-between; align-items: center;
-    padding: 1rem 2.5rem; border-bottom: 1px solid var(--border);
-    background: rgba(0,0,0,0.9); backdrop-filter: blur(10px);
-    position: sticky; top: 0; z-index: 100;
+    padding: 0.9rem 3rem; border-bottom: 1px solid var(--border);
+    background: rgba(0,0,0,0.95); backdrop-filter: blur(20px);
+    position: sticky; top: 0; z-index: 200;
 }
 .topbar-logo {
-    font-family: 'Orbitron', monospace; font-size: 1rem; font-weight: 900;
-    color: var(--text); letter-spacing: 0.3em;
+    font-family: 'Orbitron', monospace; font-size: 0.85rem; font-weight: 900;
+    color: var(--text); letter-spacing: 0.4em;
 }
-.topbar-logo span { color: var(--red); }
-.topbar-status {
-    display: flex; gap: 2rem; align-items: center;
-}
-.status-dot {
-    font-family: 'Share Tech Mono', monospace; font-size: 0.65rem;
+.topbar-logo span { color: var(--red); text-shadow: 0 0 15px rgba(255,45,45,0.5); }
+.live-dot {
+    font-family: 'Share Tech Mono', monospace; font-size: 0.6rem;
     letter-spacing: 0.15em; color: var(--text2);
-    display: flex; align-items: center; gap: 0.5rem;
+    display: flex; align-items: center; gap: 0.6rem;
 }
-.status-dot::before {
-    content: ''; width: 6px; height: 6px; border-radius: 50%;
-    background: var(--green); box-shadow: 0 0 8px var(--green);
-    animation: pulse 2s infinite;
+.live-dot::before {
+    content: ''; width: 5px; height: 5px; border-radius: 50%;
+    background: var(--green); box-shadow: 0 0 10px var(--green);
+    animation: livepulse 2s infinite;
 }
-@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+@keyframes livepulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.3;transform:scale(0.8)} }
 
-/* SCAN LINE HERO */
+/* ── HERO ── */
 .hero {
-    padding: 4rem 2.5rem 3rem;
-    border-bottom: 1px solid var(--border);
-    position: relative; overflow: hidden;
+    padding: 5rem 3rem 4rem; position: relative; overflow: hidden;
+    border-bottom: 3px solid var(--red);
 }
-.hero::after {
-    content: '';
-    position: absolute; top: 0; left: 0; right: 0;
-    height: 2px; background: var(--red);
-    box-shadow: 0 0 20px var(--red), 0 0 40px rgba(255,45,45,0.5);
-    animation: scan 4s ease-in-out infinite;
+.hero::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0;
+    height: 2px; background: linear-gradient(90deg, transparent, var(--red), transparent);
+    box-shadow: 0 0 40px var(--red);
+    animation: scanline 5s ease-in-out infinite;
 }
-@keyframes scan { 0%{top:0;opacity:1} 100%{top:100%;opacity:0} }
+@keyframes scanline { 0%{top:0;opacity:1} 85%{top:100%;opacity:0.3} 100%{top:100%;opacity:0} }
 
-.hero-label {
-    font-family: 'Share Tech Mono', monospace; font-size: 0.65rem;
-    color: var(--red); letter-spacing: 0.4em; text-transform: uppercase;
-    margin-bottom: 1rem;
+.hero-eyebrow {
+    font-family: 'Share Tech Mono', monospace; font-size: 0.6rem;
+    color: var(--red); letter-spacing: 0.6em; text-transform: uppercase;
+    margin-bottom: 1.5rem; opacity: 0.8;
 }
 .hero-title {
-    font-family: 'Orbitron', monospace; font-size: clamp(3rem,8vw,7rem);
-    font-weight: 900; line-height: 0.9; color: var(--text);
-    letter-spacing: -0.02em; margin-bottom: 1.5rem;
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(6rem, 18vw, 16rem);
+    line-height: 0.85; color: var(--text);
+    letter-spacing: -3px; margin-bottom: 2rem;
+    text-shadow: none;
 }
-.hero-title .accent { color: var(--red); text-shadow: 0 0 30px rgba(255,45,45,0.6); }
-.hero-sub {
+.hero-title .r {
+    color: var(--red);
+    text-shadow: 0 0 60px rgba(255,45,45,0.5), 0 0 120px rgba(255,45,45,0.2);
+}
+.hero-operator {
     font-family: 'Share Tech Mono', monospace; font-size: 0.75rem;
-    color: var(--text2); letter-spacing: 0.2em; line-height: 1.8;
-    max-width: 600px;
+    color: var(--text2); letter-spacing: 0.25em; margin-bottom: 3rem;
+    line-height: 2;
 }
-.hero-metrics {
-    display: flex; gap: 3rem; margin-top: 2.5rem; flex-wrap: wrap;
+.hero-operator span { color: var(--text); }
+.hero-stats {
+    display: grid; grid-template-columns: repeat(4, auto);
+    gap: 0; border: 1px solid var(--border2);
+    width: fit-content;
 }
-.hero-metric-val {
-    font-family: 'Orbitron', monospace; font-size: 2.5rem; font-weight: 700;
-    color: var(--red); line-height: 1;
-    text-shadow: 0 0 20px rgba(255,45,45,0.4);
+.hero-stat {
+    padding: 1.5rem 2.5rem; border-right: 1px solid var(--border2);
+    text-align: center;
 }
-.hero-metric-label {
-    font-family: 'Share Tech Mono', monospace; font-size: 0.6rem;
-    color: var(--text2); letter-spacing: 0.2em; margin-top: 0.3rem;
+.hero-stat:last-child { border-right: none; }
+.hero-stat-val {
+    font-family: 'Anton', sans-serif; font-size: 3.5rem; line-height: 1;
+    color: var(--red); text-shadow: 0 0 30px rgba(255,45,45,0.4);
+    display: block;
+}
+.hero-stat-label {
+    font-family: 'Share Tech Mono', monospace; font-size: 0.55rem;
+    color: var(--text2); letter-spacing: 0.2em; display: block; margin-top: 0.3rem;
 }
 
-/* TABS */
+/* ── TABS ── */
 .stTabs [data-baseweb="tab-list"] {
-    background: var(--bg) !important;
-    border-bottom: 1px solid var(--border) !important;
-    gap: 0 !important; padding: 0 2.5rem !important;
+    background: var(--bg) !important; border-bottom: 1px solid var(--border2) !important;
+    gap: 0 !important; padding: 0 3rem !important;
 }
 .stTabs [data-baseweb="tab"] {
-    font-family: 'Share Tech Mono', monospace !important;
-    font-size: 0.65rem !important; letter-spacing: 0.2em !important;
-    color: var(--muted) !important; background: transparent !important;
-    border: none !important; padding: 1.2rem 1.5rem !important;
-    text-transform: uppercase !important;
+    font-family: 'Share Tech Mono', monospace !important; font-size: 0.6rem !important;
+    letter-spacing: 0.25em !important; color: var(--muted) !important;
+    background: transparent !important; border: none !important;
+    padding: 1.2rem 2rem !important; text-transform: uppercase !important;
+    transition: color 0.2s !important;
 }
 .stTabs [aria-selected="true"] {
-    color: var(--red) !important;
-    border-bottom: 1px solid var(--red) !important;
-    text-shadow: 0 0 10px rgba(255,45,45,0.5) !important;
+    color: var(--red) !important; border-bottom: 2px solid var(--red) !important;
+    text-shadow: 0 0 12px rgba(255,45,45,0.6) !important;
 }
-.stTabs [data-baseweb="tab-panel"] { background: var(--bg) !important; padding: 2.5rem !important; }
+.stTabs [data-baseweb="tab-panel"] { background: var(--bg) !important; padding: 3rem !important; }
 
-/* SECTION HEADER */
-.sec-head {
-    display: flex; align-items: center; gap: 1.5rem;
-    margin: 2.5rem 0 1.5rem; padding-bottom: 0.75rem;
-    border-bottom: 1px solid var(--border);
+/* ── SECTION HEAD ── */
+.sh {
+    display: flex; align-items: baseline; gap: 1.5rem;
+    padding: 3rem 0 1.5rem; border-bottom: 1px solid var(--border);
+    margin-bottom: 2rem;
 }
-.sec-num {
-    font-family: 'Share Tech Mono', monospace; font-size: 0.6rem;
+.sh-num {
+    font-family: 'Share Tech Mono', monospace; font-size: 0.55rem;
     color: var(--red); letter-spacing: 0.3em;
-    border: 1px solid rgba(255,45,45,0.3); padding: 0.2rem 0.5rem;
+    border: 1px solid rgba(255,45,45,0.25); padding: 0.15rem 0.5rem;
 }
-.sec-title {
-    font-family: 'Orbitron', monospace; font-size: 1.1rem; font-weight: 700;
-    color: var(--text); letter-spacing: 0.15em;
+.sh-title {
+    font-family: 'Anton', sans-serif; font-size: clamp(2rem,5vw,4rem);
+    letter-spacing: -1px; color: var(--text); line-height: 1;
 }
-.sec-tag {
-    font-family: 'Share Tech Mono', monospace; font-size: 0.6rem;
-    color: var(--text2); letter-spacing: 0.15em; margin-left: auto;
+.sh-sub {
+    font-family: 'Share Tech Mono', monospace; font-size: 0.55rem;
+    color: var(--text2); letter-spacing: 0.2em; margin-left: auto;
 }
 
-/* STAT GRID */
-.stat-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--border); margin: 1.5rem 0; }
+/* ── STAT GRID ── */
+.stat-grid {
+    display: grid; grid-template-columns: repeat(4,1fr);
+    gap: 1px; background: var(--border); margin: 1.5rem 0;
+}
 .stat-card {
-    background: var(--bg); padding: 2rem 1.5rem;
-    position: relative; overflow: hidden;
-    transition: background 0.2s;
+    background: var(--bg); padding: 2.5rem 2rem;
+    position: relative; overflow: hidden; transition: background 0.15s;
 }
-.stat-card:hover { background: #080808; }
-.stat-card::before {
-    content: ''; position: absolute; top: 0; left: 0;
-    width: 100%; height: 1px;
-}
+.stat-card:hover { background: #060606; }
 .stat-mood {
-    font-family: 'Share Tech Mono', monospace; font-size: 0.6rem;
+    font-family: 'Share Tech Mono', monospace; font-size: 0.55rem;
     letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 1rem;
-    display: flex; align-items: center; gap: 0.5rem;
 }
 .stat-num {
-    font-family: 'Orbitron', monospace; font-size: 3.5rem;
-    font-weight: 900; line-height: 1; margin-bottom: 0.5rem;
+    font-family: 'Anton', sans-serif; font-size: 5rem;
+    line-height: 1; margin-bottom: 0.5rem;
 }
-.stat-bar-bg { height: 1px; background: var(--border2); margin-top: 1rem; }
-.stat-bar-fill { height: 1px; transition: width 1s ease; }
+.stat-bar-bg { height: 1px; background: var(--border2); margin-top: 1.5rem; }
+.stat-bar-fill { height: 1px; }
 .stat-pct {
-    font-family: 'Share Tech Mono', monospace; font-size: 0.6rem;
+    font-family: 'Share Tech Mono', monospace; font-size: 0.55rem;
     color: var(--text2); margin-top: 0.5rem; letter-spacing: 0.1em;
 }
 
-/* PERSONALITY */
+/* ── PERSONALITY ── */
 .personality {
-    border: 1px solid var(--border2); padding: 2.5rem;
-    margin: 1.5rem 0; position: relative;
-    background: linear-gradient(135deg, #050505 0%, #000 100%);
+    position: relative; padding: 3.5rem 3rem;
+    margin: 1.5rem 0; overflow: hidden;
+    border-top: 3px solid var(--red); border-bottom: 1px solid var(--border2);
+    background: linear-gradient(135deg, #060606 0%, #000 100%);
 }
-.personality::before {
+.personality::after {
     content: ''; position: absolute; inset: 0;
-    background: linear-gradient(135deg, rgba(255,45,45,0.03) 0%, transparent 60%);
+    background: radial-gradient(ellipse at 0% 50%, rgba(255,45,45,0.04) 0%, transparent 60%);
     pointer-events: none;
 }
-.personality-corner {
-    position: absolute; top: 1rem; right: 1rem;
+.personality-tag {
     font-family: 'Share Tech Mono', monospace; font-size: 0.55rem;
-    color: var(--muted); letter-spacing: 0.2em;
-}
-.personality-label {
-    font-family: 'Share Tech Mono', monospace; font-size: 0.6rem;
-    color: var(--red); letter-spacing: 0.35em; margin-bottom: 1rem;
+    color: var(--red); letter-spacing: 0.5em; margin-bottom: 1.5rem; opacity: 0.8;
 }
 .personality-title {
-    font-family: 'Orbitron', monospace; font-size: clamp(1.8rem,4vw,3.5rem);
-    font-weight: 900; line-height: 1; color: var(--red);
-    text-shadow: 0 0 40px rgba(255,45,45,0.4); margin-bottom: 1rem;
-    letter-spacing: 0.05em;
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(3rem, 7vw, 7rem);
+    line-height: 0.9; color: var(--red); letter-spacing: -2px;
+    text-shadow: 0 0 60px rgba(255,45,45,0.35); margin-bottom: 1.5rem;
 }
 .personality-desc {
-    font-family: 'Rajdhani', sans-serif; font-size: 1rem;
-    color: var(--text2); max-width: 500px; line-height: 1.7;
-    font-weight: 400;
+    font-family: 'Rajdhani', sans-serif; font-size: 1.15rem;
+    color: var(--text2); max-width: 480px; line-height: 1.6; font-weight: 400;
+}
+.personality-meta {
+    font-family: 'Share Tech Mono', monospace; font-size: 0.55rem;
+    color: var(--muted); letter-spacing: 0.25em; margin-top: 2rem;
 }
 
-/* SONG TABLE */
+/* ── SONG TABLE ── */
 .song-header {
-    display: grid; grid-template-columns: 2.5rem 1fr 1fr 7rem;
-    gap: 1rem; padding: 0.6rem 1rem;
+    display: grid; grid-template-columns: 3rem 1fr 1fr 8rem;
+    gap: 1rem; padding: 0.5rem 1rem;
     border-bottom: 1px solid var(--border2);
-    font-family: 'Share Tech Mono', monospace; font-size: 0.55rem;
-    color: var(--muted); letter-spacing: 0.2em;
+    font-family: 'Share Tech Mono', monospace; font-size: 0.5rem;
+    color: var(--muted); letter-spacing: 0.25em; text-transform: uppercase;
 }
 .song-row {
-    display: grid; grid-template-columns: 2.5rem 1fr 1fr 7rem;
-    gap: 1rem; padding: 0.8rem 1rem;
-    border-bottom: 1px solid #0d0d0d;
+    display: grid; grid-template-columns: 3rem 1fr 1fr 8rem;
+    gap: 1rem; padding: 0.75rem 1rem; border-bottom: 1px solid #0a0a0a;
     transition: background 0.1s; align-items: center;
 }
-.song-row:hover { background: #080808; }
-.song-num { font-family: 'Share Tech Mono', monospace; font-size: 0.6rem; color: var(--muted); }
-.song-name { font-family: 'Rajdhani', sans-serif; font-size: 0.95rem; font-weight: 500; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.song-row:hover { background: #060606; }
+.song-num { font-family: 'Share Tech Mono', monospace; font-size: 0.55rem; color: var(--muted); }
+.song-name { font-family: 'Rajdhani', sans-serif; font-size: 1rem; font-weight: 700; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .song-artist { font-family: 'Rajdhani', sans-serif; font-size: 0.85rem; font-weight: 400; color: var(--text2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .mood-tag {
-    font-family: 'Share Tech Mono', monospace; font-size: 0.55rem;
-    letter-spacing: 0.15em; padding: 0.2rem 0.5rem;
+    font-family: 'Share Tech Mono', monospace; font-size: 0.5rem;
+    letter-spacing: 0.15em; padding: 0.2rem 0.55rem;
     display: inline-block; text-align: center; text-transform: uppercase;
 }
 
-/* DATA PANEL */
-.data-panel {
-    border: 1px solid var(--border2); padding: 1.5rem;
-    background: var(--surface); position: relative;
-}
-.data-panel-label {
+/* ── MODULE LABEL (replaces data-panel) ── */
+.mod-label {
     font-family: 'Share Tech Mono', monospace; font-size: 0.55rem;
-    color: var(--red); letter-spacing: 0.3em; margin-bottom: 0.75rem;
-    text-transform: uppercase;
+    color: var(--red); letter-spacing: 0.4em; text-transform: uppercase;
+    margin-bottom: 0.5rem;
 }
-.data-panel-title {
-    font-family: 'Orbitron', monospace; font-size: 1rem;
-    font-weight: 700; color: var(--text); margin-bottom: 0.5rem;
-    letter-spacing: 0.1em;
+.mod-title {
+    font-family: 'Anton', sans-serif; font-size: clamp(1.5rem,3vw,2.8rem);
+    letter-spacing: -1px; color: var(--text); line-height: 1; margin-bottom: 0.5rem;
 }
-.data-panel-desc {
-    font-family: 'Rajdhani', sans-serif; font-size: 0.85rem;
-    color: var(--text2); line-height: 1.6; font-weight: 400;
-}
-
-/* CHART WRAP */
-.chart-frame {
-    border: 1px solid var(--border2);
-    box-shadow: 0 0 20px rgba(255,45,45,0.05);
-    margin: 1rem 0;
+.mod-desc {
+    font-family: 'Share Tech Mono', monospace; font-size: 0.6rem;
+    color: var(--text2); letter-spacing: 0.1em; line-height: 1.8;
+    margin-bottom: 1.5rem;
 }
 
-/* SIGNAL BARS (synthetic waveform) */
-.signal-wrap { display: flex; align-items: flex-end; gap: 2px; height: 80px; margin: 1rem 0; }
-.signal-bar { flex: 1; border-radius: 1px; transition: height 0.3s; }
-
-/* MATH BLOCK */
+/* ── MATH BLOCK ── */
 .math-block {
-    background: #050505; border: 1px solid var(--border2);
-    border-left: 2px solid var(--red); padding: 1.5rem;
-    margin: 1rem 0; font-family: 'Share Tech Mono', monospace;
-    font-size: 0.75rem; color: #ccc; line-height: 2;
+    background: #030303; border-left: 2px solid var(--red);
+    padding: 1.5rem 2rem; margin: 1rem 0;
+    font-family: 'Share Tech Mono', monospace; font-size: 0.7rem;
+    color: #999; line-height: 2.2;
+}
+.math-block .redact {
+    background: #1a1a1a; color: transparent;
+    user-select: none; letter-spacing: 0.1em;
+    padding: 0 0.2rem;
 }
 
-/* INPUT OVERRIDES */
+/* ── CHART WRAPPER ── */
+.chart-wrap { margin: 0.5rem 0; }
+.stPlotlyChart { border: none !important; box-shadow: none !important; }
+
+/* ── INPUTS ── */
 .stTextInput input {
-    background: var(--surface) !important; border: 1px solid var(--border2) !important;
+    background: #050505 !important; border: 1px solid var(--border2) !important;
     border-radius: 0 !important; color: var(--text) !important;
-    font-family: 'Share Tech Mono', monospace !important; font-size: 0.75rem !important;
+    font-family: 'Share Tech Mono', monospace !important; font-size: 0.7rem !important;
+    letter-spacing: 0.1em !important;
 }
-.stTextInput input:focus { border-color: var(--red) !important; box-shadow: none !important; }
+.stTextInput input:focus { border-color: var(--red) !important; box-shadow: 0 0 10px rgba(255,45,45,0.15) !important; }
 .stSelectbox > div > div {
-    background: var(--surface) !important; border: 1px solid var(--border2) !important;
+    background: #050505 !important; border: 1px solid var(--border2) !important;
     border-radius: 0 !important; color: var(--text) !important;
 }
 
-/* BUTTONS */
+/* ── BUTTONS ── */
 .stButton > button {
-    font-family: 'Share Tech Mono', monospace !important; font-size: 0.7rem !important;
-    letter-spacing: 0.2em !important; background: transparent !important;
+    font-family: 'Share Tech Mono', monospace !important; font-size: 0.65rem !important;
+    letter-spacing: 0.25em !important; background: transparent !important;
     color: var(--red) !important; border: 1px solid var(--red) !important;
-    border-radius: 0 !important; padding: 0.8rem 2.5rem !important;
-    text-transform: uppercase !important;
-    transition: all 0.2s !important;
+    border-radius: 0 !important; padding: 0.9rem 2.5rem !important;
+    text-transform: uppercase !important; transition: all 0.2s !important;
 }
 .stButton > button:hover {
     background: var(--red) !important; color: #000 !important;
-    box-shadow: 0 0 20px rgba(255,45,45,0.4) !important;
+    box-shadow: 0 0 25px rgba(255,45,45,0.35) !important;
 }
 .stLinkButton > a {
-    font-family: 'Share Tech Mono', monospace !important; font-size: 0.65rem !important;
-    letter-spacing: 0.15em !important; background: transparent !important;
-    color: var(--red) !important; border: 1px solid rgba(255,45,45,0.4) !important;
+    font-family: 'Share Tech Mono', monospace !important; font-size: 0.6rem !important;
+    letter-spacing: 0.2em !important; background: transparent !important;
+    color: var(--red) !important; border: 1px solid rgba(255,45,45,0.35) !important;
     border-radius: 0 !important; text-transform: uppercase !important;
+    transition: all 0.2s !important;
 }
 .stLinkButton > a:hover {
-    background: rgba(255,45,45,0.1) !important;
-    border-color: var(--red) !important;
-    box-shadow: 0 0 15px rgba(255,45,45,0.2) !important;
+    background: rgba(255,45,45,0.08) !important; border-color: var(--red) !important;
 }
 
-/* LANDING */
+/* ── PROGRESS BAR ── */
+.stProgress > div > div > div {
+    background: var(--red) !important; box-shadow: 0 0 12px rgba(255,45,45,0.5) !important;
+}
+.stProgress > div > div { background: var(--border) !important; border-radius: 0 !important; }
+
+/* ── LANDING ── */
 .landing {
     min-height: 100vh; display: flex; flex-direction: column;
     justify-content: center; align-items: center; text-align: center;
     padding: 4rem 2rem; position: relative;
 }
 .landing-eyebrow {
-    font-family: 'Share Tech Mono', monospace; font-size: 0.65rem;
-    color: var(--red); letter-spacing: 0.5em; margin-bottom: 2rem;
-    display: flex; align-items: center; gap: 1rem;
+    font-family: 'Share Tech Mono', monospace; font-size: 0.6rem;
+    color: var(--red); letter-spacing: 0.6em; margin-bottom: 2rem;
+    display: flex; align-items: center; gap: 1.5rem;
 }
 .landing-eyebrow::before, .landing-eyebrow::after {
-    content: ''; height: 1px; width: 60px; background: var(--red);
-    box-shadow: 0 0 10px var(--red);
+    content: ''; height: 1px; width: 80px;
+    background: linear-gradient(90deg, transparent, var(--red));
+    box-shadow: 0 0 8px var(--red);
 }
+.landing-eyebrow::after { background: linear-gradient(90deg, var(--red), transparent); }
 .landing-title {
-    font-family: 'Orbitron', monospace; font-weight: 900;
-    font-size: clamp(4rem,14vw,12rem); line-height: 0.85;
-    color: var(--text); letter-spacing: -0.02em; margin-bottom: 2rem;
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(5rem,18vw,15rem);
+    line-height: 0.85; color: var(--text); letter-spacing: -4px; margin-bottom: 2rem;
 }
-.landing-title .r { color: var(--red); text-shadow: 0 0 40px rgba(255,45,45,0.6); }
+.landing-title .r { color: var(--red); text-shadow: 0 0 60px rgba(255,45,45,0.5), 0 0 100px rgba(255,45,45,0.2); }
 .landing-desc {
     font-family: 'Rajdhani', sans-serif; font-size: 1.1rem;
     color: var(--text2); max-width: 500px; line-height: 1.7;
     margin-bottom: 3rem; font-weight: 400;
 }
 .landing-specs {
-    display: flex; gap: 0; flex-wrap: wrap; justify-content: center;
-    border: 1px solid var(--border2); margin-top: 3rem;
+    display: flex; gap: 0; border: 1px solid var(--border2); margin-top: 3rem;
+    flex-wrap: wrap; justify-content: center;
 }
 .landing-spec {
-    padding: 1.5rem 2.5rem; border-right: 1px solid var(--border2);
-    text-align: center;
+    padding: 1.5rem 2.5rem; border-right: 1px solid var(--border2); text-align: center;
 }
 .landing-spec:last-child { border-right: none; }
 .landing-spec-val {
-    font-family: 'Orbitron', monospace; font-size: 1.5rem; font-weight: 700;
-    color: var(--red); line-height: 1; margin-bottom: 0.3rem;
+    font-family: 'Anton', sans-serif; font-size: 2rem;
+    color: var(--red); line-height: 1; margin-bottom: 0.25rem;
+    text-shadow: 0 0 20px rgba(255,45,45,0.35);
 }
 .landing-spec-label {
-    font-family: 'Share Tech Mono', monospace; font-size: 0.55rem;
+    font-family: 'Share Tech Mono', monospace; font-size: 0.5rem;
     color: var(--text2); letter-spacing: 0.2em;
 }
 
-/* LOADING */
+/* ── LOADING ── */
 .loading {
     min-height: 80vh; display: flex; flex-direction: column;
-    justify-content: center; align-items: center; text-align: center;
-    padding: 4rem 2rem;
+    justify-content: center; align-items: center; text-align: center; padding: 4rem 2rem;
 }
 .loading-title {
-    font-family: 'Orbitron', monospace; font-size: 2rem; font-weight: 700;
-    color: var(--text); letter-spacing: 0.2em; margin-bottom: 0.5rem;
+    font-family: 'Anton', sans-serif; font-size: 3.5rem; letter-spacing: -2px;
+    color: var(--text); margin-bottom: 0.5rem;
 }
 .loading-step {
-    font-family: 'Share Tech Mono', monospace; font-size: 0.7rem;
-    color: var(--red); letter-spacing: 0.25em; margin-top: 1rem;
-    animation: blink 1s infinite;
+    font-family: 'Share Tech Mono', monospace; font-size: 0.65rem;
+    color: var(--red); letter-spacing: 0.25em; margin-top: 1.5rem;
+    animation: blink 1.2s infinite;
 }
-@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.4} }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
-/* PROGRESS BAR */
-.stProgress > div > div > div {
-    background: var(--red) !important;
-    box-shadow: 0 0 10px rgba(255,45,45,0.5) !important;
-}
-.stProgress > div > div {
-    background: var(--border) !important;
-    border-radius: 0 !important;
-}
-
-/* FOOTER */
+/* ── FOOTER ── */
 .lab-footer {
-    border-top: 1px solid var(--border); padding: 1.5rem 2.5rem;
-    display: flex; justify-content: space-between; align-items: center;
-    margin-top: 4rem;
+    border-top: 1px solid var(--border); padding: 1.5rem 3rem;
+    display: flex; justify-content: space-between; margin-top: 6rem;
 }
 .footer-text {
-    font-family: 'Share Tech Mono', monospace; font-size: 0.55rem;
+    font-family: 'Share Tech Mono', monospace; font-size: 0.5rem;
     color: var(--muted); letter-spacing: 0.2em;
 }
 </style>
@@ -610,44 +601,44 @@ def make_synthetic_spectrogram(mood, rows=32, cols=80):
 # ── DASHBOARD ─────────────────────────────────────────────────────────────────
 def render_dashboard(df, research, user_name):
     import plotly.graph_objects as go
+    from plotly.subplots import make_subplots
 
     mood_counts = research.get("mood_counts", {})
     total = sum(mood_counts.values())
     dominant = max(mood_counts, key=mood_counts.get) if mood_counts else "Chill"
     p_title, p_desc = PERSONALITY.get(dominant, PERSONALITY["Chill"])
 
-    base_layout = dict(
+    BL = dict(  # base plotly layout
         paper_bgcolor='#000', plot_bgcolor='#000',
-        font=dict(color='#666', family='Share Tech Mono', size=10),
-        margin=dict(t=40,b=40,l=50,r=30),
-        xaxis=dict(gridcolor='#0d0d0d', zerolinecolor='#1a1a1a', color='#444', tickfont=dict(family='Share Tech Mono',size=9)),
-        yaxis=dict(gridcolor='#0d0d0d', zerolinecolor='#1a1a1a', color='#444', tickfont=dict(family='Share Tech Mono',size=9)),
+        font=dict(color='#333', family='Share Tech Mono', size=9),
+        margin=dict(t=20,b=30,l=45,r=20),
+        xaxis=dict(gridcolor='#0a0a0a', zerolinecolor='#111', color='#2a2a2a',
+                   tickfont=dict(family='Share Tech Mono',size=8)),
+        yaxis=dict(gridcolor='#0a0a0a', zerolinecolor='#111', color='#2a2a2a',
+                   tickfont=dict(family='Share Tech Mono',size=8)),
     )
 
-    # TOP BAR
+    # ── TOP BAR ──
     st.markdown(f"""
     <div class="topbar">
         <div class="topbar-logo">MOOD<span>SCOPE</span></div>
-        <div class="topbar-status">
-            <div class="status-dot">{user_name.upper()} — {total} SIGNALS PROCESSED</div>
-        </div>
+        <div class="live-dot"><span style="color:#fff">{user_name.upper()}</span> &nbsp;—&nbsp; {total} SIGNALS</div>
     </div>""", unsafe_allow_html=True)
 
-    # HERO
+    # ── HERO ──
     st.markdown(f"""
     <div class="hero">
-        <div class="hero-label">◈ MUSIC INTELLIGENCE RESEARCH SYSTEM</div>
-        <div class="hero-title">MOOD<span class="accent">SCOPE</span></div>
-        <div class="hero-sub">
-            OPERATOR: {user_name.upper()} &nbsp;|&nbsp;
-            SONGS PROCESSED: {total} &nbsp;|&nbsp;
-            DOMINANT SIGNAL: {dominant.upper()}
+        <div class="hero-eyebrow">◈ MUSIC INTELLIGENCE RESEARCH SYSTEM</div>
+        <div class="hero-title">MOOD<span class="r">SCOPE</span></div>
+        <div class="hero-operator">
+            OPERATOR: <span>{user_name.upper()}</span> &nbsp;&nbsp;
+            DOMINANT SIGNAL: <span style="color:var(--red)">{dominant.upper()}</span>
         </div>
-        <div class="hero-metrics">
-            <div><div class="hero-metric-val">{total}</div><div class="hero-metric-label">SONGS ANALYSED</div></div>
-            <div><div class="hero-metric-val">4</div><div class="hero-metric-label">MOOD CLUSTERS</div></div>
-            <div><div class="hero-metric-val">8D</div><div class="hero-metric-label">FEATURE SPACE</div></div>
-            <div><div class="hero-metric-val">MLP</div><div class="hero-metric-label">CLASSIFIER</div></div>
+        <div class="hero-stats">
+            <div class="hero-stat"><span class="hero-stat-val">{total}</span><span class="hero-stat-label">SONGS ANALYSED</span></div>
+            <div class="hero-stat"><span class="hero-stat-val">4</span><span class="hero-stat-label">MOOD CLUSTERS</span></div>
+            <div class="hero-stat"><span class="hero-stat-val">8D</span><span class="hero-stat-label">FEATURE SPACE</span></div>
+            <div class="hero-stat"><span class="hero-stat-val">MLP</span><span class="hero-stat-label">CLASSIFIER</span></div>
         </div>
     </div>""", unsafe_allow_html=True)
 
@@ -655,134 +646,104 @@ def render_dashboard(df, research, user_name):
 
     # ── TAB 1: OVERVIEW ──
     with tab1:
+        # Stat cards
         cards = '<div class="stat-grid">'
         for mood in ["Hype","Happy","Chill","Sad"]:
-            count = mood_counts.get(mood, 0)
+            count = mood_counts.get(mood,0)
             pct = round(count/total*100) if total else 0
-            color = MOOD_COLORS[mood]; sym = MOOD_EMOJIS[mood]
-            cards += f'''<div class="stat-card" style="border-top:1px solid {color}20">
-                <div class="stat-mood" style="color:{color}">{sym} {mood.upper()}</div>
-                <div class="stat-num" style="color:{color};text-shadow:0 0 20px {color}40">{count}</div>
-                <div class="stat-bar-bg"><div class="stat-bar-fill" style="width:{pct}%;background:{color};box-shadow:0 0 8px {color}60"></div></div>
+            color = MOOD_COLORS[mood]
+            cards += f'''<div class="stat-card">
+                <div class="stat-mood" style="color:{color}">{MOOD_EMOJIS[mood]} {mood.upper()}</div>
+                <div class="stat-num" style="color:{color};text-shadow:0 0 30px {color}50">{count}</div>
+                <div class="stat-bar-bg"><div class="stat-bar-fill" style="width:{pct}%;background:{color};box-shadow:0 0 10px {color}70"></div></div>
                 <div class="stat-pct">{pct}% OF LIBRARY</div>
             </div>'''
-        st.markdown(cards + '</div>', unsafe_allow_html=True)
+        st.markdown(cards+'</div>', unsafe_allow_html=True)
 
+        # Personality block
         st.markdown(f"""
         <div class="personality">
-            <div class="personality-corner">IDENTITY PROFILE</div>
-            <div class="personality-label">◈ OPERATOR CLASSIFICATION</div>
+            <div class="personality-tag">◈ OPERATOR CLASSIFICATION</div>
             <div class="personality-title">{p_title}</div>
             <div class="personality-desc">{p_desc}</div>
-            <div style="margin-top:2rem;font-family:Share Tech Mono,monospace;font-size:0.6rem;color:var(--muted);letter-spacing:0.2em">
-                PRIMARY SIGNAL — {dominant.upper()} &nbsp;|&nbsp; {mood_counts.get(dominant,0)} TRACKS CLASSIFIED
-            </div>
+            <div class="personality-meta">PRIMARY: {dominant.upper()} — {mood_counts.get(dominant,0)} TRACKS &nbsp;|&nbsp; ██████ CLASSIFIED</div>
         </div>""", unsafe_allow_html=True)
 
-        st.markdown('<div class="sec-head"><span class="sec-num">MOD-01</span><span class="sec-title">SIGNAL DISTRIBUTION</span><span class="sec-tag">DONUT ANALYSIS</span></div>', unsafe_allow_html=True)
-        col1, col2 = st.columns([1, 1])
+        # Donut + top tracks
+        st.markdown('<div class="sh"><span class="sh-num">MOD-01</span><span class="sh-title">SIGNAL DISTRIBUTION</span><span class="sh-sub">MOOD BREAKDOWN</span></div>', unsafe_allow_html=True)
+        col1, col2 = st.columns([1,1])
         with col1:
             labels = list(mood_counts.keys()); values = list(mood_counts.values())
-            colors = [MOOD_COLORS.get(m,"#888") for m in labels]
-            fig = go.Figure(go.Pie(labels=labels, values=values, hole=0.7,
-                marker=dict(colors=colors, line=dict(color='#000',width=3)),
+            colors_pie = [MOOD_COLORS.get(m,"#888") for m in labels]
+            fig_pie = go.Figure(go.Pie(labels=labels, values=values, hole=0.72,
+                marker=dict(colors=colors_pie, line=dict(color='#000',width=4)),
                 textinfo='label+percent',
-                textfont=dict(family='Share Tech Mono',size=10,color='white')))
-            fig.update_layout(paper_bgcolor='#000',plot_bgcolor='#000',font=dict(color='white'),
-                showlegend=False, margin=dict(t=20,b=20,l=20,r=20), height=300,
-                annotations=[dict(text=f'<b>{total}</b><br><span style="font-size:10px">TRACKS</span>',
-                    x=0.5,y=0.5,font=dict(size=20,color='white',family='Orbitron'),showarrow=False)])
-            st.markdown('<div class="chart-frame">', unsafe_allow_html=True)
-            st.plotly_chart(fig, use_container_width=True)
-            st.markdown('</div>', unsafe_allow_html=True)
+                textfont=dict(family='Share Tech Mono',size=9,color='white')))
+            fig_pie.update_layout(paper_bgcolor='#000', plot_bgcolor='#000', font=dict(color='white'),
+                showlegend=False, margin=dict(t=10,b=10,l=10,r=10), height=320,
+                annotations=[dict(text=f'<b>{total}</b>',x=0.5,y=0.5,
+                    font=dict(size=32,color='white',family='Anton'),showarrow=False)])
+            st.plotly_chart(fig_pie, use_container_width=True)
         with col2:
             for mood in ["Hype","Happy","Chill","Sad"]:
                 color = MOOD_COLORS[mood]
                 top = df[df["cluster_name"]==mood].head(3)
-                st.markdown(f'<div style="font-family:Share Tech Mono,monospace;font-size:0.55rem;letter-spacing:0.3em;color:{color};margin-top:1.2rem;text-shadow:0 0 10px {color}60">{MOOD_EMOJIS[mood]} {mood.upper()} — TOP SIGNALS</div>', unsafe_allow_html=True)
-                for _, row in top.iterrows():
-                    st.markdown(f'<div style="font-family:Rajdhani,sans-serif;font-size:0.85rem;color:#aaa;padding:0.25rem 0;border-bottom:1px solid #0d0d0d">→ {row["name"]} <span style="color:#444">/ {row["artist"]}</span></div>', unsafe_allow_html=True)
+                st.markdown(f'<div style="font-family:Share Tech Mono,monospace;font-size:0.5rem;letter-spacing:0.35em;color:{color};margin-top:1.5rem">{MOOD_EMOJIS[mood]} {mood.upper()}</div>', unsafe_allow_html=True)
+                for _, r in top.iterrows():
+                    st.markdown(f'<div style="font-family:Rajdhani,sans-serif;font-size:0.9rem;font-weight:600;color:#ccc;padding:0.2rem 0;border-bottom:1px solid #0a0a0a">→ {r["name"]} <span style="color:#333;font-weight:400">/ {r["artist"]}</span></div>', unsafe_allow_html=True)
 
     # ── TAB 2: YOUR SONGS ──
     with tab2:
-        st.markdown(f'<div class="sec-head"><span class="sec-num">MOD-02</span><span class="sec-title">SIGNAL CATALOGUE</span><span class="sec-tag">{len(df)} ENTRIES</span></div>', unsafe_allow_html=True)
-        col_f1, col_f2 = st.columns([2,1])
-        with col_f1: search = st.text_input("", placeholder="SEARCH SIGNAL BY NAME OR ARTIST...", label_visibility="collapsed")
-        with col_f2: mood_filter = st.selectbox("", ["ALL MOODS","Hype","Happy","Chill","Sad"], label_visibility="collapsed")
+        st.markdown(f'<div class="sh"><span class="sh-num">MOD-02</span><span class="sh-title">SIGNAL CATALOGUE</span><span class="sh-sub">{len(df)} ENTRIES</span></div>', unsafe_allow_html=True)
+        col_f1, col_f2 = st.columns([3,1])
+        with col_f1: search = st.text_input("", placeholder="SEARCH BY TRACK OR ARTIST...", label_visibility="collapsed")
+        with col_f2: mood_filter = st.selectbox("", ["ALL","Hype","Happy","Chill","Sad"], label_visibility="collapsed")
         filtered = df.copy()
         if search: filtered = filtered[filtered["name"].str.contains(search,case=False,na=False)|filtered["artist"].str.contains(search,case=False,na=False)]
-        if mood_filter != "ALL MOODS": filtered = filtered[filtered["cluster_name"]==mood_filter]
+        if mood_filter != "ALL": filtered = filtered[filtered["cluster_name"]==mood_filter]
         st.markdown('<div class="song-header"><span>#</span><span>TRACK</span><span>ARTIST</span><span>CLASS</span></div>', unsafe_allow_html=True)
-        rows = ""
-        for i, (_, row) in enumerate(filtered.head(100).iterrows()):
-            mood = row.get("cluster_name","Chill"); color = MOOD_COLORS.get(mood,"#888"); sym = MOOD_EMOJIS.get(mood,"")
-            rows += f'<div class="song-row"><span class="song-num">{i+1:03d}</span><span class="song-name">{row["name"]}</span><span class="song-artist">{row["artist"]}</span><span class="mood-tag" style="background:{color}10;color:{color};border:1px solid {color}30">{sym} {mood.upper()}</span></div>'
-        st.markdown(rows, unsafe_allow_html=True)
+        rows_html = ""
+        for i,(_, r) in enumerate(filtered.head(100).iterrows()):
+            mood = r.get("cluster_name","Chill"); color = MOOD_COLORS.get(mood,"#888")
+            rows_html += f'<div class="song-row"><span class="song-num">{i+1:03d}</span><span class="song-name">{r["name"]}</span><span class="song-artist">{r["artist"]}</span><span class="mood-tag" style="background:{color}0d;color:{color};border:1px solid {color}25">{MOOD_EMOJIS.get(mood,"")} {mood.upper()}</span></div>'
+        st.markdown(rows_html, unsafe_allow_html=True)
 
     # ── TAB 3: RESEARCH LAB ──
     with tab3:
-        st.markdown('<div class="sec-head"><span class="sec-num">LAB-00</span><span class="sec-title">RESEARCH LAB</span><span class="sec-tag">ML ANALYSIS SUITE</span></div>', unsafe_allow_html=True)
 
-        # ── SIGNAL ANALYSIS ──
-        st.markdown('<div class="sec-head"><span class="sec-num">LAB-01</span><span class="sec-title">SIGNAL ANALYSIS</span><span class="sec-tag">SYNTHETIC AUDIO MODELS</span></div>', unsafe_allow_html=True)
-        st.markdown("""
-        <div class="data-panel" style="margin-bottom:1.5rem">
-            <div class="data-panel-label">◈ MODULE DESCRIPTION</div>
-            <div class="data-panel-desc">
-                Synthetic audio models derived from mood classification vectors.
-                Each waveform represents the expected energy envelope and frequency
-                distribution for songs in that mood cluster.
-                Spectrogram shows frequency intensity over time — brighter = louder.
-            </div>
-        </div>""", unsafe_allow_html=True)
+        # LAB-01 SIGNAL ANALYSIS
+        st.markdown('<div class="sh"><span class="sh-num">LAB-01</span><span class="sh-title">SIGNAL ANALYSIS</span><span class="sh-sub">SYNTHETIC AUDIO MODELS</span></div>', unsafe_allow_html=True)
+        st.markdown('<div class="mod-desc">WAVEFORM + SPECTROGRAM PER MOOD CLUSTER — DERIVED FROM CLASSIFICATION VECTORS</div>', unsafe_allow_html=True)
 
         col_s1, col_s2 = st.columns(2)
-        for idx, (mood, col) in enumerate(zip(["Hype","Happy","Chill","Sad"], [col_s1,col_s2,col_s1,col_s2])):
+        for mood, col in zip(["Hype","Happy","Chill","Sad"], [col_s1,col_s2,col_s1,col_s2]):
             wave = make_synthetic_waveform(mood)
             spec = make_synthetic_spectrogram(mood)
             color = MOOD_COLORS[mood]
             t_axis = np.linspace(0, 30, len(wave))
+            r_c,g_c,b_c = int(color[1:3],16), int(color[3:5],16), int(color[5:7],16)
             with col:
-                st.markdown(f'<div class="data-panel" style="margin-bottom:1rem;border-color:{color}30"><div class="data-panel-label" style="color:{color}">{MOOD_EMOJIS[mood]} {mood.upper()} — SIGNAL MODEL</div></div>', unsafe_allow_html=True)
-                from plotly.subplots import make_subplots
-                fig_sig = make_subplots(rows=2, cols=1, vertical_spacing=0.12,
-                    subplot_titles=["WAVEFORM (AMPLITUDE OVER TIME)", "SPECTROGRAM (FREQUENCY INTENSITY)"])
+                st.markdown(f'<div style="font-family:Share Tech Mono,monospace;font-size:0.55rem;letter-spacing:0.35em;color:{color};padding:1rem 0 0.5rem;text-shadow:0 0 12px {color}60">{MOOD_EMOJIS[mood]} {mood.upper()} — SIGNAL MODEL</div>', unsafe_allow_html=True)
+                fig_sig = make_subplots(rows=2, cols=1, vertical_spacing=0.08)
                 fig_sig.add_trace(go.Scatter(x=t_axis, y=wave, mode='lines',
-                    line=dict(color=color, width=1.5),
-                    fill='tozeroy', fillcolor=MOOD_DIM[mood], name="Amplitude"), row=1, col=1)
-                r,g,b = int(color[1:3],16), int(color[3:5],16), int(color[5:7],16)
+                    line=dict(color=color, width=1.2),
+                    fill='tozeroy', fillcolor=MOOD_DIM[mood]), row=1, col=1)
                 fig_sig.add_trace(go.Heatmap(z=spec,
-                    colorscale=[[0,'#000'],[0.3,f'rgba({r},{g},{b},0.2)'],[0.7,f'rgba({r},{g},{b},0.6)'],[1.0,color]],
-                    showscale=False, name="Spectrogram"), row=2, col=1)
+                    colorscale=[[0,'#000'],[0.3,f'rgba({r_c},{g_c},{b_c},0.15)'],[0.7,f'rgba({r_c},{g_c},{b_c},0.55)'],[1.0,color]],
+                    showscale=False), row=2, col=1)
                 fig_sig.update_layout(
                     paper_bgcolor='#000', plot_bgcolor='#000',
-                    font=dict(color='#555', family='Share Tech Mono', size=9),
-                    height=400, showlegend=False,
-                    margin=dict(t=40,b=20,l=40,r=20),
-                    xaxis=dict(gridcolor='#0d0d0d',color='#333',title=dict(text='TIME (S)',font=dict(size=8))),
-                    yaxis=dict(gridcolor='#0d0d0d',color='#333',title=dict(text='AMP',font=dict(size=8))),
-                    xaxis2=dict(gridcolor='#0d0d0d',color='#333',title=dict(text='TIME FRAMES',font=dict(size=8))),
-                    yaxis2=dict(gridcolor='#0d0d0d',color='#333',title=dict(text='FREQ BIN',font=dict(size=8))),
+                    height=360, showlegend=False,
+                    margin=dict(t=5,b=5,l=5,r=5),
+                    xaxis=dict(visible=False), yaxis=dict(visible=False),
+                    xaxis2=dict(visible=False), yaxis2=dict(visible=False),
                 )
-                for ann in fig_sig.layout.annotations:
-                    ann.font = dict(family='Share Tech Mono', size=9, color='#555')
-                st.markdown('<div class="chart-frame">', unsafe_allow_html=True)
                 st.plotly_chart(fig_sig, use_container_width=True)
-                st.markdown('</div>', unsafe_allow_html=True)
 
-        # ── PCA ──
-        st.markdown('<div class="sec-head"><span class="sec-num">LAB-02</span><span class="sec-title">DIMENSIONALITY REDUCTION</span><span class="sec-tag">PCA — 8D → 2D</span></div>', unsafe_allow_html=True)
+        # LAB-02 PCA
+        st.markdown('<div class="sh"><span class="sh-num">LAB-02</span><span class="sh-title">DIMENSIONALITY REDUCTION</span><span class="sh-sub">PCA 8D → 2D</span></div>', unsafe_allow_html=True)
         pca_exp = research.get("pca_explained",[0,0])
-        st.markdown(f"""
-        <div class="data-panel" style="margin-bottom:1.5rem">
-            <div class="data-panel-label">◈ ALGORITHM</div>
-            <div class="data-panel-desc">
-                Principal Component Analysis projects the 8-dimensional audio feature space
-                onto 2 principal components for visualization.<br><br>
-                PC1 captures <b style="color:#FF2D2D">{round(pca_exp[0]*100,1)}%</b> of variance &nbsp;|&nbsp;
-                PC2 captures <b style="color:#FF2D2D">{round(pca_exp[1]*100,1)}%</b> of variance
-            </div>
-        </div>""", unsafe_allow_html=True)
+        st.markdown(f'<div class="mod-desc">PC1 <span style="color:var(--red)">{round(pca_exp[0]*100,1)}%</span> VARIANCE &nbsp;·&nbsp; PC2 <span style="color:var(--red)">{round(pca_exp[1]*100,1)}%</span> VARIANCE — HOVER TO IDENTIFY SONGS</div>', unsafe_allow_html=True)
         songs_data = research.get("songs",[])
         if songs_data:
             sdf = pd.DataFrame(songs_data)
@@ -791,27 +752,26 @@ def render_dashboard(df, research, user_name):
                 sub = sdf[sdf["mood"]==mood]
                 if not sub.empty:
                     fig_pca.add_trace(go.Scatter(x=sub["pca_x"], y=sub["pca_y"], mode="markers", name=mood,
-                        marker=dict(color=MOOD_COLORS[mood], size=7, opacity=0.85, line=dict(width=0)),
-                        hovertemplate='<b>%{customdata[0]}</b><br>%{customdata[1]}<extra></extra>',
+                        marker=dict(color=MOOD_COLORS[mood], size=8, opacity=0.9, line=dict(width=0)),
+                        hovertemplate='<b>%{customdata[0]}</b> / %{customdata[1]}<extra></extra>',
                         customdata=list(zip(sub["name"],sub["artist"]))))
             for c in research.get("centroids",[]):
                 fig_pca.add_trace(go.Scatter(x=[c["pca_x"]], y=[c["pca_y"]], mode="markers+text",
-                    marker=dict(symbol="diamond", size=14, color=MOOD_COLORS.get(c["mood"],"#fff"),
-                        line=dict(width=1,color='white'), opacity=1),
+                    marker=dict(symbol="diamond", size=16, color=MOOD_COLORS.get(c["mood"],"#fff"),
+                        line=dict(width=1,color='#000')),
                     text=[c["mood"].upper()], textposition="top center",
-                    textfont=dict(family='Share Tech Mono',size=9,color=MOOD_COLORS.get(c["mood"],"#fff")),
+                    textfont=dict(family='Share Tech Mono',size=8,color=MOOD_COLORS.get(c["mood"],"#fff")),
                     showlegend=False, hoverinfo='skip'))
-            fig_pca.update_layout(**base_layout, height=500,
-                legend=dict(orientation="h",y=-0.1,font=dict(family='Share Tech Mono',size=10)),
-                xaxis_title=f"PC1 — {round(pca_exp[0]*100,1)}% VAR",
-                yaxis_title=f"PC2 — {round(pca_exp[1]*100,1)}% VAR")
-            st.markdown('<div class="chart-frame">', unsafe_allow_html=True)
+            fig_pca.update_layout(**BL, height=560,
+                margin=dict(t=10,b=10,l=10,r=10),
+                xaxis=dict(visible=False), yaxis=dict(visible=False),
+                legend=dict(orientation="h", y=-0.02,
+                    font=dict(family='Share Tech Mono',size=9,color='#555')))
             st.plotly_chart(fig_pca, use_container_width=True)
-            st.markdown('</div>', unsafe_allow_html=True)
 
-        # ── CLUSTERING MATH ──
-        st.markdown('<div class="sec-head"><span class="sec-num">LAB-03</span><span class="sec-title">CLUSTERING MATHEMATICS</span><span class="sec-tag">K-MEANS — ELBOW METHOD</span></div>', unsafe_allow_html=True)
-        col_e1, col_e2 = st.columns([1,1])
+        # LAB-03 CLUSTERING
+        st.markdown('<div class="sh"><span class="sh-num">LAB-03</span><span class="sh-title">K-MEANS CLUSTERING</span><span class="sh-sub">ELBOW METHOD — OPTIMAL k=4</span></div>', unsafe_allow_html=True)
+        col_e1, col_e2 = st.columns([3,2])
         with col_e1:
             elbow = research.get("elbow",[])
             if elbow:
@@ -819,95 +779,86 @@ def render_dashboard(df, research, user_name):
                 fig_elbow.add_trace(go.Scatter(x=[e["k"] for e in elbow], y=[e["inertia"] for e in elbow],
                     mode='lines+markers',
                     line=dict(color='#FF2D2D', width=2),
-                    marker=dict(color='#FF2D2D', size=6, line=dict(width=1,color='#000')),
+                    marker=dict(color='#FF2D2D', size=7, line=dict(width=1,color='#000')),
                     fill='tozeroy', fillcolor='rgba(255,45,45,0.04)'))
-                fig_elbow.add_vline(x=4, line_dash="dash", line_color="#333",
-                    annotation_text="k=4  OPTIMAL",
-                    annotation_font=dict(family='Share Tech Mono',size=9,color='#FF2D2D'))
-                fig_elbow.update_layout(**base_layout, height=320, xaxis_title="K VALUE", yaxis_title="INERTIA")
-                st.markdown('<div class="chart-frame">', unsafe_allow_html=True)
+                fig_elbow.add_vline(x=4, line_dash="dash", line_color="#222",
+                    annotation_text="k=4",
+                    annotation_font=dict(family='Share Tech Mono',size=9,color='#FF2D2D'),
+                    annotation_position="top right")
+                fig_elbow.update_layout(**BL, height=300, xaxis_title="k", yaxis_title="INERTIA",
+                    margin=dict(t=10,b=30,l=45,r=20))
                 st.plotly_chart(fig_elbow, use_container_width=True)
-                st.markdown('</div>', unsafe_allow_html=True)
         with col_e2:
             st.markdown("""
             <div class="math-block">
-                K-MEANS OBJECTIVE FUNCTION:<br><br>
                 J = Σᵢ Σₓ∈Cᵢ ‖x − μᵢ‖²<br><br>
-                WHERE:<br>
-                · Cᵢ = cluster i<br>
-                · μᵢ = centroid of cluster i<br>
-                · ‖·‖² = squared euclidean distance<br><br>
-                CONVERGENCE CRITERION:<br>
-                ‖μᵢ(t+1) − μᵢ(t)‖ &lt; ε = 1e-6<br><br>
-                ITERATIONS: 300 MAX<br>
-                CLUSTERS: k = 4<br>
-                DIMENSIONS: 8 AUDIO FEATURES
+                Cᵢ &nbsp;= CLUSTER i<br>
+                μᵢ &nbsp;= CENTROID OF Cᵢ<br>
+                ‖·‖² = EUCLIDEAN DISTANCE<br><br>
+                ε &nbsp;= 1e-6 &nbsp;CONVERGENCE<br>
+                k &nbsp;= 4 &nbsp;CLUSTERS<br>
+                d &nbsp;= 8 &nbsp;DIMENSIONS<br>
+                n &nbsp;= <span class="redact">████</span> MAX ITER
             </div>""", unsafe_allow_html=True)
 
-        # ── NEURAL NETWORK ──
-        st.markdown('<div class="sec-head"><span class="sec-num">LAB-04</span><span class="sec-title">NEURAL NETWORK</span><span class="sec-tag">MLP — 8→16→8→4</span></div>', unsafe_allow_html=True)
+        # LAB-04 NEURAL NETWORK
+        st.markdown('<div class="sh"><span class="sh-num">LAB-04</span><span class="sh-title">NEURAL NETWORK</span><span class="sh-sub">MLP 8→16→8→4 — 300 EPOCHS</span></div>', unsafe_allow_html=True)
         nn = research.get("neural_net",{})
+        fa = nn.get("final_accuracy",0)
+        loss_history = nn.get("loss_history",[])
+        acc_history  = nn.get("acc_history",[])
+
         col_n1, col_n2 = st.columns([3,2])
         with col_n1:
-            loss_history = nn.get("loss_history",[])
-            acc_history  = nn.get("acc_history",[])
             if loss_history:
-                from plotly.subplots import make_subplots as msp
-                fig_nn = msp(rows=1, cols=2, subplot_titles=["LOSS CURVE","ACCURACY CURVE"])
+                fig_nn = make_subplots(rows=1, cols=2, horizontal_spacing=0.08)
                 fig_nn.add_trace(go.Scatter(y=loss_history, mode='lines',
-                    line=dict(color='#FF2D2D',width=2), fill='tozeroy',
-                    fillcolor='rgba(255,45,45,0.04)', name="Loss"), row=1, col=1)
+                    line=dict(color='#FF2D2D',width=1.5),
+                    fill='tozeroy', fillcolor='rgba(255,45,45,0.03)'), row=1, col=1)
                 fig_nn.add_trace(go.Scatter(y=acc_history, mode='lines',
-                    line=dict(color='#4DFFB4',width=2), fill='tozeroy',
-                    fillcolor='rgba(77,255,180,0.04)', name="Accuracy"), row=1, col=2)
+                    line=dict(color='#4DFFB4',width=1.5),
+                    fill='tozeroy', fillcolor='rgba(77,255,180,0.03)'), row=1, col=2)
                 fig_nn.update_layout(paper_bgcolor='#000', plot_bgcolor='#000',
-                    font=dict(color='#555',family='Share Tech Mono',size=9),
-                    height=300, showlegend=False,
-                    margin=dict(t=40,b=30,l=40,r=20),
-                    xaxis=dict(gridcolor='#0d0d0d',color='#333',title=dict(text='EPOCH',font=dict(size=8))),
-                    yaxis=dict(gridcolor='#0d0d0d',color='#333'),
-                    xaxis2=dict(gridcolor='#0d0d0d',color='#333',title=dict(text='EPOCH',font=dict(size=8))),
-                    yaxis2=dict(gridcolor='#0d0d0d',color='#333'))
-                for ann in fig_nn.layout.annotations:
-                    ann.font = dict(family='Share Tech Mono',size=9,color='#555')
-                st.markdown('<div class="chart-frame">', unsafe_allow_html=True)
+                    height=280, showlegend=False,
+                    margin=dict(t=5,b=30,l=40,r=10),
+                    font=dict(color='#2a2a2a',family='Share Tech Mono',size=8),
+                    xaxis=dict(gridcolor='#080808',color='#222',title=dict(text='EPOCH',font=dict(size=7))),
+                    yaxis=dict(gridcolor='#080808',color='#222',title=dict(text='LOSS',font=dict(size=7))),
+                    xaxis2=dict(gridcolor='#080808',color='#222',title=dict(text='EPOCH',font=dict(size=7))),
+                    yaxis2=dict(gridcolor='#080808',color='#222',title=dict(text='ACC',font=dict(size=7))))
                 st.plotly_chart(fig_nn, use_container_width=True)
-                st.markdown('</div>', unsafe_allow_html=True)
         with col_n2:
-            fa = nn.get("final_accuracy",0)
             st.markdown(f"""
             <div class="math-block">
-                ARCHITECTURE:<br>
-                INPUT  → 8 NEURONS<br>
-                HIDDEN → 16 NEURONS (ReLU)<br>
-                HIDDEN → 8 NEURONS (ReLU)<br>
-                OUTPUT → 4 NEURONS (Softmax)<br><br>
-                ACTIVATION: ReLU / Softmax<br>
-                LOSS: Cross-Entropy<br>
-                OPTIMIZER: Mini-batch SGD<br>
-                LEARNING RATE: 0.05<br>
-                BATCH SIZE: 16<br>
-                EPOCHS: 300<br><br>
-                FINAL ACCURACY: <span style="color:#4DFFB4">{fa:.1%}</span>
+                8 → 16 → 8 → 4<br><br>
+                ACTIVATION &nbsp;ReLU / Softmax<br>
+                LOSS &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cross-Entropy<br>
+                LR &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0.05<br>
+                BATCH &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;16<br>
+                EPOCHS &nbsp;&nbsp;&nbsp;&nbsp;300<br><br>
+                ACCURACY &nbsp;<span style="color:#4DFFB4;font-size:1rem">{fa:.1%}</span>
             </div>""", unsafe_allow_html=True)
 
-        # Confusion matrix
+        # Confusion matrix — full width
         cm_data = nn.get("confusion_matrix",[])
         mood_labels = nn.get("mood_labels",["Hype","Happy","Chill","Sad"])
         if cm_data:
-            st.markdown('<div style="max-width:500px">', unsafe_allow_html=True)
             fig_cm = go.Figure(go.Heatmap(z=cm_data, x=mood_labels, y=mood_labels,
-                colorscale=[[0,'#000'],[0.4,'#1a0000'],[0.7,'#660000'],[1,'#FF2D2D']],
+                colorscale=[[0,'#000'],[0.35,'#110000'],[0.65,'#550000'],[1,'#FF2D2D']],
                 showscale=False, text=cm_data, texttemplate='%{text}',
-                textfont=dict(family='Share Tech Mono',size=14,color='white')))
-            fig_cm.update_layout(**base_layout, height=350,
-                xaxis_title="PREDICTED CLASS", yaxis_title="ACTUAL CLASS")
-            st.markdown('<div class="chart-frame">', unsafe_allow_html=True)
-            st.plotly_chart(fig_cm, use_container_width=True)
-            st.markdown('</div></div>', unsafe_allow_html=True)
+                textfont=dict(family='Share Tech Mono',size=18,color='white')))
+            fig_cm.update_layout(**BL, height=380,
+                margin=dict(t=10,b=30,l=70,r=20),
+                xaxis=dict(title=dict(text='PREDICTED',font=dict(size=8)),
+                           color='#333',tickfont=dict(family='Share Tech Mono',size=9),gridcolor='#000'),
+                yaxis=dict(title=dict(text='ACTUAL',font=dict(size=8)),
+                           color='#333',tickfont=dict(family='Share Tech Mono',size=9),gridcolor='#000'))
+            col_cm = st.columns([1,2,1])[1]
+            with col_cm:
+                st.plotly_chart(fig_cm, use_container_width=True)
 
-        # ── FEATURE RADAR ──
-        st.markdown('<div class="sec-head"><span class="sec-num">LAB-05</span><span class="sec-title">FEATURE RADAR</span><span class="sec-tag">AUDIO FINGERPRINT PER MOOD</span></div>', unsafe_allow_html=True)
+        # LAB-05 FEATURE RADAR
+        st.markdown('<div class="sh"><span class="sh-num">LAB-05</span><span class="sh-title">FEATURE RADAR</span><span class="sh-sub">AUDIO FINGERPRINT PER MOOD</span></div>', unsafe_allow_html=True)
         mood_avgs = research.get("mood_averages",{})
         if mood_avgs:
             features = ["energy","valence","danceability","acousticness","tempo_norm","speechiness"]
@@ -922,20 +873,20 @@ def render_dashboard(df, research, user_name):
                         line=dict(color=MOOD_COLORS[mood],width=2), name=mood))
             fig_r.update_layout(
                 paper_bgcolor='#000', plot_bgcolor='#000',
-                font=dict(color='#555',family='Share Tech Mono',size=9),
+                font=dict(color='#444',family='Share Tech Mono',size=9),
                 polar=dict(bgcolor='#000',
-                    radialaxis=dict(visible=True,range=[0,1],gridcolor='#111',color='#333',tickfont=dict(size=8)),
-                    angularaxis=dict(gridcolor='#111',color='#555',tickfont=dict(family='Share Tech Mono',size=9))),
-                legend=dict(orientation="h",y=-0.1,font=dict(family='Share Tech Mono',size=10)),
-                height=450, margin=dict(t=40,b=60,l=40,r=40))
-            st.markdown('<div class="chart-frame">', unsafe_allow_html=True)
+                    radialaxis=dict(visible=True,range=[0,1],gridcolor='#0d0d0d',color='#222',
+                        tickfont=dict(size=7)),
+                    angularaxis=dict(gridcolor='#0d0d0d',color='#444',
+                        tickfont=dict(family='Share Tech Mono',size=9))),
+                legend=dict(orientation="h",y=-0.08,font=dict(family='Share Tech Mono',size=9)),
+                height=500, margin=dict(t=20,b=60,l=20,r=20))
             st.plotly_chart(fig_r, use_container_width=True)
-            st.markdown('</div>', unsafe_allow_html=True)
 
-    # FOOTER
+    # ── FOOTER ──
     st.markdown("""
     <div class="lab-footer">
-        <span class="footer-text">MOODSCOPE — K-MEANS + MLP NEURAL NETWORK — RESEARCH BUILD</span>
+        <span class="footer-text">MOODSCOPE — K-MEANS + MLP NEURAL NET — ██████ RESEARCH BUILD</span>
         <span class="footer-text">@ALTAIRA15K</span>
     </div>""", unsafe_allow_html=True)
 
