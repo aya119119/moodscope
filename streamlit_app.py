@@ -40,398 +40,219 @@ PERSONALITY = {
 def inject_css():
     st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Share+Tech+Mono&family=Rajdhani:wght@400;600;700&family=Orbitron:wght@700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Share+Tech+Mono&family=Rajdhani:wght@400;600;700&display=swap');
 
-:root {
-    --bg:      #000000;
-    --surface: #040404;
-    --border:  #161616;
-    --border2: #1f1f1f;
-    --red:     #FF2D2D;
-    --green:   #4DFFB4;
-    --blue:    #2D8BFF;
-    --orange:  #FF6B2D;
-    --muted:   #3a3a3a;
-    --text:    #FFFFFF;
-    --text2:   #666666;
-}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
-*, *::before, *::after { box-sizing: border-box; }
-html, body { margin: 0; padding: 0; }
+header,footer,[data-testid="stHeader"],[data-testid="stToolbar"],
+[data-testid="stDecoration"],#MainMenu,.stDeployButton,
+[data-testid="collapsedControl"]{display:none!important;visibility:hidden!important;height:0!important}
+section[data-testid="stSidebar"]{display:none!important}
+.stApp>div:first-child{padding-top:0!important}
+[data-testid="stAppViewContainer"],.main,.stApp{background:#000!important;color:#fff!important}
+.block-container{padding:0!important;max-width:100%!important;position:relative;z-index:1}
 
-/* HIDE ALL STREAMLIT CHROME */
-header, footer, [data-testid="stHeader"], [data-testid="stToolbar"],
-#MainMenu, .stDeployButton, [data-testid="stDecoration"] {
-    display: none !important; visibility: hidden !important; height: 0 !important;
-}
-section[data-testid="stSidebar"] { display: none !important; }
-.stApp > div:first-child { padding-top: 0 !important; }
-
-[data-testid="stAppViewContainer"], .main, .stApp {
-    background: #000000 !important;
-    color: var(--text) !important;
+[data-testid="stAppViewContainer"]::after{
+    content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+    background-image:linear-gradient(rgba(255,45,45,0.025) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,45,45,0.025) 1px,transparent 1px);
+    background-size:50px 50px;
 }
 
-/* GRID BACKGROUND */
-body::before, [data-testid="stAppViewContainer"]::before {
-    content: '';
-    position: fixed; inset: 0;
-    background-image:
-        linear-gradient(rgba(255,45,45,0.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,45,45,0.025) 1px, transparent 1px);
-    background-size: 50px 50px;
-    pointer-events: none; z-index: 0;
-}
+::-webkit-scrollbar{width:2px}
+::-webkit-scrollbar-thumb{background:#FF2D2D}
+::-webkit-scrollbar-track{background:#000}
 
-.block-container { padding: 0 !important; max-width: 100% !important; position: relative; z-index: 1; }
+/* TOPBAR */
+.ms-topbar{position:sticky;top:0;z-index:500;display:flex;align-items:center;
+    justify-content:space-between;padding:0.85rem 2.5rem;
+    background:rgba(0,0,0,0.97);backdrop-filter:blur(12px);border-bottom:1px solid #0d0d0d}
+.ms-logo{font-family:'Anton',sans-serif;font-size:0.95rem;letter-spacing:0.35em;color:#fff}
+.ms-logo b{color:#FF2D2D;text-shadow:0 0 12px rgba(255,45,45,0.5)}
+.ms-live{font-family:'Share Tech Mono',monospace;font-size:0.52rem;color:#2a2a2a;
+    letter-spacing:0.15em;display:flex;align-items:center;gap:0.5rem}
+.ms-live::before{content:'';width:5px;height:5px;border-radius:50%;
+    background:#4DFFB4;box-shadow:0 0 8px #4DFFB4;animation:lp 2s infinite}
+@keyframes lp{0%,100%{opacity:1}50%{opacity:0.15}}
 
-/* SCROLLBAR */
-::-webkit-scrollbar { width: 3px; }
-::-webkit-scrollbar-track { background: #000; }
-::-webkit-scrollbar-thumb { background: var(--red); }
+/* HERO */
+.ms-hero{padding:3.5rem 0 3rem;overflow:hidden;position:relative;border-bottom:2px solid #FF2D2D}
+.ms-hero::before{content:'';position:absolute;left:0;right:0;top:0;height:1px;
+    background:linear-gradient(90deg,transparent 0%,#FF2D2D 50%,transparent 100%);
+    box-shadow:0 0 30px #FF2D2D;animation:scanh 6s ease-in-out infinite}
+@keyframes scanh{0%{top:0;opacity:1}80%{top:100%;opacity:0.2}100%{top:100%;opacity:0}}
 
-/* ── TOP BAR ── */
-.topbar {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 0.9rem 3rem; border-bottom: 1px solid var(--border);
-    background: rgba(0,0,0,0.95); backdrop-filter: blur(20px);
-    position: sticky; top: 0; z-index: 200;
-}
-.topbar-logo {
-    font-family: 'Orbitron', monospace; font-size: 0.85rem; font-weight: 900;
-    color: var(--text); letter-spacing: 0.4em;
-}
-.topbar-logo span { color: var(--red); text-shadow: 0 0 15px rgba(255,45,45,0.5); }
-.live-dot {
-    font-family: 'Share Tech Mono', monospace; font-size: 0.6rem;
-    letter-spacing: 0.15em; color: var(--text2);
-    display: flex; align-items: center; gap: 0.6rem;
-}
-.live-dot::before {
-    content: ''; width: 5px; height: 5px; border-radius: 50%;
-    background: var(--green); box-shadow: 0 0 10px var(--green);
-    animation: livepulse 2s infinite;
-}
-@keyframes livepulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.3;transform:scale(0.8)} }
+.ms-mq-outer{overflow:hidden;white-space:nowrap;margin-bottom:2rem}
+.ms-mq-track{display:inline-flex;animation:mdrift 35s linear infinite;will-change:transform}
+@keyframes mdrift{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ms-mq-item{font-family:'Anton',sans-serif;font-size:clamp(5.5rem,14vw,13rem);
+    line-height:0.87;letter-spacing:-3px;color:#fff;padding:0 1.5rem;flex-shrink:0}
+.ms-mq-item.red{color:#FF2D2D;text-shadow:0 0 50px rgba(255,45,45,0.4),0 0 100px rgba(255,45,45,0.12)}
+.ms-mq-item.dim{color:#0d0d0d}
 
-/* ── HERO ── */
-.hero {
-    padding: 5rem 3rem 4rem; position: relative; overflow: hidden;
-    border-bottom: 3px solid var(--red);
-}
-.hero::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0;
-    height: 2px; background: linear-gradient(90deg, transparent, var(--red), transparent);
-    box-shadow: 0 0 40px var(--red);
-    animation: scanline 5s ease-in-out infinite;
-}
-@keyframes scanline { 0%{top:0;opacity:1} 85%{top:100%;opacity:0.3} 100%{top:100%;opacity:0} }
+.ms-hero-meta{padding:0 2.5rem;display:flex;align-items:flex-end;
+    justify-content:space-between;flex-wrap:wrap;gap:2rem}
+.ms-op{font-family:'Share Tech Mono',monospace;font-size:0.58rem;
+    color:#2a2a2a;letter-spacing:0.22em;line-height:2.2}
+.ms-op span{color:#fff}.ms-op .sig{color:#FF2D2D}
+.ms-sr{display:flex;gap:0;border:1px solid #0d0d0d}
+.ms-s{padding:1.1rem 2rem;border-right:1px solid #0d0d0d;text-align:center}
+.ms-s:last-child{border-right:none}
+.ms-sv{font-family:'Anton',sans-serif;font-size:2.2rem;line-height:1;
+    color:#FF2D2D;display:block;text-shadow:0 0 20px rgba(255,45,45,0.3)}
+.ms-sl{font-family:'Share Tech Mono',monospace;font-size:0.45rem;
+    color:#1f1f1f;letter-spacing:0.2em;display:block;margin-top:0.2rem}
 
-.hero-eyebrow {
-    font-family: 'Share Tech Mono', monospace; font-size: 0.6rem;
-    color: var(--red); letter-spacing: 0.6em; text-transform: uppercase;
-    margin-bottom: 1.5rem; opacity: 0.8;
-}
-.hero-title {
-    font-family: 'Anton', sans-serif;
-    font-size: clamp(6rem, 18vw, 16rem);
-    line-height: 0.85; color: var(--text);
-    letter-spacing: -3px; margin-bottom: 2rem;
-    text-shadow: none;
-}
-.hero-title .r {
-    color: var(--red);
-    text-shadow: 0 0 60px rgba(255,45,45,0.5), 0 0 120px rgba(255,45,45,0.2);
-}
-.hero-operator {
-    font-family: 'Share Tech Mono', monospace; font-size: 0.75rem;
-    color: var(--text2); letter-spacing: 0.25em; margin-bottom: 3rem;
-    line-height: 2;
-}
-.hero-operator span { color: var(--text); }
-.hero-stats {
-    display: grid; grid-template-columns: repeat(4, auto);
-    gap: 0; border: 1px solid var(--border2);
-    width: fit-content;
-}
-.hero-stat {
-    padding: 1.5rem 2.5rem; border-right: 1px solid var(--border2);
-    text-align: center;
-}
-.hero-stat:last-child { border-right: none; }
-.hero-stat-val {
-    font-family: 'Anton', sans-serif; font-size: 3.5rem; line-height: 1;
-    color: var(--red); text-shadow: 0 0 30px rgba(255,45,45,0.4);
-    display: block;
-}
-.hero-stat-label {
-    font-family: 'Share Tech Mono', monospace; font-size: 0.55rem;
-    color: var(--text2); letter-spacing: 0.2em; display: block; margin-top: 0.3rem;
-}
+/* TABS */
+.stTabs [data-baseweb="tab-list"]{background:#000!important;gap:0!important;
+    padding:0 2.5rem!important;border-bottom:1px solid #0d0d0d!important}
+.stTabs [data-baseweb="tab"]{font-family:'Share Tech Mono',monospace!important;
+    font-size:0.56rem!important;letter-spacing:0.25em!important;color:#1f1f1f!important;
+    background:transparent!important;border:none!important;
+    padding:1.1rem 1.8rem!important;text-transform:uppercase!important}
+.stTabs [aria-selected="true"]{color:#FF2D2D!important;
+    border-bottom:1px solid #FF2D2D!important;
+    text-shadow:0 0 10px rgba(255,45,45,0.35)!important}
+.stTabs [data-baseweb="tab-panel"]{background:#000!important;padding:3rem 2.5rem!important}
 
-/* ── TABS ── */
-.stTabs [data-baseweb="tab-list"] {
-    background: var(--bg) !important; border-bottom: 1px solid var(--border2) !important;
-    gap: 0 !important; padding: 0 3rem !important;
-}
-.stTabs [data-baseweb="tab"] {
-    font-family: 'Share Tech Mono', monospace !important; font-size: 0.6rem !important;
-    letter-spacing: 0.25em !important; color: var(--muted) !important;
-    background: transparent !important; border: none !important;
-    padding: 1.2rem 2rem !important; text-transform: uppercase !important;
-    transition: color 0.2s !important;
-}
-.stTabs [aria-selected="true"] {
-    color: var(--red) !important; border-bottom: 2px solid var(--red) !important;
-    text-shadow: 0 0 12px rgba(255,45,45,0.6) !important;
-}
-.stTabs [data-baseweb="tab-panel"] { background: var(--bg) !important; padding: 3rem !important; }
+/* SECTION HEAD */
+.sh{display:flex;align-items:baseline;gap:1.2rem;
+    padding:3rem 0 1.2rem;border-bottom:1px solid #0a0a0a;margin-bottom:2rem}
+.sh-n{font-family:'Share Tech Mono',monospace;font-size:0.48rem;
+    color:#FF2D2D;letter-spacing:0.3em;
+    border:1px solid rgba(255,45,45,0.18);padding:0.12rem 0.45rem}
+.sh-t{font-family:'Anton',sans-serif;font-size:clamp(2rem,4vw,3.5rem);
+    letter-spacing:-1px;color:#fff;line-height:1}
+.sh-s{font-family:'Share Tech Mono',monospace;font-size:0.45rem;
+    color:#1a1a1a;letter-spacing:0.15em;margin-left:auto}
 
-/* ── SECTION HEAD ── */
-.sh {
-    display: flex; align-items: baseline; gap: 1.5rem;
-    padding: 3rem 0 1.5rem; border-bottom: 1px solid var(--border);
-    margin-bottom: 2rem;
-}
-.sh-num {
-    font-family: 'Share Tech Mono', monospace; font-size: 0.55rem;
-    color: var(--red); letter-spacing: 0.3em;
-    border: 1px solid rgba(255,45,45,0.25); padding: 0.15rem 0.5rem;
-}
-.sh-title {
-    font-family: 'Anton', sans-serif; font-size: clamp(2rem,5vw,4rem);
-    letter-spacing: -1px; color: var(--text); line-height: 1;
-}
-.sh-sub {
-    font-family: 'Share Tech Mono', monospace; font-size: 0.55rem;
-    color: var(--text2); letter-spacing: 0.2em; margin-left: auto;
-}
+/* STAT GRID */
+.sg{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:#0a0a0a}
+.sc{background:#000;padding:2.5rem 2rem;transition:background 0.15s}
+.sc:hover{background:#030303}
+.sc-m{font-family:'Share Tech Mono',monospace;font-size:0.48rem;
+    letter-spacing:0.3em;text-transform:uppercase;margin-bottom:1rem}
+.sc-n{font-family:'Anton',sans-serif;font-size:5rem;line-height:1;margin-bottom:0.5rem}
+.sc-b{height:1px;background:#0a0a0a;margin-top:1.5rem}
+.sc-f{height:1px}
+.sc-p{font-family:'Share Tech Mono',monospace;font-size:0.48rem;
+    color:#1f1f1f;margin-top:0.4rem;letter-spacing:0.1em}
 
-/* ── STAT GRID ── */
-.stat-grid {
-    display: grid; grid-template-columns: repeat(4,1fr);
-    gap: 1px; background: var(--border); margin: 1.5rem 0;
-}
-.stat-card {
-    background: var(--bg); padding: 2.5rem 2rem;
-    position: relative; overflow: hidden; transition: background 0.15s;
-}
-.stat-card:hover { background: #060606; }
-.stat-mood {
-    font-family: 'Share Tech Mono', monospace; font-size: 0.55rem;
-    letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 1rem;
-}
-.stat-num {
-    font-family: 'Anton', sans-serif; font-size: 5rem;
-    line-height: 1; margin-bottom: 0.5rem;
-}
-.stat-bar-bg { height: 1px; background: var(--border2); margin-top: 1.5rem; }
-.stat-bar-fill { height: 1px; }
-.stat-pct {
-    font-family: 'Share Tech Mono', monospace; font-size: 0.55rem;
-    color: var(--text2); margin-top: 0.5rem; letter-spacing: 0.1em;
-}
+/* PERSONALITY */
+.pcard{position:relative;padding:3.5rem 3rem;margin:2rem 0;overflow:hidden;
+    border-top:2px solid #FF2D2D;border-bottom:1px solid #0a0a0a}
+.pcard::after{content:'';position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(ellipse at 0% 50%,rgba(255,45,45,0.025) 0%,transparent 50%)}
+.pcard-tag{font-family:'Share Tech Mono',monospace;font-size:0.48rem;
+    color:#FF2D2D;letter-spacing:0.5em;margin-bottom:1.5rem;opacity:0.6}
+.pcard-title{font-family:'Anton',sans-serif;font-size:clamp(3rem,6vw,6rem);
+    line-height:0.87;letter-spacing:-2px;color:#FF2D2D;
+    text-shadow:0 0 45px rgba(255,45,45,0.25);margin-bottom:1.5rem}
+.pcard-desc{font-family:'Rajdhani',sans-serif;font-size:1rem;
+    color:#444;max-width:440px;line-height:1.6;font-weight:400}
+.pcard-meta{font-family:'Share Tech Mono',monospace;font-size:0.48rem;
+    color:#141414;letter-spacing:0.25em;margin-top:2.5rem}
 
-/* ── PERSONALITY ── */
-.personality {
-    position: relative; padding: 3.5rem 3rem;
-    margin: 1.5rem 0; overflow: hidden;
-    border-top: 3px solid var(--red); border-bottom: 1px solid var(--border2);
-    background: linear-gradient(135deg, #060606 0%, #000 100%);
-}
-.personality::after {
-    content: ''; position: absolute; inset: 0;
-    background: radial-gradient(ellipse at 0% 50%, rgba(255,45,45,0.04) 0%, transparent 60%);
-    pointer-events: none;
-}
-.personality-tag {
-    font-family: 'Share Tech Mono', monospace; font-size: 0.55rem;
-    color: var(--red); letter-spacing: 0.5em; margin-bottom: 1.5rem; opacity: 0.8;
-}
-.personality-title {
-    font-family: 'Anton', sans-serif;
-    font-size: clamp(3rem, 7vw, 7rem);
-    line-height: 0.9; color: var(--red); letter-spacing: -2px;
-    text-shadow: 0 0 60px rgba(255,45,45,0.35); margin-bottom: 1.5rem;
-}
-.personality-desc {
-    font-family: 'Rajdhani', sans-serif; font-size: 1.15rem;
-    color: var(--text2); max-width: 480px; line-height: 1.6; font-weight: 400;
-}
-.personality-meta {
-    font-family: 'Share Tech Mono', monospace; font-size: 0.55rem;
-    color: var(--muted); letter-spacing: 0.25em; margin-top: 2rem;
-}
+/* SONG TABLE */
+.song-hdr{display:grid;grid-template-columns:3rem 1fr 1fr 8rem;
+    gap:1rem;padding:0.5rem 0.8rem;border-bottom:1px solid #0a0a0a;
+    font-family:'Share Tech Mono',monospace;font-size:0.45rem;
+    color:#1a1a1a;letter-spacing:0.25em;text-transform:uppercase}
+.song-r{display:grid;grid-template-columns:3rem 1fr 1fr 8rem;
+    gap:1rem;padding:0.7rem 0.8rem;border-bottom:1px solid #060606;
+    transition:background 0.1s;align-items:center}
+.song-r:hover{background:#030303}
+.sn{font-family:'Share Tech Mono',monospace;font-size:0.48rem;color:#1a1a1a}
+.st2{font-family:'Rajdhani',sans-serif;font-size:0.95rem;font-weight:700;
+    color:#ddd;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sa{font-family:'Rajdhani',sans-serif;font-size:0.82rem;color:#333;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mtag{font-family:'Share Tech Mono',monospace;font-size:0.45rem;
+    letter-spacing:0.12em;padding:0.18rem 0.5rem;
+    display:inline-block;text-transform:uppercase}
 
-/* ── SONG TABLE ── */
-.song-header {
-    display: grid; grid-template-columns: 3rem 1fr 1fr 8rem;
-    gap: 1rem; padding: 0.5rem 1rem;
-    border-bottom: 1px solid var(--border2);
-    font-family: 'Share Tech Mono', monospace; font-size: 0.5rem;
-    color: var(--muted); letter-spacing: 0.25em; text-transform: uppercase;
-}
-.song-row {
-    display: grid; grid-template-columns: 3rem 1fr 1fr 8rem;
-    gap: 1rem; padding: 0.75rem 1rem; border-bottom: 1px solid #0a0a0a;
-    transition: background 0.1s; align-items: center;
-}
-.song-row:hover { background: #060606; }
-.song-num { font-family: 'Share Tech Mono', monospace; font-size: 0.55rem; color: var(--muted); }
-.song-name { font-family: 'Rajdhani', sans-serif; font-size: 1rem; font-weight: 700; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.song-artist { font-family: 'Rajdhani', sans-serif; font-size: 0.85rem; font-weight: 400; color: var(--text2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.mood-tag {
-    font-family: 'Share Tech Mono', monospace; font-size: 0.5rem;
-    letter-spacing: 0.15em; padding: 0.2rem 0.55rem;
-    display: inline-block; text-align: center; text-transform: uppercase;
-}
+/* MOD DESC */
+.moddesc{font-family:'Share Tech Mono',monospace;font-size:0.52rem;
+    color:#1f1f1f;letter-spacing:0.12em;line-height:1.9;
+    margin-bottom:2rem;text-transform:uppercase}
+.moddesc b{color:#FF2D2D;font-weight:normal}
 
-/* ── MODULE LABEL (replaces data-panel) ── */
-.mod-label {
-    font-family: 'Share Tech Mono', monospace; font-size: 0.55rem;
-    color: var(--red); letter-spacing: 0.4em; text-transform: uppercase;
-    margin-bottom: 0.5rem;
-}
-.mod-title {
-    font-family: 'Anton', sans-serif; font-size: clamp(1.5rem,3vw,2.8rem);
-    letter-spacing: -1px; color: var(--text); line-height: 1; margin-bottom: 0.5rem;
-}
-.mod-desc {
-    font-family: 'Share Tech Mono', monospace; font-size: 0.6rem;
-    color: var(--text2); letter-spacing: 0.1em; line-height: 1.8;
-    margin-bottom: 1.5rem;
-}
+/* MATH BLOCK */
+.mb{border-left:2px solid #FF2D2D;padding:1.4rem 1.8rem;
+    font-family:'Share Tech Mono',monospace;font-size:0.62rem;
+    color:#555;line-height:2.3}
+.mb .hi{color:#4DFFB4}
 
-/* ── MATH BLOCK ── */
-.math-block {
-    background: #030303; border-left: 2px solid var(--red);
-    padding: 1.5rem 2rem; margin: 1rem 0;
-    font-family: 'Share Tech Mono', monospace; font-size: 0.7rem;
-    color: #999; line-height: 2.2;
-}
-.math-block .redact {
-    background: #1a1a1a; color: transparent;
-    user-select: none; letter-spacing: 0.1em;
-    padding: 0 0.2rem;
-}
+/* INPUTS */
+.stTextInput input{background:#030303!important;border:1px solid #0d0d0d!important;
+    border-radius:0!important;color:#fff!important;
+    font-family:'Share Tech Mono',monospace!important;font-size:0.62rem!important}
+.stTextInput input:focus{border-color:#FF2D2D!important;
+    box-shadow:0 0 6px rgba(255,45,45,0.1)!important}
+.stSelectbox>div>div{background:#030303!important;border:1px solid #0d0d0d!important;
+    border-radius:0!important;color:#fff!important}
 
-/* ── CHART WRAPPER ── */
-.chart-wrap { margin: 0.5rem 0; }
-.stPlotlyChart { border: none !important; box-shadow: none !important; }
+/* BUTTONS */
+.stButton>button{font-family:'Share Tech Mono',monospace!important;
+    font-size:0.58rem!important;letter-spacing:0.25em!important;
+    background:transparent!important;color:#FF2D2D!important;
+    border:1px solid #FF2D2D!important;border-radius:0!important;
+    padding:0.85rem 2.5rem!important;text-transform:uppercase!important;
+    transition:all 0.2s!important}
+.stButton>button:hover{background:#FF2D2D!important;color:#000!important;
+    box-shadow:0 0 18px rgba(255,45,45,0.25)!important}
+.stLinkButton>a{font-family:'Share Tech Mono',monospace!important;
+    font-size:0.58rem!important;letter-spacing:0.25em!important;
+    background:transparent!important;color:#FF2D2D!important;
+    border:1px solid rgba(255,45,45,0.35)!important;
+    border-radius:0!important;text-transform:uppercase!important;transition:all 0.2s!important}
+.stLinkButton>a:hover{background:rgba(255,45,45,0.06)!important;border-color:#FF2D2D!important}
 
-/* ── INPUTS ── */
-.stTextInput input {
-    background: #050505 !important; border: 1px solid var(--border2) !important;
-    border-radius: 0 !important; color: var(--text) !important;
-    font-family: 'Share Tech Mono', monospace !important; font-size: 0.7rem !important;
-    letter-spacing: 0.1em !important;
-}
-.stTextInput input:focus { border-color: var(--red) !important; box-shadow: 0 0 10px rgba(255,45,45,0.15) !important; }
-.stSelectbox > div > div {
-    background: #050505 !important; border: 1px solid var(--border2) !important;
-    border-radius: 0 !important; color: var(--text) !important;
-}
+/* PROGRESS */
+.stProgress>div>div>div{background:#FF2D2D!important;
+    box-shadow:0 0 10px rgba(255,45,45,0.35)!important}
+.stProgress>div>div{background:#0a0a0a!important;border-radius:0!important}
 
-/* ── BUTTONS ── */
-.stButton > button {
-    font-family: 'Share Tech Mono', monospace !important; font-size: 0.65rem !important;
-    letter-spacing: 0.25em !important; background: transparent !important;
-    color: var(--red) !important; border: 1px solid var(--red) !important;
-    border-radius: 0 !important; padding: 0.9rem 2.5rem !important;
-    text-transform: uppercase !important; transition: all 0.2s !important;
-}
-.stButton > button:hover {
-    background: var(--red) !important; color: #000 !important;
-    box-shadow: 0 0 25px rgba(255,45,45,0.35) !important;
-}
-.stLinkButton > a {
-    font-family: 'Share Tech Mono', monospace !important; font-size: 0.6rem !important;
-    letter-spacing: 0.2em !important; background: transparent !important;
-    color: var(--red) !important; border: 1px solid rgba(255,45,45,0.35) !important;
-    border-radius: 0 !important; text-transform: uppercase !important;
-    transition: all 0.2s !important;
-}
-.stLinkButton > a:hover {
-    background: rgba(255,45,45,0.08) !important; border-color: var(--red) !important;
-}
+/* LANDING */
+.lp{min-height:100vh;display:flex;flex-direction:column;
+    justify-content:center;align-items:center;text-align:center;padding:4rem 2rem}
+.lp-eye{font-family:'Share Tech Mono',monospace;font-size:0.55rem;
+    color:#FF2D2D;letter-spacing:0.6em;margin-bottom:2rem;opacity:0.7;
+    display:flex;align-items:center;gap:1.5rem}
+.lp-eye::before,.lp-eye::after{content:'';height:1px;width:70px;
+    background:linear-gradient(90deg,transparent,#FF2D2D)}
+.lp-eye::after{background:linear-gradient(90deg,#FF2D2D,transparent)}
+.lp-title{font-family:'Anton',sans-serif;
+    font-size:clamp(5rem,18vw,15rem);line-height:0.84;
+    letter-spacing:-4px;color:#fff;margin-bottom:2rem}
+.lp-title b{color:#FF2D2D;
+    text-shadow:0 0 55px rgba(255,45,45,0.4),0 0 90px rgba(255,45,45,0.12)}
+.lp-desc{font-family:'Rajdhani',sans-serif;font-size:1rem;
+    color:#2a2a2a;max-width:440px;line-height:1.7;margin-bottom:3rem}
+.lp-specs{display:flex;border:1px solid #0d0d0d;margin-top:3rem;
+    flex-wrap:wrap;justify-content:center}
+.lp-spec{padding:1.4rem 2.2rem;border-right:1px solid #0d0d0d;text-align:center}
+.lp-spec:last-child{border-right:none}
+.lp-sv{font-family:'Anton',sans-serif;font-size:1.8rem;color:#FF2D2D;
+    line-height:1;margin-bottom:0.2rem;text-shadow:0 0 15px rgba(255,45,45,0.25)}
+.lp-sl{font-family:'Share Tech Mono',monospace;font-size:0.45rem;
+    color:#1a1a1a;letter-spacing:0.2em}
 
-/* ── PROGRESS BAR ── */
-.stProgress > div > div > div {
-    background: var(--red) !important; box-shadow: 0 0 12px rgba(255,45,45,0.5) !important;
-}
-.stProgress > div > div { background: var(--border) !important; border-radius: 0 !important; }
+/* LOADING */
+.ldr{min-height:80vh;display:flex;flex-direction:column;
+    justify-content:center;align-items:center;text-align:center;padding:4rem 2rem}
+.ldr-t{font-family:'Anton',sans-serif;font-size:3rem;letter-spacing:-1px;color:#fff}
+.ldr-s{font-family:'Share Tech Mono',monospace;font-size:0.58rem;
+    color:#FF2D2D;letter-spacing:0.25em;margin-top:1.5rem;animation:bk 1.2s infinite}
+@keyframes bk{0%,100%{opacity:1}50%{opacity:0.15}}
 
-/* ── LANDING ── */
-.landing {
-    min-height: 100vh; display: flex; flex-direction: column;
-    justify-content: center; align-items: center; text-align: center;
-    padding: 4rem 2rem; position: relative;
-}
-.landing-eyebrow {
-    font-family: 'Share Tech Mono', monospace; font-size: 0.6rem;
-    color: var(--red); letter-spacing: 0.6em; margin-bottom: 2rem;
-    display: flex; align-items: center; gap: 1.5rem;
-}
-.landing-eyebrow::before, .landing-eyebrow::after {
-    content: ''; height: 1px; width: 80px;
-    background: linear-gradient(90deg, transparent, var(--red));
-    box-shadow: 0 0 8px var(--red);
-}
-.landing-eyebrow::after { background: linear-gradient(90deg, var(--red), transparent); }
-.landing-title {
-    font-family: 'Anton', sans-serif;
-    font-size: clamp(5rem,18vw,15rem);
-    line-height: 0.85; color: var(--text); letter-spacing: -4px; margin-bottom: 2rem;
-}
-.landing-title .r { color: var(--red); text-shadow: 0 0 60px rgba(255,45,45,0.5), 0 0 100px rgba(255,45,45,0.2); }
-.landing-desc {
-    font-family: 'Rajdhani', sans-serif; font-size: 1.1rem;
-    color: var(--text2); max-width: 500px; line-height: 1.7;
-    margin-bottom: 3rem; font-weight: 400;
-}
-.landing-specs {
-    display: flex; gap: 0; border: 1px solid var(--border2); margin-top: 3rem;
-    flex-wrap: wrap; justify-content: center;
-}
-.landing-spec {
-    padding: 1.5rem 2.5rem; border-right: 1px solid var(--border2); text-align: center;
-}
-.landing-spec:last-child { border-right: none; }
-.landing-spec-val {
-    font-family: 'Anton', sans-serif; font-size: 2rem;
-    color: var(--red); line-height: 1; margin-bottom: 0.25rem;
-    text-shadow: 0 0 20px rgba(255,45,45,0.35);
-}
-.landing-spec-label {
-    font-family: 'Share Tech Mono', monospace; font-size: 0.5rem;
-    color: var(--text2); letter-spacing: 0.2em;
-}
+/* FOOTER */
+.ms-foot{border-top:1px solid #0a0a0a;padding:1.5rem 2.5rem;
+    display:flex;justify-content:space-between;margin-top:6rem}
+.ms-foot span{font-family:'Share Tech Mono',monospace;font-size:0.45rem;
+    color:#141414;letter-spacing:0.2em}
 
-/* ── LOADING ── */
-.loading {
-    min-height: 80vh; display: flex; flex-direction: column;
-    justify-content: center; align-items: center; text-align: center; padding: 4rem 2rem;
-}
-.loading-title {
-    font-family: 'Anton', sans-serif; font-size: 3.5rem; letter-spacing: -2px;
-    color: var(--text); margin-bottom: 0.5rem;
-}
-.loading-step {
-    font-family: 'Share Tech Mono', monospace; font-size: 0.65rem;
-    color: var(--red); letter-spacing: 0.25em; margin-top: 1.5rem;
-    animation: blink 1.2s infinite;
-}
-@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
-
-/* ── FOOTER ── */
-.lab-footer {
-    border-top: 1px solid var(--border); padding: 1.5rem 3rem;
-    display: flex; justify-content: space-between; margin-top: 6rem;
-}
-.footer-text {
-    font-family: 'Share Tech Mono', monospace; font-size: 0.5rem;
-    color: var(--muted); letter-spacing: 0.2em;
-}
+.stPlotlyChart{border:none!important;box-shadow:none!important}
 </style>
 """, unsafe_allow_html=True)
 
@@ -603,292 +424,288 @@ def render_dashboard(df, research, user_name):
     import plotly.graph_objects as go
     from plotly.subplots import make_subplots
 
-    mood_counts = research.get("mood_counts", {})
-    total = sum(mood_counts.values())
-    dominant = max(mood_counts, key=mood_counts.get) if mood_counts else "Chill"
-    p_title, p_desc = PERSONALITY.get(dominant, PERSONALITY["Chill"])
+    mc  = research.get("mood_counts", {})
+    tot = sum(mc.values())
+    dom = max(mc, key=mc.get) if mc else "Chill"
+    pt, pd_ = PERSONALITY.get(dom, PERSONALITY["Chill"])
 
-    BL = dict(  # base plotly layout
-        paper_bgcolor='#000', plot_bgcolor='#000',
-        font=dict(color='#333', family='Share Tech Mono', size=9),
-        margin=dict(t=20,b=30,l=45,r=20),
-        xaxis=dict(gridcolor='#0a0a0a', zerolinecolor='#111', color='#2a2a2a',
-                   tickfont=dict(family='Share Tech Mono',size=8)),
-        yaxis=dict(gridcolor='#0a0a0a', zerolinecolor='#111', color='#2a2a2a',
-                   tickfont=dict(family='Share Tech Mono',size=8)),
-    )
+    BL = dict(paper_bgcolor='#000', plot_bgcolor='#000',
+        font=dict(color='#222', family='Share Tech Mono', size=8),
+        margin=dict(t=10,b=25,l=40,r=10),
+        xaxis=dict(gridcolor='#080808', zerolinecolor='#0d0d0d', color='#1f1f1f',
+                   tickfont=dict(family='Share Tech Mono',size=7)),
+        yaxis=dict(gridcolor='#080808', zerolinecolor='#0d0d0d', color='#1f1f1f',
+                   tickfont=dict(family='Share Tech Mono',size=7)))
 
-    # ── TOP BAR ──
-    st.markdown(f"""
-    <div class="topbar">
-        <div class="topbar-logo">MOOD<span>SCOPE</span></div>
-        <div class="live-dot"><span style="color:#fff">{user_name.upper()}</span> &nbsp;—&nbsp; {total} SIGNALS</div>
-    </div>""", unsafe_allow_html=True)
+    # ── TOPBAR ──
+    st.markdown(f'''
+    <div class="ms-topbar">
+        <div class="ms-logo">MOOD<b>SCOPE</b></div>
+        <div class="ms-live"><span style="color:#666">{user_name.upper()}</span>&nbsp;—&nbsp;{tot} SIGNALS</div>
+    </div>''', unsafe_allow_html=True)
 
-    # ── HERO ──
-    st.markdown(f"""
-    <div class="hero">
-        <div class="hero-eyebrow">◈ MUSIC INTELLIGENCE RESEARCH SYSTEM</div>
-        <div class="hero-title">MOOD<span class="r">SCOPE</span></div>
-        <div class="hero-operator">
-            OPERATOR: <span>{user_name.upper()}</span> &nbsp;&nbsp;
-            DOMINANT SIGNAL: <span style="color:var(--red)">{dominant.upper()}</span>
+    # ── HERO — marquee drift ──
+    items = ""
+    for _ in range(6):
+        items += '<span class="ms-mq-item">MOOD</span><span class="ms-mq-item red">SCOPE</span><span class="ms-mq-item dim">///</span>'
+    st.markdown(f'''
+    <div class="ms-hero">
+        <div class="ms-mq-outer"><div class="ms-mq-track">{items}{items}</div></div>
+        <div class="ms-hero-meta">
+            <div class="ms-op">
+                OPERATOR: <span>{user_name.upper()}</span><br>
+                DOMINANT: <span class="sig">{dom.upper()}</span><br>
+                STATUS: <span>CLASSIFIED</span>
+            </div>
+            <div class="ms-sr">
+                <div class="ms-s"><span class="ms-sv">{tot}</span><span class="ms-sl">SONGS</span></div>
+                <div class="ms-s"><span class="ms-sv">4</span><span class="ms-sl">CLUSTERS</span></div>
+                <div class="ms-s"><span class="ms-sv">8D</span><span class="ms-sl">FEATURES</span></div>
+                <div class="ms-s"><span class="ms-sv">MLP</span><span class="ms-sl">CLASSIFIER</span></div>
+            </div>
         </div>
-        <div class="hero-stats">
-            <div class="hero-stat"><span class="hero-stat-val">{total}</span><span class="hero-stat-label">SONGS ANALYSED</span></div>
-            <div class="hero-stat"><span class="hero-stat-val">4</span><span class="hero-stat-label">MOOD CLUSTERS</span></div>
-            <div class="hero-stat"><span class="hero-stat-val">8D</span><span class="hero-stat-label">FEATURE SPACE</span></div>
-            <div class="hero-stat"><span class="hero-stat-val">MLP</span><span class="hero-stat-label">CLASSIFIER</span></div>
-        </div>
-    </div>""", unsafe_allow_html=True)
+    </div>''', unsafe_allow_html=True)
 
-    tab1, tab2, tab3 = st.tabs(["01 — OVERVIEW", "02 — YOUR SONGS", "03 — RESEARCH LAB"])
+    t1, t2, t3 = st.tabs(["01 — OVERVIEW", "02 — YOUR SONGS", "03 — RESEARCH LAB"])
 
-    # ── TAB 1: OVERVIEW ──
-    with tab1:
-        # Stat cards
-        cards = '<div class="stat-grid">'
+    # ── OVERVIEW ──
+    with t1:
+        cards = '<div class="sg">'
         for mood in ["Hype","Happy","Chill","Sad"]:
-            count = mood_counts.get(mood,0)
-            pct = round(count/total*100) if total else 0
-            color = MOOD_COLORS[mood]
-            cards += f'''<div class="stat-card">
-                <div class="stat-mood" style="color:{color}">{MOOD_EMOJIS[mood]} {mood.upper()}</div>
-                <div class="stat-num" style="color:{color};text-shadow:0 0 30px {color}50">{count}</div>
-                <div class="stat-bar-bg"><div class="stat-bar-fill" style="width:{pct}%;background:{color};box-shadow:0 0 10px {color}70"></div></div>
-                <div class="stat-pct">{pct}% OF LIBRARY</div>
+            n = mc.get(mood,0); pct = round(n/tot*100) if tot else 0
+            c = MOOD_COLORS[mood]
+            cards += f'''<div class="sc">
+                <div class="sc-m" style="color:{c}">{MOOD_EMOJIS[mood]} {mood.upper()}</div>
+                <div class="sc-n" style="color:{c};text-shadow:0 0 25px {c}40">{n}</div>
+                <div class="sc-b"><div class="sc-f" style="width:{pct}%;background:{c};box-shadow:0 0 8px {c}60"></div></div>
+                <div class="sc-p">{pct}% OF LIBRARY</div>
             </div>'''
         st.markdown(cards+'</div>', unsafe_allow_html=True)
 
-        # Personality block
-        st.markdown(f"""
-        <div class="personality">
-            <div class="personality-tag">◈ OPERATOR CLASSIFICATION</div>
-            <div class="personality-title">{p_title}</div>
-            <div class="personality-desc">{p_desc}</div>
-            <div class="personality-meta">PRIMARY: {dominant.upper()} — {mood_counts.get(dominant,0)} TRACKS &nbsp;|&nbsp; ██████ CLASSIFIED</div>
-        </div>""", unsafe_allow_html=True)
+        st.markdown(f'''
+        <div class="pcard">
+            <div class="pcard-tag">◈ OPERATOR CLASSIFICATION</div>
+            <div class="pcard-title">{pt}</div>
+            <div class="pcard-desc">{pd_}</div>
+            <div class="pcard-meta">PRIMARY — {dom.upper()} &nbsp;·&nbsp; {mc.get(dom,0)} TRACKS &nbsp;·&nbsp; ██████</div>
+        </div>''', unsafe_allow_html=True)
 
-        # Donut + top tracks
-        st.markdown('<div class="sh"><span class="sh-num">MOD-01</span><span class="sh-title">SIGNAL DISTRIBUTION</span><span class="sh-sub">MOOD BREAKDOWN</span></div>', unsafe_allow_html=True)
-        col1, col2 = st.columns([1,1])
-        with col1:
-            labels = list(mood_counts.keys()); values = list(mood_counts.values())
-            colors_pie = [MOOD_COLORS.get(m,"#888") for m in labels]
-            fig_pie = go.Figure(go.Pie(labels=labels, values=values, hole=0.72,
-                marker=dict(colors=colors_pie, line=dict(color='#000',width=4)),
+        st.markdown('<div class="sh"><span class="sh-n">MOD-01</span><span class="sh-t">DISTRIBUTION</span><span class="sh-s">MOOD BREAKDOWN</span></div>', unsafe_allow_html=True)
+        c1, c2 = st.columns([1,1])
+        with c1:
+            lbls = list(mc.keys()); vals = list(mc.values())
+            cols_pie = [MOOD_COLORS.get(m,"#888") for m in lbls]
+            fig_pie = go.Figure(go.Pie(labels=lbls, values=vals, hole=0.72,
+                marker=dict(colors=cols_pie, line=dict(color='#000',width=3)),
                 textinfo='label+percent',
-                textfont=dict(family='Share Tech Mono',size=9,color='white')))
-            fig_pie.update_layout(paper_bgcolor='#000', plot_bgcolor='#000', font=dict(color='white'),
-                showlegend=False, margin=dict(t=10,b=10,l=10,r=10), height=320,
-                annotations=[dict(text=f'<b>{total}</b>',x=0.5,y=0.5,
-                    font=dict(size=32,color='white',family='Anton'),showarrow=False)])
+                textfont=dict(family='Share Tech Mono',size=9,color='#888')))
+            fig_pie.update_layout(paper_bgcolor='#000',plot_bgcolor='#000',
+                font=dict(color='#888'),showlegend=False,
+                margin=dict(t=5,b=5,l=5,r=5),height=300,
+                annotations=[dict(text=f'<b>{tot}</b>',x=0.5,y=0.5,
+                    font=dict(size=36,color='#FF2D2D',family='Anton'),showarrow=False)])
             st.plotly_chart(fig_pie, use_container_width=True)
-        with col2:
+        with c2:
             for mood in ["Hype","Happy","Chill","Sad"]:
                 color = MOOD_COLORS[mood]
                 top = df[df["cluster_name"]==mood].head(3)
-                st.markdown(f'<div style="font-family:Share Tech Mono,monospace;font-size:0.5rem;letter-spacing:0.35em;color:{color};margin-top:1.5rem">{MOOD_EMOJIS[mood]} {mood.upper()}</div>', unsafe_allow_html=True)
-                for _, r in top.iterrows():
-                    st.markdown(f'<div style="font-family:Rajdhani,sans-serif;font-size:0.9rem;font-weight:600;color:#ccc;padding:0.2rem 0;border-bottom:1px solid #0a0a0a">→ {r["name"]} <span style="color:#333;font-weight:400">/ {r["artist"]}</span></div>', unsafe_allow_html=True)
+                st.markdown(f'<div style="font-family:Share Tech Mono,monospace;font-size:0.48rem;letter-spacing:0.35em;color:{color};margin-top:1.5rem">{MOOD_EMOJIS[mood]} {mood.upper()}</div>', unsafe_allow_html=True)
+                for _, row in top.iterrows():
+                    st.markdown(f'<div style="font-family:Rajdhani,sans-serif;font-size:0.9rem;font-weight:600;color:#555;padding:0.2rem 0;border-bottom:1px solid #080808">→ {row["name"]} <span style="color:#222">/ {row["artist"]}</span></div>', unsafe_allow_html=True)
 
-    # ── TAB 2: YOUR SONGS ──
-    with tab2:
-        st.markdown(f'<div class="sh"><span class="sh-num">MOD-02</span><span class="sh-title">SIGNAL CATALOGUE</span><span class="sh-sub">{len(df)} ENTRIES</span></div>', unsafe_allow_html=True)
-        col_f1, col_f2 = st.columns([3,1])
-        with col_f1: search = st.text_input("", placeholder="SEARCH BY TRACK OR ARTIST...", label_visibility="collapsed")
-        with col_f2: mood_filter = st.selectbox("", ["ALL","Hype","Happy","Chill","Sad"], label_visibility="collapsed")
-        filtered = df.copy()
-        if search: filtered = filtered[filtered["name"].str.contains(search,case=False,na=False)|filtered["artist"].str.contains(search,case=False,na=False)]
-        if mood_filter != "ALL": filtered = filtered[filtered["cluster_name"]==mood_filter]
-        st.markdown('<div class="song-header"><span>#</span><span>TRACK</span><span>ARTIST</span><span>CLASS</span></div>', unsafe_allow_html=True)
-        rows_html = ""
-        for i,(_, r) in enumerate(filtered.head(100).iterrows()):
+    # ── YOUR SONGS ──
+    with t2:
+        st.markdown(f'<div class="sh"><span class="sh-n">MOD-02</span><span class="sh-t">CATALOGUE</span><span class="sh-s">{len(df)} ENTRIES</span></div>', unsafe_allow_html=True)
+        cf1, cf2 = st.columns([3,1])
+        with cf1: srch = st.text_input("", placeholder="SEARCH TRACK OR ARTIST...", label_visibility="collapsed")
+        with cf2: mf = st.selectbox("", ["ALL","Hype","Happy","Chill","Sad"], label_visibility="collapsed")
+        filt = df.copy()
+        if srch: filt = filt[filt["name"].str.contains(srch,case=False,na=False)|filt["artist"].str.contains(srch,case=False,na=False)]
+        if mf != "ALL": filt = filt[filt["cluster_name"]==mf]
+        st.markdown('<div class="song-hdr"><span>#</span><span>TRACK</span><span>ARTIST</span><span>CLASS</span></div>', unsafe_allow_html=True)
+        rhtml = ""
+        for i,(_,r) in enumerate(filt.head(100).iterrows()):
             mood = r.get("cluster_name","Chill"); color = MOOD_COLORS.get(mood,"#888")
-            rows_html += f'<div class="song-row"><span class="song-num">{i+1:03d}</span><span class="song-name">{r["name"]}</span><span class="song-artist">{r["artist"]}</span><span class="mood-tag" style="background:{color}0d;color:{color};border:1px solid {color}25">{MOOD_EMOJIS.get(mood,"")} {mood.upper()}</span></div>'
-        st.markdown(rows_html, unsafe_allow_html=True)
+            rhtml += f'<div class="song-r"><span class="sn">{i+1:03d}</span><span class="st2">{r["name"]}</span><span class="sa">{r["artist"]}</span><span class="mtag" style="background:{color}0a;color:{color};border:1px solid {color}20">{MOOD_EMOJIS.get(mood,"")} {mood.upper()}</span></div>'
+        st.markdown(rhtml, unsafe_allow_html=True)
 
-    # ── TAB 3: RESEARCH LAB ──
-    with tab3:
+    # ── RESEARCH LAB ──
+    with t3:
 
         # LAB-01 SIGNAL ANALYSIS
-        st.markdown('<div class="sh"><span class="sh-num">LAB-01</span><span class="sh-title">SIGNAL ANALYSIS</span><span class="sh-sub">SYNTHETIC AUDIO MODELS</span></div>', unsafe_allow_html=True)
-        st.markdown('<div class="mod-desc">WAVEFORM + SPECTROGRAM PER MOOD CLUSTER — DERIVED FROM CLASSIFICATION VECTORS</div>', unsafe_allow_html=True)
-
-        col_s1, col_s2 = st.columns(2)
-        for mood, col in zip(["Hype","Happy","Chill","Sad"], [col_s1,col_s2,col_s1,col_s2]):
+        st.markdown('<div class="sh"><span class="sh-n">LAB-01</span><span class="sh-t">SIGNAL ANALYSIS</span><span class="sh-s">SYNTHETIC MODELS</span></div>', unsafe_allow_html=True)
+        st.markdown('<div class="moddesc">WAVEFORM + SPECTROGRAM &nbsp;·&nbsp; <b>MOOD CLASSIFICATION VECTORS</b> &nbsp;·&nbsp; AMPLITUDE × FREQUENCY</div>', unsafe_allow_html=True)
+        cs1, cs2 = st.columns(2)
+        for mood, col in zip(["Hype","Happy","Chill","Sad"], [cs1,cs2,cs1,cs2]):
             wave = make_synthetic_waveform(mood)
             spec = make_synthetic_spectrogram(mood)
             color = MOOD_COLORS[mood]
-            t_axis = np.linspace(0, 30, len(wave))
-            r_c,g_c,b_c = int(color[1:3],16), int(color[3:5],16), int(color[5:7],16)
+            t_ax = np.linspace(0, 30, len(wave))
+            rc,gc,bc = int(color[1:3],16), int(color[3:5],16), int(color[5:7],16)
             with col:
-                st.markdown(f'<div style="font-family:Share Tech Mono,monospace;font-size:0.55rem;letter-spacing:0.35em;color:{color};padding:1rem 0 0.5rem;text-shadow:0 0 12px {color}60">{MOOD_EMOJIS[mood]} {mood.upper()} — SIGNAL MODEL</div>', unsafe_allow_html=True)
-                fig_sig = make_subplots(rows=2, cols=1, vertical_spacing=0.08)
-                fig_sig.add_trace(go.Scatter(x=t_axis, y=wave, mode='lines',
+                st.markdown(f'<div style="font-family:Share Tech Mono,monospace;font-size:0.48rem;letter-spacing:0.35em;color:{color};padding:1.5rem 0 0.4rem;text-shadow:0 0 10px {color}50">{MOOD_EMOJIS[mood]} {mood.upper()}</div>', unsafe_allow_html=True)
+                fig_s = make_subplots(rows=2, cols=1, vertical_spacing=0.06)
+                fig_s.add_trace(go.Scatter(x=t_ax, y=wave, mode='lines',
                     line=dict(color=color, width=1.2),
                     fill='tozeroy', fillcolor=MOOD_DIM[mood]), row=1, col=1)
-                fig_sig.add_trace(go.Heatmap(z=spec,
-                    colorscale=[[0,'#000'],[0.3,f'rgba({r_c},{g_c},{b_c},0.15)'],[0.7,f'rgba({r_c},{g_c},{b_c},0.55)'],[1.0,color]],
+                fig_s.add_trace(go.Heatmap(z=spec,
+                    colorscale=[[0,'#000'],[0.3,f'rgba({rc},{gc},{bc},0.12)'],[0.7,f'rgba({rc},{gc},{bc},0.5)'],[1.0,color]],
                     showscale=False), row=2, col=1)
-                fig_sig.update_layout(
-                    paper_bgcolor='#000', plot_bgcolor='#000',
-                    height=360, showlegend=False,
-                    margin=dict(t=5,b=5,l=5,r=5),
-                    xaxis=dict(visible=False), yaxis=dict(visible=False),
-                    xaxis2=dict(visible=False), yaxis2=dict(visible=False),
-                )
-                st.plotly_chart(fig_sig, use_container_width=True)
+                fig_s.update_layout(paper_bgcolor='#000',plot_bgcolor='#000',
+                    height=320,showlegend=False,margin=dict(t=2,b=2,l=2,r=2),
+                    xaxis=dict(visible=False),yaxis=dict(visible=False),
+                    xaxis2=dict(visible=False),yaxis2=dict(visible=False))
+                st.plotly_chart(fig_s, use_container_width=True)
 
         # LAB-02 PCA
-        st.markdown('<div class="sh"><span class="sh-num">LAB-02</span><span class="sh-title">DIMENSIONALITY REDUCTION</span><span class="sh-sub">PCA 8D → 2D</span></div>', unsafe_allow_html=True)
+        st.markdown('<div class="sh"><span class="sh-n">LAB-02</span><span class="sh-t">PCA MAP</span><span class="sh-s">8D → 2D</span></div>', unsafe_allow_html=True)
         pca_exp = research.get("pca_explained",[0,0])
-        st.markdown(f'<div class="mod-desc">PC1 <span style="color:var(--red)">{round(pca_exp[0]*100,1)}%</span> VARIANCE &nbsp;·&nbsp; PC2 <span style="color:var(--red)">{round(pca_exp[1]*100,1)}%</span> VARIANCE — HOVER TO IDENTIFY SONGS</div>', unsafe_allow_html=True)
-        songs_data = research.get("songs",[])
-        if songs_data:
-            sdf = pd.DataFrame(songs_data)
+        st.markdown(f'<div class="moddesc">PC1 <b>{round(pca_exp[0]*100,1)}%</b> &nbsp;·&nbsp; PC2 <b>{round(pca_exp[1]*100,1)}%</b> &nbsp;·&nbsp; HOVER TO IDENTIFY</div>', unsafe_allow_html=True)
+        sdata = research.get("songs",[])
+        if sdata:
+            sdf2 = pd.DataFrame(sdata)
             fig_pca = go.Figure()
             for mood in ["Hype","Happy","Chill","Sad"]:
-                sub = sdf[sdf["mood"]==mood]
+                sub = sdf2[sdf2["mood"]==mood]
                 if not sub.empty:
-                    fig_pca.add_trace(go.Scatter(x=sub["pca_x"], y=sub["pca_y"], mode="markers", name=mood,
-                        marker=dict(color=MOOD_COLORS[mood], size=8, opacity=0.9, line=dict(width=0)),
+                    fig_pca.add_trace(go.Scatter(x=sub["pca_x"],y=sub["pca_y"],mode="markers",name=mood,
+                        marker=dict(color=MOOD_COLORS[mood],size=8,opacity=0.9,line=dict(width=0)),
                         hovertemplate='<b>%{customdata[0]}</b> / %{customdata[1]}<extra></extra>',
                         customdata=list(zip(sub["name"],sub["artist"]))))
             for c in research.get("centroids",[]):
-                fig_pca.add_trace(go.Scatter(x=[c["pca_x"]], y=[c["pca_y"]], mode="markers+text",
-                    marker=dict(symbol="diamond", size=16, color=MOOD_COLORS.get(c["mood"],"#fff"),
+                fig_pca.add_trace(go.Scatter(x=[c["pca_x"]],y=[c["pca_y"]],mode="markers+text",
+                    marker=dict(symbol="diamond",size=14,color=MOOD_COLORS.get(c["mood"],"#fff"),
                         line=dict(width=1,color='#000')),
-                    text=[c["mood"].upper()], textposition="top center",
+                    text=[c["mood"].upper()],textposition="top center",
                     textfont=dict(family='Share Tech Mono',size=8,color=MOOD_COLORS.get(c["mood"],"#fff")),
-                    showlegend=False, hoverinfo='skip'))
-            fig_pca.update_layout(**BL, height=560,
-                margin=dict(t=10,b=10,l=10,r=10),
-                xaxis=dict(visible=False), yaxis=dict(visible=False),
-                legend=dict(orientation="h", y=-0.02,
-                    font=dict(family='Share Tech Mono',size=9,color='#555')))
+                    showlegend=False,hoverinfo='skip'))
+            fig_pca.update_layout(**BL, height=520,
+                margin=dict(t=5,b=5,l=5,r=5),
+                xaxis=dict(visible=False),yaxis=dict(visible=False),
+                legend=dict(orientation="h",y=-0.02,font=dict(family='Share Tech Mono',size=9,color='#333')))
             st.plotly_chart(fig_pca, use_container_width=True)
 
-        # LAB-03 CLUSTERING
-        st.markdown('<div class="sh"><span class="sh-num">LAB-03</span><span class="sh-title">K-MEANS CLUSTERING</span><span class="sh-sub">ELBOW METHOD — OPTIMAL k=4</span></div>', unsafe_allow_html=True)
-        col_e1, col_e2 = st.columns([3,2])
-        with col_e1:
+        # LAB-03 K-MEANS
+        st.markdown('<div class="sh"><span class="sh-n">LAB-03</span><span class="sh-t">K-MEANS</span><span class="sh-s">ELBOW — k=4</span></div>', unsafe_allow_html=True)
+        ce1, ce2 = st.columns([3,2])
+        with ce1:
             elbow = research.get("elbow",[])
             if elbow:
-                fig_elbow = go.Figure()
-                fig_elbow.add_trace(go.Scatter(x=[e["k"] for e in elbow], y=[e["inertia"] for e in elbow],
-                    mode='lines+markers',
-                    line=dict(color='#FF2D2D', width=2),
-                    marker=dict(color='#FF2D2D', size=7, line=dict(width=1,color='#000')),
-                    fill='tozeroy', fillcolor='rgba(255,45,45,0.04)'))
-                fig_elbow.add_vline(x=4, line_dash="dash", line_color="#222",
+                fig_e = go.Figure()
+                fig_e.add_trace(go.Scatter(x=[e["k"] for e in elbow],y=[e["inertia"] for e in elbow],
+                    mode='lines+markers',line=dict(color='#FF2D2D',width=1.8),
+                    marker=dict(color='#FF2D2D',size=6,line=dict(width=1,color='#000')),
+                    fill='tozeroy',fillcolor='rgba(255,45,45,0.03)'))
+                fig_e.add_vline(x=4,line_dash="dash",line_color="#1a1a1a",
                     annotation_text="k=4",
-                    annotation_font=dict(family='Share Tech Mono',size=9,color='#FF2D2D'),
+                    annotation_font=dict(family='Share Tech Mono',size=8,color='#FF2D2D'),
                     annotation_position="top right")
-                fig_elbow.update_layout(**BL, height=300, xaxis_title="k", yaxis_title="INERTIA",
-                    margin=dict(t=10,b=30,l=45,r=20))
-                st.plotly_chart(fig_elbow, use_container_width=True)
-        with col_e2:
-            st.markdown("""
-            <div class="math-block">
+                fig_e.update_layout(**BL,height=280,
+                    margin=dict(t=5,b=30,l=40,r=10),
+                    xaxis=dict(title=dict(text='k',font=dict(size=7)),
+                        gridcolor='#080808',color='#1a1a1a',tickfont=dict(family='Share Tech Mono',size=7)),
+                    yaxis=dict(title=dict(text='INERTIA',font=dict(size=7)),
+                        gridcolor='#080808',color='#1a1a1a',tickfont=dict(family='Share Tech Mono',size=7)))
+                st.plotly_chart(fig_e, use_container_width=True)
+        with ce2:
+            st.markdown('''
+            <div class="mb">
                 J = Σᵢ Σₓ∈Cᵢ ‖x − μᵢ‖²<br><br>
                 Cᵢ &nbsp;= CLUSTER i<br>
-                μᵢ &nbsp;= CENTROID OF Cᵢ<br>
-                ‖·‖² = EUCLIDEAN DISTANCE<br><br>
-                ε &nbsp;= 1e-6 &nbsp;CONVERGENCE<br>
-                k &nbsp;= 4 &nbsp;CLUSTERS<br>
-                d &nbsp;= 8 &nbsp;DIMENSIONS<br>
-                n &nbsp;= <span class="redact">████</span> MAX ITER
-            </div>""", unsafe_allow_html=True)
+                μᵢ &nbsp;= CENTROID<br>
+                ε &nbsp;= 1e-6<br>
+                k &nbsp;= 4 &nbsp;n = 8D<br><br>
+                ITER &nbsp;300 MAX<br>
+                INIT &nbsp;RANDOM
+            </div>''', unsafe_allow_html=True)
 
-        # LAB-04 NEURAL NETWORK
-        st.markdown('<div class="sh"><span class="sh-num">LAB-04</span><span class="sh-title">NEURAL NETWORK</span><span class="sh-sub">MLP 8→16→8→4 — 300 EPOCHS</span></div>', unsafe_allow_html=True)
+        # LAB-04 NEURAL NET
+        st.markdown('<div class="sh"><span class="sh-n">LAB-04</span><span class="sh-t">NEURAL NET</span><span class="sh-s">MLP 8→16→8→4</span></div>', unsafe_allow_html=True)
         nn = research.get("neural_net",{})
         fa = nn.get("final_accuracy",0)
-        loss_history = nn.get("loss_history",[])
-        acc_history  = nn.get("acc_history",[])
-
-        col_n1, col_n2 = st.columns([3,2])
-        with col_n1:
-            if loss_history:
-                fig_nn = make_subplots(rows=1, cols=2, horizontal_spacing=0.08)
-                fig_nn.add_trace(go.Scatter(y=loss_history, mode='lines',
+        lh = nn.get("loss_history",[])
+        ah = nn.get("acc_history",[])
+        cn1, cn2 = st.columns([3,2])
+        with cn1:
+            if lh:
+                fig_nn = make_subplots(rows=1,cols=2,horizontal_spacing=0.06)
+                fig_nn.add_trace(go.Scatter(y=lh,mode='lines',
                     line=dict(color='#FF2D2D',width=1.5),
-                    fill='tozeroy', fillcolor='rgba(255,45,45,0.03)'), row=1, col=1)
-                fig_nn.add_trace(go.Scatter(y=acc_history, mode='lines',
+                    fill='tozeroy',fillcolor='rgba(255,45,45,0.025)'),row=1,col=1)
+                fig_nn.add_trace(go.Scatter(y=ah,mode='lines',
                     line=dict(color='#4DFFB4',width=1.5),
-                    fill='tozeroy', fillcolor='rgba(77,255,180,0.03)'), row=1, col=2)
-                fig_nn.update_layout(paper_bgcolor='#000', plot_bgcolor='#000',
-                    height=280, showlegend=False,
-                    margin=dict(t=5,b=30,l=40,r=10),
-                    font=dict(color='#2a2a2a',family='Share Tech Mono',size=8),
-                    xaxis=dict(gridcolor='#080808',color='#222',title=dict(text='EPOCH',font=dict(size=7))),
-                    yaxis=dict(gridcolor='#080808',color='#222',title=dict(text='LOSS',font=dict(size=7))),
-                    xaxis2=dict(gridcolor='#080808',color='#222',title=dict(text='EPOCH',font=dict(size=7))),
-                    yaxis2=dict(gridcolor='#080808',color='#222',title=dict(text='ACC',font=dict(size=7))))
+                    fill='tozeroy',fillcolor='rgba(77,255,180,0.025)'),row=1,col=2)
+                fig_nn.update_layout(paper_bgcolor='#000',plot_bgcolor='#000',
+                    height=260,showlegend=False,
+                    margin=dict(t=5,b=25,l=35,r=5),
+                    font=dict(color='#1a1a1a',family='Share Tech Mono',size=7),
+                    xaxis=dict(gridcolor='#060606',color='#1a1a1a',
+                        title=dict(text='EPOCH',font=dict(size=6))),
+                    yaxis=dict(gridcolor='#060606',color='#1a1a1a',
+                        title=dict(text='LOSS',font=dict(size=6))),
+                    xaxis2=dict(gridcolor='#060606',color='#1a1a1a',
+                        title=dict(text='EPOCH',font=dict(size=6))),
+                    yaxis2=dict(gridcolor='#060606',color='#1a1a1a',
+                        title=dict(text='ACC',font=dict(size=6))))
                 st.plotly_chart(fig_nn, use_container_width=True)
-        with col_n2:
-            st.markdown(f"""
-            <div class="math-block">
+        with cn2:
+            st.markdown(f'''
+            <div class="mb">
                 8 → 16 → 8 → 4<br><br>
-                ACTIVATION &nbsp;ReLU / Softmax<br>
-                LOSS &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cross-Entropy<br>
-                LR &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0.05<br>
-                BATCH &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;16<br>
-                EPOCHS &nbsp;&nbsp;&nbsp;&nbsp;300<br><br>
-                ACCURACY &nbsp;<span style="color:#4DFFB4;font-size:1rem">{fa:.1%}</span>
-            </div>""", unsafe_allow_html=True)
+                ReLU / Softmax<br>
+                CE Loss &nbsp;LR 0.05<br>
+                Batch 16 &nbsp;Ep 300<br><br>
+                ACC &nbsp;<span class="hi">{fa:.1%}</span>
+            </div>''', unsafe_allow_html=True)
 
-        # Confusion matrix — full width
-        cm_data = nn.get("confusion_matrix",[])
-        mood_labels = nn.get("mood_labels",["Hype","Happy","Chill","Sad"])
-        if cm_data:
-            fig_cm = go.Figure(go.Heatmap(z=cm_data, x=mood_labels, y=mood_labels,
-                colorscale=[[0,'#000'],[0.35,'#110000'],[0.65,'#550000'],[1,'#FF2D2D']],
-                showscale=False, text=cm_data, texttemplate='%{text}',
-                textfont=dict(family='Share Tech Mono',size=18,color='white')))
-            fig_cm.update_layout(**BL, height=380,
-                margin=dict(t=10,b=30,l=70,r=20),
-                xaxis=dict(title=dict(text='PREDICTED',font=dict(size=8)),
-                           color='#333',tickfont=dict(family='Share Tech Mono',size=9),gridcolor='#000'),
-                yaxis=dict(title=dict(text='ACTUAL',font=dict(size=8)),
-                           color='#333',tickfont=dict(family='Share Tech Mono',size=9),gridcolor='#000'))
-            col_cm = st.columns([1,2,1])[1]
-            with col_cm:
+        # Confusion matrix
+        cm_d = nn.get("confusion_matrix",[])
+        ml   = nn.get("mood_labels",["Hype","Happy","Chill","Sad"])
+        if cm_d:
+            fig_cm = go.Figure(go.Heatmap(z=cm_d,x=ml,y=ml,
+                colorscale=[[0,'#000'],[0.3,'#0d0000'],[0.6,'#440000'],[1,'#FF2D2D']],
+                showscale=False,text=cm_d,texttemplate='%{text}',
+                textfont=dict(family='Share Tech Mono',size=16,color='#888')))
+            fig_cm.update_layout(**BL,height=360,
+                margin=dict(t=5,b=30,l=65,r=10),
+                xaxis=dict(title=dict(text='PREDICTED',font=dict(size=7)),
+                    color='#222',tickfont=dict(family='Share Tech Mono',size=8),gridcolor='#000'),
+                yaxis=dict(title=dict(text='ACTUAL',font=dict(size=7)),
+                    color='#222',tickfont=dict(family='Share Tech Mono',size=8),gridcolor='#000'))
+            cm_col = st.columns([1,2,1])[1]
+            with cm_col:
                 st.plotly_chart(fig_cm, use_container_width=True)
 
-        # LAB-05 FEATURE RADAR
-        st.markdown('<div class="sh"><span class="sh-num">LAB-05</span><span class="sh-title">FEATURE RADAR</span><span class="sh-sub">AUDIO FINGERPRINT PER MOOD</span></div>', unsafe_allow_html=True)
-        mood_avgs = research.get("mood_averages",{})
-        if mood_avgs:
-            features = ["energy","valence","danceability","acousticness","tempo_norm","speechiness"]
-            feat_labels = ["ENERGY","VALENCE","DANCE","ACOUSTIC","TEMPO","SPEECH"]
+        # LAB-05 RADAR
+        st.markdown('<div class="sh"><span class="sh-n">LAB-05</span><span class="sh-t">FEATURE RADAR</span><span class="sh-s">AUDIO FINGERPRINT</span></div>', unsafe_allow_html=True)
+        mavgs = research.get("mood_averages",{})
+        if mavgs:
+            feats = ["energy","valence","danceability","acousticness","tempo_norm","speechiness"]
+            flbls = ["ENERGY","VALENCE","DANCE","ACOUSTIC","TEMPO","SPEECH"]
             fig_r = go.Figure()
             for mood in ["Hype","Happy","Chill","Sad"]:
-                if mood in mood_avgs:
-                    vals = [max(0,min(1,mood_avgs[mood].get(f,0))) for f in features]
-                    fig_r.add_trace(go.Scatterpolar(
-                        r=vals+[vals[0]], theta=feat_labels+[feat_labels[0]],
-                        fill='toself', fillcolor=MOOD_DIM[mood],
-                        line=dict(color=MOOD_COLORS[mood],width=2), name=mood))
-            fig_r.update_layout(
-                paper_bgcolor='#000', plot_bgcolor='#000',
-                font=dict(color='#444',family='Share Tech Mono',size=9),
+                if mood in mavgs:
+                    vs = [max(0,min(1,mavgs[mood].get(f,0))) for f in feats]
+                    fig_r.add_trace(go.Scatterpolar(r=vs+[vs[0]],theta=flbls+[flbls[0]],
+                        fill='toself',fillcolor=MOOD_DIM[mood],
+                        line=dict(color=MOOD_COLORS[mood],width=1.8),name=mood))
+            fig_r.update_layout(paper_bgcolor='#000',plot_bgcolor='#000',
+                font=dict(color='#333',family='Share Tech Mono',size=8),
                 polar=dict(bgcolor='#000',
-                    radialaxis=dict(visible=True,range=[0,1],gridcolor='#0d0d0d',color='#222',
+                    radialaxis=dict(visible=True,range=[0,1],gridcolor='#080808',color='#111',
                         tickfont=dict(size=7)),
-                    angularaxis=dict(gridcolor='#0d0d0d',color='#444',
-                        tickfont=dict(family='Share Tech Mono',size=9))),
-                legend=dict(orientation="h",y=-0.08,font=dict(family='Share Tech Mono',size=9)),
-                height=500, margin=dict(t=20,b=60,l=20,r=20))
+                    angularaxis=dict(gridcolor='#080808',color='#333',
+                        tickfont=dict(family='Share Tech Mono',size=8))),
+                legend=dict(orientation="h",y=-0.06,font=dict(family='Share Tech Mono',size=9,color='#444')),
+                height=480,margin=dict(t=15,b=50,l=15,r=15))
             st.plotly_chart(fig_r, use_container_width=True)
 
-    # ── FOOTER ──
-    st.markdown("""
-    <div class="lab-footer">
-        <span class="footer-text">MOODSCOPE — K-MEANS + MLP NEURAL NET — ██████ RESEARCH BUILD</span>
-        <span class="footer-text">@ALTAIRA15K</span>
-    </div>""", unsafe_allow_html=True)
+    st.markdown('''
+    <div class="ms-foot">
+        <span>MOODSCOPE — K-MEANS + MLP — ██████</span>
+        <span>@ALTAIRA15K</span>
+    </div>''', unsafe_allow_html=True)
+
 
 # ── AUTH ──────────────────────────────────────────────────────────────────────
 def get_auth():
@@ -899,7 +716,7 @@ def get_auth():
         show_dialog=True
     )
 
-# ── INIT STATE ────────────────────────────────────────────────────────────────
+# ── INIT ──────────────────────────────────────────────────────────────────────
 inject_css()
 for k, v in [("stage","landing"),("df",None),("research",None),("user_name","OPERATOR"),("auth_code",None)]:
     if k not in st.session_state: st.session_state[k] = v
@@ -913,32 +730,28 @@ if auth_code and st.session_state.stage == "landing":
 if st.session_state.stage == "landing":
     auth_url = get_auth().get_authorize_url()
     st.markdown(f"""
-    <div class="landing">
-        <div class="landing-eyebrow">MUSIC INTELLIGENCE SYSTEM</div>
-        <div class="landing-title">MOOD<span class="r">SCOPE</span></div>
-        <div class="landing-desc">
-            Connect your Spotify. Your liked songs are fed through a K-Means
-            clustering algorithm and an MLP neural network. The system classifies
-            every track and builds your personal music intelligence profile.
-        </div>
+    <div class="lp">
+        <div class="lp-eye">MUSIC INTELLIGENCE SYSTEM</div>
+        <div class="lp-title">MOOD<b>SCOPE</b></div>
+        <div class="lp-desc">Connect Spotify. K-Means clusters your liked songs by mood.<br>MLP neural net classifies every track. Your profile in seconds.</div>
     </div>""", unsafe_allow_html=True)
     col = st.columns([1,2,1])[1]
     with col:
-        st.link_button("◈ INITIALIZE — CONNECT SPOTIFY", auth_url, use_container_width=True)
+        st.link_button("◈ CONNECT SPOTIFY", auth_url, use_container_width=True)
     st.markdown("""
-    <div style="display:flex;justify-content:center;margin-top:2rem;padding-bottom:4rem">
-        <div class="landing-specs">
-            <div class="landing-spec"><div class="landing-spec-val">K-M</div><div class="landing-spec-label">CLUSTERING</div></div>
-            <div class="landing-spec"><div class="landing-spec-val">MLP</div><div class="landing-spec-label">NEURAL NET</div></div>
-            <div class="landing-spec"><div class="landing-spec-val">PCA</div><div class="landing-spec-label">8D → 2D</div></div>
-            <div class="landing-spec"><div class="landing-spec-val">4</div><div class="landing-spec-label">MOOD CLASSES</div></div>
-            <div class="landing-spec"><div class="landing-spec-val">200</div><div class="landing-spec-label">MAX SONGS</div></div>
+    <div style="display:flex;justify-content:center;padding-bottom:5rem">
+        <div class="lp-specs">
+            <div class="lp-spec"><div class="lp-sv">K-M</div><div class="lp-sl">CLUSTERING</div></div>
+            <div class="lp-spec"><div class="lp-sv">MLP</div><div class="lp-sl">NEURAL NET</div></div>
+            <div class="lp-spec"><div class="lp-sv">PCA</div><div class="lp-sl">8D→2D</div></div>
+            <div class="lp-spec"><div class="lp-sv">4</div><div class="lp-sl">MOOD CLASSES</div></div>
+            <div class="lp-spec"><div class="lp-sv">200</div><div class="lp-sl">MAX SONGS</div></div>
         </div>
     </div>""", unsafe_allow_html=True)
 
 # ── LOADING ───────────────────────────────────────────────────────────────────
 elif st.session_state.stage == "loading":
-    st.markdown('<div class="loading"><div class="loading-title">PROCESSING SIGNALS</div></div>', unsafe_allow_html=True)
+    st.markdown('<div class="ldr"><div class="ldr-t">PROCESSING SIGNALS</div></div>', unsafe_allow_html=True)
     status = st.empty()
     bar = st.progress(0)
     try:
@@ -968,7 +781,7 @@ elif st.session_state.stage == "dashboard":
         render_dashboard(st.session_state.df, st.session_state.research, st.session_state.user_name)
         col = st.columns([1,2,1])[1]
         with col:
-            if st.button("◈ REINITIALIZE SYSTEM", use_container_width=True):
+            if st.button("◈ REINITIALIZE", use_container_width=True):
                 for k in ["stage","df","research"]: st.session_state[k] = "landing" if k=="stage" else None
                 st.rerun()
     else:
