@@ -814,10 +814,9 @@ def render_dashboard(df, research, user_name):
                 fig_sil.add_vline(x=3.5, line_dash="dash", line_color="#333",
                     annotation_text="CURRENT k=4",
                     annotation_font=dict(family='Share Tech Mono', size=8, color='#FF2D2D'))
-                fig_sil.update_layout(**base_layout, height=300,
-                    xaxis_title="K", yaxis_title="SILHOUETTE SCORE",
-                    yaxis=dict(range=[min(0, min(sil_vals)-0.05), max(sil_vals)+0.1],
-                               gridcolor='#0d0d0d', color='#444'))
+                sil_layout = {k: v for k, v in base_layout.items() if k != 'yaxis'}
+                sil_layout['yaxis'] = dict(range=[min(0, min(sil_vals)-0.05), max(sil_vals)+0.1], gridcolor='#0d0d0d', color='#444', tickfont=dict(family='Share Tech Mono', size=9))
+                fig_sil.update_layout(**sil_layout, height=300, xaxis_title='K', yaxis_title='SILHOUETTE SCORE')
                 st.markdown('<div class="chart-frame">', unsafe_allow_html=True)
                 st.plotly_chart(fig_sil, use_container_width=True)
                 st.markdown('</div>', unsafe_allow_html=True)
@@ -836,9 +835,9 @@ def render_dashboard(df, research, user_name):
                 fig_dbi.add_vline(x=3.5, line_dash="dash", line_color="#333",
                     annotation_text="CURRENT k=4",
                     annotation_font=dict(family='Share Tech Mono', size=8, color='#FF2D2D'))
-                fig_dbi.update_layout(**base_layout, height=300,
-                    xaxis_title="K", yaxis_title="DAVIES-BOULDIN INDEX",
-                    yaxis=dict(gridcolor='#0d0d0d', color='#444'))
+                dbi_layout = {k: v for k, v in base_layout.items() if k != 'yaxis'}
+                dbi_layout['yaxis'] = dict(gridcolor='#0d0d0d', color='#444', tickfont=dict(family='Share Tech Mono', size=9))
+                fig_dbi.update_layout(**dbi_layout, height=300, xaxis_title='K', yaxis_title='DAVIES-BOULDIN INDEX')
                 st.markdown('<div class="chart-frame">', unsafe_allow_html=True)
                 st.plotly_chart(fig_dbi, use_container_width=True)
                 st.markdown('</div>', unsafe_allow_html=True)
