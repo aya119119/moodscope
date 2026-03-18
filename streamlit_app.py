@@ -532,20 +532,15 @@ def render_dashboard(df, research, user_name):
         <div class="status-dot">{user_name.upper()} — {total} SIGNALS PROCESSED</div>
     </div>""", unsafe_allow_html=True)
 
-    # DASHBOARD MARQUEE
+    # HERO with marquee as sole title
     dmq_inner = ' <span class="sep">◈</span> '.join(
         ['<span class="ms">MOOD</span><span class="sc">SCOPE</span>'] * 10
     )
-    st.markdown(
-        f'<div class="dash-marquee-wrap"><span class="dash-marquee-track">{dmq_inner} <span class="sep">◈</span> {dmq_inner}</span></div>',
-        unsafe_allow_html=True
-    )
-
-    # HERO
+    dmq_track = f'<span class="dash-marquee-track">{dmq_inner} <span class="sep">◈</span> {dmq_inner}</span>'
     st.markdown(f"""
     <div class="hero">
         <div class="hero-label">◈ MUSIC INTELLIGENCE RESEARCH SYSTEM</div>
-        <div class="hero-title">MOOD<span class="accent">SCOPE</span></div>
+        <div class="dash-marquee-wrap" style="margin:1.5rem 0 1rem;border:none;padding:0.5rem 0">{dmq_track}</div>
         <div class="hero-sub">
             OPERATOR: {user_name.upper()} &nbsp;|&nbsp;
             SONGS PROCESSED: {total} &nbsp;|&nbsp;
@@ -987,16 +982,16 @@ if auth_code and st.session_state.stage == "landing":
 if st.session_state.stage == "landing":
     auth_url = get_auth().get_authorize_url()
     # build seamless marquee: duplicate text so loop is invisible
-    mq_inner = ' <span class="sep">◈</span> '.join(
+    lmq_inner = ' <span class="sep">◈</span> '.join(
         ['<span class="ms">MOOD</span><span class="sc">SCOPE</span>'] * 8
     )
-    mq_html = f'<span class="landing-marquee-track">{mq_inner} <span class="sep">◈</span> {mq_inner}</span>'
+    lmq_track = f'<span class="landing-marquee-track">{lmq_inner} <span class="sep">◈</span> {lmq_inner}</span>'
 
     st.markdown(f"""
     <div class="landing">
         <div class="landing-eyebrow">MUSIC INTELLIGENCE SYSTEM</div>
-        <div class="landing-marquee-wrap">{mq_html}</div>
-        <div class="landing-desc" style="margin-top:2rem">
+        <div class="landing-marquee-wrap">{lmq_track}</div>
+        <div class="landing-desc">
             Connect your Spotify. Your liked songs are fed through a K-Means
             clustering algorithm and an MLP neural network. The system classifies
             every track and builds your personal music intelligence profile.
