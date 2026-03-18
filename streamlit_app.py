@@ -203,6 +203,95 @@ section[data-testid="stSidebar"] { display: none !important; }
 
 .lab-footer { border-top: 1px solid var(--border); padding: 1.5rem 2.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 4rem; }
 .footer-text { font-family: 'Share Tech Mono', monospace; font-size: 0.55rem; color: var(--muted); letter-spacing: 0.2em; }
+
+/* ── LANDING MARQUEE ── */
+.landing-marquee-wrap {
+    width: 100%;
+    overflow: hidden;
+    padding: 2rem 0 1rem;
+    position: relative;
+}
+.landing-marquee-track {
+    display: inline-block;
+    white-space: nowrap;
+    animation: hero-marquee 40s linear infinite;
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(5rem, 14vw, 14rem);
+    font-weight: 900;
+    color: #E0E0E0;
+    text-shadow: 0 0 60px rgba(255,45,45,0.3);
+    line-height: 1;
+    letter-spacing: -0.02em;
+}
+.landing-marquee-track .ms { color: #E0E0E0; }
+.landing-marquee-track .sc { color: #FF2D2D; text-shadow: 0 0 80px #FF2D2D, 0 0 30px #FF2D2D; }
+.landing-marquee-track .sep { color: #FF2D2D; opacity: 0.4; margin: 0 1.5rem; font-size: 0.4em; vertical-align: middle; }
+@keyframes hero-marquee {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* ── DASHBOARD MARQUEE ── */
+.dash-marquee-wrap {
+    width: 100%;
+    overflow: hidden;
+    border-top: 1px solid #1a1a1a;
+    border-bottom: 1px solid #1a1a1a;
+    padding: 0.6rem 0;
+    background: #000;
+}
+.dash-marquee-track {
+    display: inline-block;
+    white-space: nowrap;
+    animation: dash-marquee 55s linear infinite;
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(2.5rem, 6vw, 5.5rem);
+    font-weight: 900;
+    color: #E0E0E0;
+    line-height: 1;
+    letter-spacing: -0.01em;
+}
+.dash-marquee-track .ms { color: #E0E0E0; }
+.dash-marquee-track .sc { color: #FF2D2D; text-shadow: 0 0 30px rgba(255,45,45,0.6); }
+.dash-marquee-track .sep { color: #FF2D2D; opacity: 0.3; margin: 0 2rem; font-size: 0.35em; vertical-align: middle; }
+@keyframes dash-marquee {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* ── LOADING STEPS ── */
+.loading-steps {
+    margin: 2rem auto 1rem;
+    max-width: 480px;
+    text-align: left;
+}
+.loading-step-line {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.75rem;
+    color: #444;
+    letter-spacing: 0.12em;
+    padding: 0.35rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    opacity: 0;
+    animation: step-fadein 0.5s ease forwards;
+}
+.loading-step-line .step-num { color: #FF2D2D; min-width: 1.5rem; }
+.loading-step-line.active { color: #E0E0E0; }
+.loading-step-line.active .step-num { animation: step-pulse 1s infinite; }
+@keyframes step-fadein { to { opacity: 1; } }
+@keyframes step-pulse  { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+.loading-step-line:nth-child(1) { animation-delay: 0.1s; }
+.loading-step-line:nth-child(2) { animation-delay: 0.6s; }
+.loading-step-line:nth-child(3) { animation-delay: 1.1s; }
+.loading-step-line:nth-child(4) { animation-delay: 1.6s; }
+.loading-step-line:nth-child(5) { animation-delay: 2.1s; }
+.loading-step-line:nth-child(6) { animation-delay: 2.6s; }
+.loading-step-line:nth-child(7) { animation-delay: 3.1s; }
+.loading-step-line:nth-child(8) { animation-delay: 3.6s; }
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -442,6 +531,15 @@ def render_dashboard(df, research, user_name):
         <div class="topbar-logo">MOOD<span>SCOPE</span></div>
         <div class="status-dot">{user_name.upper()} — {total} SIGNALS PROCESSED</div>
     </div>""", unsafe_allow_html=True)
+
+    # DASHBOARD MARQUEE
+    dmq_inner = ' <span class="sep">◈</span> '.join(
+        ['<span class="ms">MOOD</span><span class="sc">SCOPE</span>'] * 10
+    )
+    st.markdown(
+        f'<div class="dash-marquee-wrap"><span class="dash-marquee-track">{dmq_inner} <span class="sep">◈</span> {dmq_inner}</span></div>',
+        unsafe_allow_html=True
+    )
 
     # HERO
     st.markdown(f"""
@@ -888,11 +986,17 @@ if auth_code and st.session_state.stage == "landing":
 # ── LANDING ───────────────────────────────────────────────────────────────────
 if st.session_state.stage == "landing":
     auth_url = get_auth().get_authorize_url()
+    # build seamless marquee: duplicate text so loop is invisible
+    mq_inner = ' <span class="sep">◈</span> '.join(
+        ['<span class="ms">MOOD</span><span class="sc">SCOPE</span>'] * 8
+    )
+    mq_html = f'<span class="landing-marquee-track">{mq_inner} <span class="sep">◈</span> {mq_inner}</span>'
+
     st.markdown(f"""
     <div class="landing">
         <div class="landing-eyebrow">MUSIC INTELLIGENCE SYSTEM</div>
-        <div class="landing-title">MOOD<span class="r">SCOPE</span></div>
-        <div class="landing-desc">
+        <div class="landing-marquee-wrap">{mq_html}</div>
+        <div class="landing-desc" style="margin-top:2rem">
             Connect your Spotify. Your liked songs are fed through a K-Means
             clustering algorithm and an MLP neural network. The system classifies
             every track and builds your personal music intelligence profile.
@@ -914,7 +1018,24 @@ if st.session_state.stage == "landing":
 
 # ── LOADING ───────────────────────────────────────────────────────────────────
 elif st.session_state.stage == "loading":
-    st.markdown('<div class="loading"><div class="loading-title">PROCESSING SIGNALS</div></div>', unsafe_allow_html=True)
+    steps = [
+        "AUTHENTICATING WITH SPOTIFY API",
+        "FETCHING LIKED TRACKS (MAX 200)",
+        "EXTRACTING AUDIO FEATURES",
+        "GENERATING SYNTHETIC MOOD VECTORS",
+        "EXECUTING K-MEANS CLUSTERING",
+        "TRAINING MLP NEURAL NETWORK",
+        "PROJECTING TO 2D SPACE (PCA)",
+        "SYNTHESIZING WAVEFORM MODELS",
+    ]
+    steps_html = "".join(
+        f'<div class="loading-step-line"><span class="step-num">{i+1:02d}</span><span>█ {s}</span></div>'
+        for i, s in enumerate(steps)
+    )
+    st.markdown(f'''<div class="loading">
+        <div class="loading-title">PROCESSING SIGNALS</div>
+        <div class="loading-steps">{steps_html}</div>
+    </div>''', unsafe_allow_html=True)
     status = st.empty()
     bar = st.progress(0)
     try:
