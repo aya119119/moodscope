@@ -20,11 +20,11 @@ LASTFM_SECRET = st.secrets.get("LASTFM_SECRET", "")
 SCOPE = "user-library-read"
 
 # ── CONSTANTS ─────────────────────────────────────────────────────────────────
-MOOD_COLORS = {"Hype": "#FF2D2D", "Happy": "#FF6B2D", "Chill": "#4DFFB4", "Sad": "#2D8BFF"}
-MOOD_GLOW   = {"Hype": "rgba(255,45,45,0.4)",   "Happy": "rgba(255,107,45,0.4)",
-               "Chill": "rgba(77,255,180,0.4)",  "Sad":   "rgba(45,139,255,0.4)"}
-MOOD_DIM    = {"Hype": "rgba(255,45,45,0.08)",   "Happy": "rgba(255,107,45,0.08)",
-               "Chill": "rgba(77,255,180,0.08)", "Sad":   "rgba(45,139,255,0.08)"}
+MOOD_COLORS = {"Hype": "#D8A7B1", "Happy": "#C9856E", "Chill": "#A89BB5", "Sad": "#7A92A8"}
+MOOD_GLOW   = {"Hype": "rgba(216,167,177,0.4)",  "Happy": "rgba(201,133,110,0.4)",
+               "Chill": "rgba(168,155,181,0.4)", "Sad":   "rgba(122,146,168,0.4)"}
+MOOD_DIM    = {"Hype": "rgba(216,167,177,0.08)",  "Happy": "rgba(201,133,110,0.08)",
+               "Chill": "rgba(168,155,181,0.08)", "Sad":   "rgba(122,146,168,0.08)"}
 MOOD_EMOJIS = {"Hype": "▲", "Happy": "◆", "Chill": "●", "Sad": "▼"}
 MOOD_VECTORS = {
     "Hype":  [0.85, 0.65, 0.80, 0.10, 0.75, -5.0,  0.15, 0.05],
@@ -47,18 +47,21 @@ def inject_css():
 @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap');
 
 :root {
-    --bg:      #000000;
-    --surface: #050505;
-    --border:  #1a1a1a;
-    --border2: #222222;
-    --red:     #FF2D2D;
-    --green:   #4DFFB4;
-    --blue:    #2D8BFF;
-    --orange:  #FF6B2D;
-    --muted:   #444444;
-    --dim:     #2a2a2a;
-    --text:    #E0E0E0;
-    --text2:   #888888;
+    --bg:      #1B1B1B;
+    --surface: #2A1525;
+    --border:  #3a2535;
+    --border2: #4B1D3F;
+    --red:     #D8A7B1;
+    --green:   #A89BB5;
+    --blue:    #7A92A8;
+    --orange:  #C9856E;
+    --muted:   #A08A9A;
+    --dim:     #2e1e2e;
+    --text:    #E8D9C1;
+    --text2:   #A08A9A;
+    --burgundy:#4B1D3F;
+    --rose:    #D8A7B1;
+    --nude:    #E8D9C1;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -74,8 +77,8 @@ html, body { margin: 0; padding: 0; }
     content: '';
     position: fixed; inset: 0;
     background-image:
-        linear-gradient(rgba(255,45,45,0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,45,45,0.02) 1px, transparent 1px);
+        linear-gradient(rgba(216,167,177,0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(216,167,177,0.015) 1px, transparent 1px);
     background-size: 40px 40px;
     pointer-events: none; z-index: 0;
 }
@@ -86,14 +89,15 @@ section[data-testid="stSidebar"] { display: none !important; }
 #MainMenu, footer, [data-testid="stToolbar"], .stDeployButton { display: none !important; }
 
 ::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: #000; }
-::-webkit-scrollbar-thumb { background: var(--red); }
+::-webkit-scrollbar-track { background: #1B1B1B; }
+::-webkit-scrollbar-thumb { background: var(--rose); border-radius: 2px; }
 
 .topbar {
     display: flex; justify-content: space-between; align-items: center;
     padding: 1rem 2.5rem; border-bottom: 1px solid var(--border);
-    background: rgba(0,0,0,0.9); backdrop-filter: blur(10px);
+    background: rgba(27,27,27,0.96); backdrop-filter: blur(16px);
     position: sticky; top: 0; z-index: 100;
+    border-bottom: 1px solid rgba(216,167,177,0.15);
 }
 .topbar-logo { font-family: 'Orbitron', monospace; font-size: 1rem; font-weight: 900; color: var(--text); letter-spacing: 0.3em; }
 .topbar-logo span { color: var(--red); }
@@ -104,7 +108,7 @@ section[data-testid="stSidebar"] { display: none !important; }
 }
 .status-dot::before {
     content: ''; width: 6px; height: 6px; border-radius: 50%;
-    background: var(--green); box-shadow: 0 0 8px var(--green);
+    background: var(--rose); box-shadow: 0 0 8px var(--rose);
     animation: pulse 2s infinite;
 }
 @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
@@ -115,9 +119,9 @@ section[data-testid="stSidebar"] { display: none !important; }
 }
 .hero::after {
     content: ''; position: absolute; top: 0; left: 0; right: 0;
-    height: 2px; background: var(--red);
-    box-shadow: 0 0 20px var(--red), 0 0 40px rgba(255,45,45,0.5);
-    animation: scan 4s ease-in-out infinite;
+    height: 1px; background: linear-gradient(90deg, transparent, var(--rose), transparent);
+    box-shadow: 0 0 20px var(--rose);
+    animation: scan 5s ease-in-out infinite;
 }
 @keyframes scan { 0%{top:0;opacity:1} 100%{top:100%;opacity:0} }
 
@@ -141,15 +145,15 @@ section[data-testid="stSidebar"] { display: none !important; }
 
 .stat-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--border); margin: 1.5rem 0; }
 .stat-card { background: var(--bg); padding: 2rem 1.5rem; position: relative; overflow: hidden; transition: background 0.2s; }
-.stat-card:hover { background: #080808; }
+.stat-card:hover { background: #221525; }
 .stat-mood { font-family: 'Share Tech Mono', monospace; font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
 .stat-num { font-family: 'Orbitron', monospace; font-size: 3.5rem; font-weight: 900; line-height: 1; margin-bottom: 0.5rem; }
 .stat-bar-bg { height: 1px; background: var(--border2); margin-top: 1rem; }
 .stat-bar-fill { height: 1px; }
 .stat-pct { font-family: 'Share Tech Mono', monospace; font-size: 0.6rem; color: var(--text2); margin-top: 0.5rem; letter-spacing: 0.1em; }
 
-.personality { border: 1px solid var(--border2); padding: 2.5rem; margin: 1.5rem 0; position: relative; background: linear-gradient(135deg, #050505 0%, #000 100%); }
-.personality::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,45,45,0.03) 0%, transparent 60%); pointer-events: none; }
+.personality { border: 1px solid var(--border2); padding: 2.5rem; margin: 1.5rem 0; position: relative; background: linear-gradient(135deg, #1f0e1a 0%, #1B1B1B 100%); }
+.personality::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(216,167,177,0.05) 0%, transparent 60%); pointer-events: none; }
 .personality-corner { position: absolute; top: 1rem; right: 1rem; font-family: 'Share Tech Mono', monospace; font-size: 0.55rem; color: var(--muted); letter-spacing: 0.2em; }
 .personality-label { font-family: 'Share Tech Mono', monospace; font-size: 0.6rem; color: var(--red); letter-spacing: 0.35em; margin-bottom: 1rem; }
 .personality-title { font-family: 'Orbitron', monospace; font-size: clamp(1.8rem,4vw,3.5rem); font-weight: 900; line-height: 1; color: var(--red); text-shadow: 0 0 40px rgba(255,45,45,0.4); margin-bottom: 1rem; letter-spacing: 0.05em; }
@@ -157,36 +161,40 @@ section[data-testid="stSidebar"] { display: none !important; }
 
 .song-header { display: grid; grid-template-columns: 2.5rem 1fr 1fr 7rem; gap: 1rem; padding: 0.6rem 1rem; border-bottom: 1px solid var(--border2); font-family: 'Share Tech Mono', monospace; font-size: 0.55rem; color: var(--muted); letter-spacing: 0.2em; }
 .song-row { display: grid; grid-template-columns: 2.5rem 1fr 1fr 7rem; gap: 1rem; padding: 0.8rem 1rem; border-bottom: 1px solid #0d0d0d; transition: background 0.1s; align-items: center; }
-.song-row:hover { background: #080808; }
+.song-row:hover { background: #221525; }
 .song-num { font-family: 'Share Tech Mono', monospace; font-size: 0.6rem; color: var(--muted); }
 .song-name { font-family: 'Rajdhani', sans-serif; font-size: 0.95rem; font-weight: 500; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .song-artist { font-family: 'Rajdhani', sans-serif; font-size: 0.85rem; font-weight: 400; color: var(--text2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .mood-tag { font-family: 'Share Tech Mono', monospace; font-size: 0.55rem; letter-spacing: 0.15em; padding: 0.2rem 0.5rem; display: inline-block; text-align: center; text-transform: uppercase; }
 
-.data-panel { border: 1px solid var(--border2); padding: 1.5rem; background: var(--surface); position: relative; }
+.data-panel { border: 1px solid rgba(216,167,177,0.15); padding: 1.5rem; background: var(--surface); position: relative; }
 .data-panel-label { font-family: 'Share Tech Mono', monospace; font-size: 0.55rem; color: var(--red); letter-spacing: 0.3em; margin-bottom: 0.75rem; text-transform: uppercase; }
 .data-panel-title { font-family: 'Orbitron', monospace; font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem; letter-spacing: 0.1em; }
 .data-panel-desc { font-family: 'Rajdhani', sans-serif; font-size: 0.85rem; color: var(--text2); line-height: 1.6; font-weight: 400; }
 
-.chart-frame { border: 1px solid var(--border2); box-shadow: 0 0 20px rgba(255,45,45,0.05); margin: 1rem 0; }
+.chart-frame { border: 1px solid rgba(216,167,177,0.12); box-shadow: 0 0 30px rgba(216,167,177,0.04); margin: 1rem 0; }
 
-.math-block { background: #050505; border: 1px solid var(--border2); border-left: 2px solid var(--red); padding: 1.5rem; margin: 1rem 0; font-family: 'Share Tech Mono', monospace; font-size: 0.75rem; color: #ccc; line-height: 2; }
+.math-block { background: #160f14; border: 1px solid rgba(216,167,177,0.15); border-left: 2px solid var(--rose); padding: 1.5rem; margin: 1rem 0; font-family: 'Share Tech Mono', monospace; font-size: 0.75rem; color: var(--nude); line-height: 2; }
 
 .stTextInput input { background: var(--surface) !important; border: 1px solid var(--border2) !important; border-radius: 0 !important; color: var(--text) !important; font-family: 'Share Tech Mono', monospace !important; font-size: 0.75rem !important; }
 .stTextInput input:focus { border-color: var(--red) !important; box-shadow: none !important; }
 .stSelectbox > div > div { background: var(--surface) !important; border: 1px solid var(--border2) !important; border-radius: 0 !important; color: var(--text) !important; }
 
 .stButton > button { font-family: 'Share Tech Mono', monospace !important; font-size: 0.7rem !important; letter-spacing: 0.2em !important; background: transparent !important; color: var(--red) !important; border: 1px solid var(--red) !important; border-radius: 0 !important; padding: 0.8rem 2.5rem !important; text-transform: uppercase !important; transition: all 0.2s !important; }
-.stButton > button:hover { background: var(--red) !important; color: #000 !important; box-shadow: 0 0 20px rgba(255,45,45,0.4) !important; }
+.stButton > button:hover { background: var(--rose) !important; color: #1B1B1B !important; box-shadow: 0 0 20px rgba(216,167,177,0.3) !important; }
 .stLinkButton > a { font-family: 'Share Tech Mono', monospace !important; font-size: 0.65rem !important; letter-spacing: 0.15em !important; background: transparent !important; color: var(--red) !important; border: 1px solid rgba(255,45,45,0.4) !important; border-radius: 0 !important; text-transform: uppercase !important; }
-.stLinkButton > a:hover { background: rgba(255,45,45,0.1) !important; border-color: var(--red) !important; }
+.stLinkButton > a:hover { background: rgba(216,167,177,0.1) !important; border-color: var(--rose) !important; }
 
-.stProgress > div > div > div { background: var(--red) !important; box-shadow: 0 0 10px rgba(255,45,45,0.5) !important; }
-.stProgress > div > div { background: var(--border) !important; border-radius: 0 !important; }
+.stProgress > div > div > div { background: var(--rose) !important; box-shadow: 0 0 10px rgba(216,167,177,0.4) !important; }
+.stProgress > div > div { background: #2e1e2e !important; border-radius: 0 !important; }
 
-.landing { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 4rem 2rem; position: relative; }
+.landing {
+    min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+    align-items: center; text-align: center; padding: 4rem 2rem; position: relative;
+    background: radial-gradient(ellipse at 50% 0%, rgba(75,29,63,0.6) 0%, #1B1B1B 65%);
+}
 .landing-eyebrow { font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; color: var(--red); letter-spacing: 0.5em; margin-bottom: 2rem; display: flex; align-items: center; gap: 1rem; }
-.landing-eyebrow::before, .landing-eyebrow::after { content: ''; height: 1px; width: 60px; background: var(--red); box-shadow: 0 0 10px var(--red); }
+.landing-eyebrow::before, .landing-eyebrow::after { content: ''; height: 1px; width: 60px; background: var(--rose); box-shadow: 0 0 10px var(--rose); }
 .landing-title { font-family: 'Orbitron', monospace; font-weight: 900; font-size: clamp(4rem,14vw,12rem); line-height: 0.85; color: var(--text); letter-spacing: -0.02em; margin-bottom: 2rem; }
 .landing-title .r { color: var(--red); text-shadow: 0 0 40px rgba(255,45,45,0.6); }
 .landing-desc { font-family: 'Rajdhani', sans-serif; font-size: 1.1rem; color: var(--text2); max-width: 500px; line-height: 1.7; margin-bottom: 3rem; font-weight: 400; }
@@ -197,11 +205,11 @@ section[data-testid="stSidebar"] { display: none !important; }
 .landing-spec-label { font-family: 'Share Tech Mono', monospace; font-size: 0.55rem; color: var(--text2); letter-spacing: 0.2em; }
 
 .loading { min-height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 4rem 2rem; }
-.loading-title { font-family: 'Orbitron', monospace; font-size: 2rem; font-weight: 700; color: var(--text); letter-spacing: 0.2em; margin-bottom: 0.5rem; }
+.loading-title { font-family: 'Orbitron', monospace; font-size: 2rem; font-weight: 700; color: var(--nude); letter-spacing: 0.2em; margin-bottom: 0.5rem; }
 .loading-step { font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; color: var(--red); letter-spacing: 0.25em; margin-top: 1rem; animation: blink 1s infinite; }
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.4} }
 
-.lab-footer { border-top: 1px solid var(--border); padding: 1.5rem 2.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 4rem; }
+.lab-footer { border-top: 1px solid rgba(216,167,177,0.15); padding: 1.5rem 2.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 4rem; background: linear-gradient(180deg, transparent, rgba(75,29,63,0.1)); }
 .footer-text { font-family: 'Share Tech Mono', monospace; font-size: 0.55rem; color: var(--muted); letter-spacing: 0.2em; }
 
 /* ── LANDING MARQUEE ── */
@@ -212,20 +220,17 @@ section[data-testid="stSidebar"] { display: none !important; }
     position: relative;
 }
 .landing-marquee-track {
-    display: inline-block;
-    white-space: nowrap;
-    animation: hero-marquee 40s linear infinite;
+    display: inline-block; white-space: nowrap;
+    animation: hero-marquee 42s linear infinite;
     font-family: 'Orbitron', monospace;
-    font-size: clamp(5rem, 14vw, 14rem);
-    font-weight: 900;
-    color: #E0E0E0;
-    text-shadow: 0 0 60px rgba(255,45,45,0.3);
-    line-height: 1;
-    letter-spacing: -0.02em;
+    font-size: clamp(6rem, 16vw, 16rem);
+    font-weight: 900; color: var(--nude);
+    text-shadow: 0 0 80px rgba(216,167,177,0.25);
+    line-height: 1; letter-spacing: 0.08em;
 }
-.landing-marquee-track .ms { color: #E0E0E0; }
-.landing-marquee-track .sc { color: #FF2D2D; text-shadow: 0 0 80px #FF2D2D, 0 0 30px #FF2D2D; }
-.landing-marquee-track .sep { color: #FF2D2D; opacity: 0.4; margin: 0 1.5rem; font-size: 0.4em; vertical-align: middle; }
+.landing-marquee-track .ms { color: var(--nude); }
+.landing-marquee-track .sc { color: var(--rose); text-shadow: 0 0 80px rgba(216,167,177,0.8), 0 0 30px var(--rose); }
+.landing-marquee-track .sep { color: var(--rose); opacity: 0.5; margin: 0 2rem; font-size: 0.4em; vertical-align: middle; }
 @keyframes hero-marquee {
     0%   { transform: translateX(0); }
     100% { transform: translateX(-50%); }
@@ -233,27 +238,23 @@ section[data-testid="stSidebar"] { display: none !important; }
 
 /* ── DASHBOARD MARQUEE ── */
 .dash-marquee-wrap {
-    width: 100%;
-    overflow: hidden;
-    border-top: 1px solid #1a1a1a;
-    border-bottom: 1px solid #1a1a1a;
-    padding: 0.6rem 0;
-    background: #000;
+    width: 100%; overflow: hidden;
+    border-top: 1px solid rgba(216,167,177,0.1);
+    border-bottom: 1px solid rgba(216,167,177,0.1);
+    padding: 0.8rem 0;
+    background: linear-gradient(90deg, #1B1B1B, #2A1525, #1B1B1B);
 }
 .dash-marquee-track {
-    display: inline-block;
-    white-space: nowrap;
+    display: inline-block; white-space: nowrap;
     animation: dash-marquee 55s linear infinite;
     font-family: 'Orbitron', monospace;
-    font-size: clamp(2.5rem, 6vw, 5.5rem);
-    font-weight: 900;
-    color: #E0E0E0;
-    line-height: 1;
-    letter-spacing: -0.01em;
+    font-size: clamp(3rem, 8vw, 8rem);
+    font-weight: 900; color: var(--nude);
+    line-height: 1; letter-spacing: 0.08em;
 }
-.dash-marquee-track .ms { color: #E0E0E0; }
-.dash-marquee-track .sc { color: #FF2D2D; text-shadow: 0 0 30px rgba(255,45,45,0.6); }
-.dash-marquee-track .sep { color: #FF2D2D; opacity: 0.3; margin: 0 2rem; font-size: 0.35em; vertical-align: middle; }
+.dash-marquee-track .ms { color: var(--nude); }
+.dash-marquee-track .sc { color: var(--rose); text-shadow: 0 0 40px rgba(216,167,177,0.7); }
+.dash-marquee-track .sep { color: var(--rose); opacity: 0.4; margin: 0 2.5rem; font-size: 0.35em; vertical-align: middle; }
 @keyframes dash-marquee {
     0%   { transform: translateX(0); }
     100% { transform: translateX(-50%); }
@@ -277,7 +278,7 @@ section[data-testid="stSidebar"] { display: none !important; }
     opacity: 0;
     animation: step-fadein 0.5s ease forwards;
 }
-.loading-step-line .step-num { color: #FF2D2D; min-width: 1.5rem; }
+.loading-step-line .step-num { color: var(--rose); min-width: 1.5rem; }
 .loading-step-line.active { color: #E0E0E0; }
 .loading-step-line.active .step-num { animation: step-pulse 1s infinite; }
 @keyframes step-fadein { to { opacity: 1; } }
@@ -291,6 +292,47 @@ section[data-testid="stSidebar"] { display: none !important; }
 .loading-step-line:nth-child(6) { animation-delay: 2.6s; }
 .loading-step-line:nth-child(7) { animation-delay: 3.1s; }
 .loading-step-line:nth-child(8) { animation-delay: 3.6s; }
+
+/* ── SCROLL INDICATOR ── */
+.scroll-indicator {
+    position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+}
+.scroll-line {
+    width: 1px; height: 50px;
+    background: linear-gradient(to bottom, transparent, var(--rose));
+    animation: scroll-pulse 2s ease-in-out infinite;
+}
+.scroll-label {
+    font-family: 'Share Tech Mono', monospace; font-size: 0.5rem;
+    color: var(--muted); letter-spacing: 0.3em; text-transform: uppercase;
+    animation: scroll-pulse 2s ease-in-out infinite;
+}
+@keyframes scroll-pulse { 0%,100%{opacity:0.3; transform:translateY(-4px)} 50%{opacity:1; transform:translateY(0)} }
+
+/* ── SECTION BREAK ── */
+.section-break {
+    width: 100%; height: 1px; margin: 0;
+    background: linear-gradient(90deg, transparent, rgba(216,167,177,0.2), transparent);
+}
+
+/* ── FADE IN ON SCROLL ── */
+.fade-in {
+    animation: fadein-up 0.7s ease both;
+}
+@keyframes fadein-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── LANDING HERO BG ── */
+.landing-hero-bg {
+    position: absolute; inset: 0; z-index: 0; overflow: hidden;
+    background: radial-gradient(ellipse at 50% -20%, rgba(75,29,63,0.8) 0%, transparent 70%),
+                radial-gradient(ellipse at 80% 80%, rgba(75,29,63,0.3) 0%, transparent 50%),
+                #1B1B1B;
+}
+.landing-content { position: relative; z-index: 1; width: 100%; display: flex; flex-direction: column; align-items: center; }
 
 </style>
 """, unsafe_allow_html=True)
@@ -516,12 +558,12 @@ def render_dashboard(df, research, user_name):
     p_title, p_desc = PERSONALITY.get(dominant, PERSONALITY["Chill"])
 
     base_layout = dict(
-        paper_bgcolor='#000', plot_bgcolor='#000',
-        font=dict(color='#666', family='Share Tech Mono', size=10),
+        paper_bgcolor='#1B1B1B', plot_bgcolor='#1B1B1B',
+        font=dict(color='#A08A9A', family='Share Tech Mono', size=10),
         margin=dict(t=40, b=40, l=50, r=30),
-        xaxis=dict(gridcolor='#0d0d0d', zerolinecolor='#1a1a1a', color='#444',
+        xaxis=dict(gridcolor='#2e1e2e', zerolinecolor='#3a2535', color='#A08A9A',
                    tickfont=dict(family='Share Tech Mono', size=9)),
-        yaxis=dict(gridcolor='#0d0d0d', zerolinecolor='#1a1a1a', color='#444',
+        yaxis=dict(gridcolor='#2e1e2e', zerolinecolor='#3a2535', color='#A08A9A',
                    tickfont=dict(family='Share Tech Mono', size=9)),
     )
 
@@ -538,7 +580,7 @@ def render_dashboard(df, research, user_name):
     )
     dmq_track = f'<span class="dash-marquee-track">{dmq_inner} <span class="sep">◈</span> {dmq_inner}</span>'
     st.markdown(f"""
-    <div class="hero">
+    <div class="hero" style="background:linear-gradient(180deg,rgba(75,29,63,0.25) 0%,transparent 100%)">
         <div class="hero-label">◈ MUSIC INTELLIGENCE RESEARCH SYSTEM</div>
         <div class="dash-marquee-wrap" style="margin:1.5rem 0 1rem;border:none;padding:0.5rem 0">{dmq_track}</div>
         <div class="hero-sub">
@@ -554,6 +596,7 @@ def render_dashboard(df, research, user_name):
         </div>
     </div>""", unsafe_allow_html=True)
 
+    st.markdown('<div class="section-break"></div>', unsafe_allow_html=True)
     tab1, tab2, tab3 = st.tabs(["01 — OVERVIEW", "02 — YOUR SONGS", "03 — RESEARCH LAB"])
 
     # ── TAB 1: OVERVIEW ──────────────────────────────────────────────────────
@@ -594,7 +637,7 @@ def render_dashboard(df, research, user_name):
                 textinfo='label+percent',
                 textfont=dict(family='Share Tech Mono', size=10, color='white')))
             fig.update_layout(
-                paper_bgcolor='#000', plot_bgcolor='#000', font=dict(color='white'),
+                paper_bgcolor='#1B1B1B', plot_bgcolor='#1B1B1B', font=dict(color='#E8D9C1'),
                 showlegend=False, margin=dict(t=20,b=20,l=20,r=20), height=300,
                 annotations=[dict(text=f'<b>{total}</b><br><span style="font-size:10px">TRACKS</span>',
                     x=0.5, y=0.5, font=dict(size=20, color='white', family='Orbitron'), showarrow=False)])
@@ -674,14 +717,14 @@ def render_dashboard(df, research, user_name):
                                 [1.0, color]],
                     showscale=False, name="Spectrogram"), row=2, col=1)
                 fig_sig.update_layout(
-                    paper_bgcolor='#000', plot_bgcolor='#000',
-                    font=dict(color='#555', family='Share Tech Mono', size=9),
+                    paper_bgcolor='#1B1B1B', plot_bgcolor='#1B1B1B',
+                    font=dict(color='#A08A9A', family='Share Tech Mono', size=9),
                     height=400, showlegend=False,
                     margin=dict(t=40, b=20, l=40, r=20),
-                    xaxis=dict(gridcolor='#0d0d0d', color='#333'),
-                    yaxis=dict(gridcolor='#0d0d0d', color='#333'),
-                    xaxis2=dict(gridcolor='#0d0d0d', color='#333'),
-                    yaxis2=dict(gridcolor='#0d0d0d', color='#333'),
+                    xaxis=dict(gridcolor='#2e1e2e', color='#A08A9A'),
+                    yaxis=dict(gridcolor='#2e1e2e', color='#A08A9A'),
+                    xaxis2=dict(gridcolor='#2e1e2e', color='#A08A9A'),
+                    yaxis2=dict(gridcolor='#2e1e2e', color='#A08A9A'),
                 )
                 for ann in fig_sig.layout.annotations:
                     ann.font = dict(family='Share Tech Mono', size=9, color='#555')
@@ -698,8 +741,8 @@ def render_dashboard(df, research, user_name):
             <div class="data-panel-desc">
                 Principal Component Analysis projects the 8-dimensional audio feature space
                 onto 2 principal components for visualization.<br><br>
-                PC1 captures <b style="color:#FF2D2D">{round(pca_exp[0]*100,1)}%</b> of variance &nbsp;|&nbsp;
-                PC2 captures <b style="color:#FF2D2D">{round(pca_exp[1]*100,1)}%</b> of variance
+                PC1 captures <b style="color:#D8A7B1">{round(pca_exp[0]*100,1)}%</b> of variance &nbsp;|&nbsp;
+                PC2 captures <b style="color:#D8A7B1">{round(pca_exp[1]*100,1)}%</b> of variance
             </div>
         </div>""", unsafe_allow_html=True)
         songs_data = research.get("songs", [])
@@ -740,12 +783,12 @@ def render_dashboard(df, research, user_name):
                 fig_elbow.add_trace(go.Scatter(
                     x=[e["k"] for e in elbow], y=[e["inertia"] for e in elbow],
                     mode='lines+markers',
-                    line=dict(color='#FF2D2D', width=2),
-                    marker=dict(color='#FF2D2D', size=6, line=dict(width=1, color='#000')),
+                    line=dict(color='#D8A7B1', width=2),
+                    marker=dict(color='#D8A7B1', size=6, line=dict(width=1, color='#1B1B1B')),
                     fill='tozeroy', fillcolor='rgba(255,45,45,0.04)'))
                 fig_elbow.add_vline(x=4, line_dash="dash", line_color="#333",
                     annotation_text="k=4  OPTIMAL",
-                    annotation_font=dict(family='Share Tech Mono', size=9, color='#FF2D2D'))
+                    annotation_font=dict(family='Share Tech Mono', size=9, color='#D8A7B1'))
                 fig_elbow.update_layout(**base_layout, height=320,
                     xaxis_title="K VALUE", yaxis_title="INERTIA")
                 st.markdown('<div class="chart-frame">', unsafe_allow_html=True)
@@ -778,19 +821,19 @@ def render_dashboard(df, research, user_name):
                 fig_nn = make_subplots(rows=1, cols=2,
                     subplot_titles=["LOSS CURVE","ACCURACY CURVE"])
                 fig_nn.add_trace(go.Scatter(y=loss_history, mode='lines',
-                    line=dict(color='#FF2D2D', width=2),
-                    fill='tozeroy', fillcolor='rgba(255,45,45,0.04)', name="Loss"), row=1, col=1)
+                    line=dict(color='#D8A7B1', width=2),
+                    fill='tozeroy', fillcolor='rgba(216,167,177,0.04)', name="Loss"), row=1, col=1)
                 fig_nn.add_trace(go.Scatter(y=acc_history, mode='lines',
                     line=dict(color='#4DFFB4', width=2),
-                    fill='tozeroy', fillcolor='rgba(77,255,180,0.04)', name="Accuracy"), row=1, col=2)
+                    fill='tozeroy', fillcolor='rgba(168,155,181,0.04)', name="Accuracy"), row=1, col=2)
                 fig_nn.update_layout(
-                    paper_bgcolor='#000', plot_bgcolor='#000',
-                    font=dict(color='#555', family='Share Tech Mono', size=9),
+                    paper_bgcolor='#1B1B1B', plot_bgcolor='#1B1B1B',
+                    font=dict(color='#A08A9A', family='Share Tech Mono', size=9),
                     height=300, showlegend=False, margin=dict(t=40,b=30,l=40,r=20),
-                    xaxis=dict(gridcolor='#0d0d0d', color='#333'),
-                    yaxis=dict(gridcolor='#0d0d0d', color='#333'),
-                    xaxis2=dict(gridcolor='#0d0d0d', color='#333'),
-                    yaxis2=dict(gridcolor='#0d0d0d', color='#333'))
+                    xaxis=dict(gridcolor='#2e1e2e', color='#A08A9A'),
+                    yaxis=dict(gridcolor='#2e1e2e', color='#A08A9A'),
+                    xaxis2=dict(gridcolor='#2e1e2e', color='#A08A9A'),
+                    yaxis2=dict(gridcolor='#2e1e2e', color='#A08A9A'))
                 for ann in fig_nn.layout.annotations:
                     ann.font = dict(family='Share Tech Mono', size=9, color='#555')
                 st.markdown('<div class="chart-frame">', unsafe_allow_html=True)
@@ -811,7 +854,7 @@ def render_dashboard(df, research, user_name):
                 LEARNING RATE: 0.05<br>
                 BATCH SIZE: 16<br>
                 EPOCHS: 300<br><br>
-                FINAL ACCURACY: <span style="color:#4DFFB4">{fa:.1%}</span>
+                FINAL ACCURACY: <span style="color:#A89BB5">{fa:.1%}</span>
             </div>""", unsafe_allow_html=True)
 
         cm_data = nn.get("confusion_matrix", [])
@@ -819,7 +862,7 @@ def render_dashboard(df, research, user_name):
         if cm_data:
             fig_cm = go.Figure(go.Heatmap(
                 z=cm_data, x=mood_labels, y=mood_labels,
-                colorscale=[[0,'#000'],[0.4,'#1a0000'],[0.7,'#660000'],[1,'#FF2D2D']],
+                colorscale=[[0,'#1B1B1B'],[0.4,'#2e1020'],[0.7,'#6b2040'],[1,'#D8A7B1']],
                 showscale=False, text=cm_data, texttemplate='%{text}',
                 textfont=dict(family='Share Tech Mono', size=14, color='white')))
             fig_cm.update_layout(**base_layout, height=350,
@@ -843,12 +886,12 @@ def render_dashboard(df, research, user_name):
                         fill='toself', fillcolor=MOOD_DIM[mood],
                         line=dict(color=MOOD_COLORS[mood], width=2), name=mood))
             fig_r.update_layout(
-                paper_bgcolor='#000', plot_bgcolor='#000',
-                font=dict(color='#555', family='Share Tech Mono', size=9),
-                polar=dict(bgcolor='#000',
-                    radialaxis=dict(visible=True, range=[0,1], gridcolor='#111', color='#333',
+                paper_bgcolor='#1B1B1B', plot_bgcolor='#1B1B1B',
+                font=dict(color='#A08A9A', family='Share Tech Mono', size=9),
+                polar=dict(bgcolor='#1B1B1B',
+                    radialaxis=dict(visible=True, range=[0,1], gridcolor='#2e1e2e', color='#A08A9A',
                                     tickfont=dict(size=8)),
-                    angularaxis=dict(gridcolor='#111', color='#555',
+                    angularaxis=dict(gridcolor='#2e1e2e', color='#A08A9A',
                                      tickfont=dict(family='Share Tech Mono', size=9))),
                 legend=dict(orientation="h", y=-0.1, font=dict(family='Share Tech Mono', size=10)),
                 height=450, margin=dict(t=40,b=60,l=40,r=40))
@@ -871,18 +914,18 @@ def render_dashboard(df, research, user_name):
             st.markdown(f"""
             <div class="stat-grid" style="margin-bottom:1.5rem">
                 <div class="stat-card">
-                    <div class="stat-mood" style="color:#4DFFB4">BEST SILHOUETTE K</div>
-                    <div class="stat-num" style="color:#4DFFB4;font-size:2.5rem">{best_sil_k}</div>
+                    <div class="stat-mood" style="color:#A89BB5">BEST SILHOUETTE K</div>
+                    <div class="stat-num" style="color:#A89BB5;font-size:2.5rem">{best_sil_k}</div>
                     <div class="stat-pct">SCORE: {max(sil_vals):.4f}</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-mood" style="color:#2D8BFF">BEST DBI K</div>
-                    <div class="stat-num" style="color:#2D8BFF;font-size:2.5rem">{best_dbi_k}</div>
+                    <div class="stat-mood" style="color:#7A92A8">BEST DBI K</div>
+                    <div class="stat-num" style="color:#7A92A8;font-size:2.5rem">{best_dbi_k}</div>
                     <div class="stat-pct">SCORE: {min(dbi_vals):.4f}</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-mood" style="color:#FF2D2D">CURRENT K</div>
-                    <div class="stat-num" style="color:#FF2D2D;font-size:2.5rem">4</div>
+                    <div class="stat-mood" style="color:#D8A7B1">CURRENT K</div>
+                    <div class="stat-num" style="color:#D8A7B1;font-size:2.5rem">4</div>
                     <div class="stat-pct">MOOD CLASSES USED</div>
                 </div>
                 <div class="stat-card">
@@ -899,14 +942,14 @@ def render_dashboard(df, research, user_name):
                 fig_sil.add_trace(go.Bar(
                     x=k_vals, y=sil_vals,
                     marker=dict(
-                        color=['#4DFFB4' if k==best_sil_k else '#0d2a1a' for k in k_vals],
+                        color=['#A89BB5' if k==best_sil_k else '#2e1e2e' for k in k_vals],
                         line=dict(width=0)),
                     text=[f"{v:.3f}" for v in sil_vals],
                     textposition='outside',
                     textfont=dict(family='Share Tech Mono', size=9, color='#4DFFB4')))
                 fig_sil.add_vline(x=3.5, line_dash="dash", line_color="#333",
                     annotation_text="CURRENT k=4",
-                    annotation_font=dict(family='Share Tech Mono', size=8, color='#FF2D2D'))
+                    annotation_font=dict(family='Share Tech Mono', size=8, color='#D8A7B1'))
                 sil_layout = {k: v for k, v in base_layout.items() if k != 'yaxis'}
                 sil_layout['yaxis'] = dict(range=[min(0, min(sil_vals)-0.05), max(sil_vals)+0.1], gridcolor='#0d0d0d', color='#444', tickfont=dict(family='Share Tech Mono', size=9))
                 fig_sil.update_layout(**sil_layout, height=300, xaxis_title='K', yaxis_title='SILHOUETTE SCORE')
@@ -920,14 +963,14 @@ def render_dashboard(df, research, user_name):
                 fig_dbi.add_trace(go.Bar(
                     x=k_vals, y=dbi_vals,
                     marker=dict(
-                        color=['#2D8BFF' if k==best_dbi_k else '#0a1525' for k in k_vals],
+                        color=['#7A92A8' if k==best_dbi_k else '#2e1e2e' for k in k_vals],
                         line=dict(width=0)),
                     text=[f"{v:.3f}" for v in dbi_vals],
                     textposition='outside',
                     textfont=dict(family='Share Tech Mono', size=9, color='#2D8BFF')))
                 fig_dbi.add_vline(x=3.5, line_dash="dash", line_color="#333",
                     annotation_text="CURRENT k=4",
-                    annotation_font=dict(family='Share Tech Mono', size=8, color='#FF2D2D'))
+                    annotation_font=dict(family='Share Tech Mono', size=8, color='#D8A7B1'))
                 dbi_layout = {k: v for k, v in base_layout.items() if k != 'yaxis'}
                 dbi_layout['yaxis'] = dict(gridcolor='#0d0d0d', color='#444', tickfont=dict(family='Share Tech Mono', size=9))
                 fig_dbi.update_layout(**dbi_layout, height=300, xaxis_title='K', yaxis_title='DAVIES-BOULDIN INDEX')
@@ -946,7 +989,7 @@ def render_dashboard(df, research, user_name):
                 WHERE  σ = avg distance to centroid<br>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;d = inter-centroid distance<br><br>
                 YOUR SCORES AT k=4:<br>
-                · SILHOUETTE : <span style="color:#4DFFB4">{sil_at_4:.4f}</span> &nbsp;(literature avg ~0.26 for Spotify data — Krilašević 2024)<br>
+                · SILHOUETTE : <span style="color:#A89BB5">{sil_at_4:.4f}</span> &nbsp;(literature avg ~0.26 for Spotify data — Krilašević 2024)<br>
                 · DBI &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span style="color:#2D8BFF">{dbi_at_4:.4f}</span> &nbsp;(Septiani 2025 reported 1.188 for k=3)<br><br>
                 OPTIMAL k BY SILHOUETTE = {best_sil_k} &nbsp;|&nbsp; BY DBI = {best_dbi_k} &nbsp;|&nbsp; CURRENT = 4
             </div>""", unsafe_allow_html=True)
@@ -989,12 +1032,19 @@ if st.session_state.stage == "landing":
 
     st.markdown(f"""
     <div class="landing">
-        <div class="landing-eyebrow">MUSIC INTELLIGENCE SYSTEM</div>
-        <div class="landing-marquee-wrap">{lmq_track}</div>
-        <div class="landing-desc">
-            Connect your Spotify. Your liked songs are fed through a K-Means
-            clustering algorithm and an MLP neural network. The system classifies
-            every track and builds your personal music intelligence profile.
+        <div class="landing-hero-bg"></div>
+        <div class="landing-content">
+            <div class="landing-eyebrow">MUSIC INTELLIGENCE SYSTEM</div>
+            <div class="landing-marquee-wrap">{lmq_track}</div>
+            <div class="landing-desc">
+                Connect your Spotify. Your liked songs are fed through a K-Means
+                clustering algorithm and an MLP neural network. The system classifies
+                every track and builds your personal music intelligence profile.
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-label">SCROLL</div>
+            <div class="scroll-line"></div>
         </div>
     </div>""", unsafe_allow_html=True)
     col = st.columns([1, 2, 1])[1]
